@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SqlGame.gd" type="Script" id=1]
+[ext_resource path="res://GameUI.tscn" type="PackedScene" id=2]
+
+[node name="SqlGame" type="Node"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="UI" parent="." instance=ExtResource( 2 )]
+
+visible = false
+_sections_unfolded = [ "Anchor", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags" ]
+
+
