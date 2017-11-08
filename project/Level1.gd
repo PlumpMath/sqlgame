@@ -10,18 +10,16 @@ func _ready():
     sql_node.connect("sql_row_retrieved", self, "_check_victory_row")
     
     # Level data
-    sql_node.execute_sql("CREATE TABLE `animals` (" +
+    sql_node.execute_raw("CREATE TABLE `animals` (" +
         "`id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
         "`species`   TEXT NOT NULL," +
         "`fullname`  TEXT NOT NULL," +
         "`owner` TEXT NOT NULL," +
         "`colour`    TEXT NOT NULL);")
-    sql_node.execute_sql("INSERT INTO animals VALUES (1, 'Cat', 'Bob', 'Jill', 'Blue');")
+    sql_node.execute_raw("INSERT INTO animals VALUES (1, 'Cat', 'Bob', 'Jill', 'Blue');")
 
 func _check_victory_row(row, headings, clause):
-    print(row)
-    print(headings)
-    print(clause)
+
     if victory_status != VICTORY_UNKNOWN:
         return
 
@@ -35,5 +33,7 @@ func _check_victory_row(row, headings, clause):
                 victory_status = VICTORY_SUCCESS
         if (victory_status != VICTORY_SUCCESS):
             victory_status = VICTORY_FAILED
+
+    # What to do on victory??
     if victory_status == VICTORY_SUCCESS:
-        get_node("SceneVp/Spatial/MeshInstance").scale(2,2,2)
+        get_node("SceneVp/Spatial/MeshInstance").scale = Vector3(0.2,0.2,0.2)

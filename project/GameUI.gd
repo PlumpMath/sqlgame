@@ -35,7 +35,9 @@ func _ready():
 func _on_ExecuteButton_pressed():
     var sql = sql_editor.get_text()
     if (sql_node.get_clause(sql) in ["delete", "select", "insert", "update"]):
-        sql_node.execute_sql(sql)
+        sql_node.execute_select(sql)
+    else:
+        _show_sql_error('Not a valid or allowed SQL statement')
 
 func _start_statement(sql, clause, original_sql):
     if (clause == "select"):

@@ -19,13 +19,40 @@ func _notification(what):
         # Destructor
         sql_client.close_database()
 
-func execute_sql(sql, original_clause = null):
-    
+# Returns an error or the number of effected rows
+func execute_raw(sql):
+    var prepare_result = sql_client.prepare_statement(sql)
+    if (prepare_result != null):
+        return prepare_result
+    return sql_client.execute_general()
+
+func execute_raw_insert(sql):
+    var prepare_result = sql_client.prepare_statement(sql)
+    if (prepare_result != null):
+        return prepare_result
+    return sql_client.execute_insert()
+
+# Translates the statement to an SELECT and 'signals' the results
+func execute_select(sql):    
     var clause = get_clause(sql)
 
-    emit_signal("sql_start", sql, clause, original_clause)
+    # Translate SQL to a select statement
+    var new_sql
+    if clause in ["update", "delete"]:
+        new_sql = translate_to_select(sql, clause)
+    elif clause == "insert":
+        var result = execute_raw_insert(sql)
+        if (typeof(result) == TYPE_STRING):
+            emit_signal("sql_error", result)
+            return
+        var table = get_table_name(sql, clause)
+        new_sql = "SELECT * FROM " + table + " WHERE id = " + str(result)
+    else:
+        new_sql = sql
 
-    var prepare_result = sql_client.prepare_statement(sql)
+    emit_signal("sql_start", sql, clause)
+
+    var prepare_result = sql_client.prepare_statement(new_sql)
     if (prepare_result != null):
         emit_signal("sql_error", prepare_result)
         return
@@ -35,31 +62,25 @@ func execute_sql(sql, original_clause = null):
     var headings
     while (1):
         results = sql_client.get_row()
-        if (results.size() == 0):
+        if typeof(results) == TYPE_STRING:
+            emit_signal("sql_error", results)
+            break
+        if typeof(results) == TYPE_INT:
+            emit_signal("sql_error", results)
+            break
+        if typeof(results) != TYPE_ARRAY || results.size() == 0:
             break
         if (first_row):
             headings = sql_client.get_column_names()
-            emit_signal("sql_headings_retrieved", headings, original_clause if original_clause else clause)
-        emit_signal("sql_row_retrieved", results, headings, original_clause if original_clause else clause)
+            emit_signal("sql_headings_retrieved", headings, clause)
+        emit_signal("sql_row_retrieved", results, headings, clause)
         first_row = false
-
-    # If no rows returned - check for error
-    if first_row:
-        if typeof(results) == TYPE_STRING:
-            emit_signal("sql_error", results)
-            return
     
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
 
     emit_signal("sql_complete", sql, clause)
-
-    if original_clause != null:
-        if clause in ["delete", "update", "insert"]:
-        # Translate to select statement
-            var sql_select = translate_to_select(sql, clause)
-            execute_sql(sql_select, clause)
 
 
 func get_clause(sql):
@@ -84,3 +105,21 @@ func translate_to_select(sql, clause):
         var where_location = sql.findn(" WHERE ")
         var part2 = sql.right(where_location)
         return part1 + part2
+
+func get_table_name(sql, clause):
+    var lead
+    if clause == "insert":
+        lead = "INSERT INTO"
+    elif clause == "update":
+        lead = "UPDATE"
+    elif clause == "delete":
+        lead = "DELETE FROM"
+    else:
+        lead = " FROM "
+
+    var start = sql.findn(lead) + 11
+    var remaining = sql.right(start).strip_edges(" ")
+    var end = 0
+    while remaining.substr(end, 1) != " ":
+        end += 1
+    return remaining.left(end)

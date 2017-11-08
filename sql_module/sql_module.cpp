@@ -64,8 +64,48 @@ Array SqlModule::getColumnNames()
     return names;
 }
 
+Variant SqlModule::executeInsert()
+{
+    executeGeneral();
+    return Variant((int)sqlite3_last_insert_rowid(activeDb));
+}
 
-Array SqlModule::getRow()
+Variant SqlModule::executeUpdate()
+{
+    return executeGeneral();
+}
+
+Variant SqlModule::executeDelete()
+{
+    return executeGeneral();
+}
+
+Variant SqlModule::executeGeneral()
+{
+    int rc; // return code
+
+    rc = sqlite3_step(preparedStatement);
+
+    if (rc == SQLITE_ERROR) {
+        return Variant(sqlite3_errmsg(activeDb));
+    }
+
+    if (rc == SQLITE_MISUSE) {
+        return Variant("Oops - misuse of SQLite3 Library. Our error not yours.");
+    }
+
+    if (rc == SQLITE_ROW) {
+        return Variant("Rows returned");
+    }
+
+    if (rc != SQLITE_DONE) {
+        return Variant();
+    }
+
+    return Variant((int)sqlite3_changes(activeDb));
+}
+
+Variant SqlModule::getRow()
 {
     int rc; // return code
 
@@ -155,6 +195,10 @@ void SqlModule::_bind_methods() {
     ClassDB::bind_method(D_METHOD("prepare_statement", "statement"), &SqlModule::prepareStatement);
     ClassDB::bind_method(D_METHOD("bind_parameter", "value"), &SqlModule::bindParameter);
     ClassDB::bind_method(D_METHOD("get_column_names"), &SqlModule::getColumnNames);
+    ClassDB::bind_method(D_METHOD("execute_insert"), &SqlModule::executeInsert);
+    ClassDB::bind_method(D_METHOD("execute_update"), &SqlModule::executeUpdate);
+    ClassDB::bind_method(D_METHOD("execute_delete"), &SqlModule::executeDelete);
+    ClassDB::bind_method(D_METHOD("execute_general"), &SqlModule::executeGeneral);
     ClassDB::bind_method(D_METHOD("get_row"), &SqlModule::getRow);
     ClassDB::bind_method(D_METHOD("finalize_statement"), &SqlModule::finalizeStatement);
     ClassDB::bind_method(D_METHOD("close_database"), &SqlModule::closeDatabase);

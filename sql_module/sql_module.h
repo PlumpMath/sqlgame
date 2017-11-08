@@ -24,7 +24,11 @@ public:
     Variant createDatabase();
     Variant prepareStatement(String statement);
     Variant bindParameter(Variant value);
-    Array getRow();
+    Variant executeInsert();
+    Variant executeUpdate();
+    Variant executeDelete();
+    Variant executeGeneral();
+    Variant getRow();
     Array getColumnNames();
     Variant finalizeStatement();
     Variant closeDatabase();
