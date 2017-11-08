@@ -1,11 +1,26 @@
 extends Control
 
-var sql_client
+var sql_node
+var sql_editor
+var sql_info
+var item_list
 
 func _ready():
+    # Create node references
+    sql_node = get_parent().get_node("SQLTools")
+    sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
+    sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
+    item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
+    
+    # Handle signals
+    sql_node.connect("sql_start", self, "_start_statement")
+    sql_node.connect("sql_error", self, "_show_sql_error")
+    sql_node.connect("sql_headings_retrieved", self, "_insert_headings")
+    sql_node.connect("sql_row_retrieved", self, "_insert_row")
+    sql_node.connect("sql_complete", self, "_finish_statement")
 
     # Configure the viewport
-    var viewport = get_node("SceneVp")
+    var viewport = get_parent().get_node("SceneVp")
     var viewport_texture = get_node("MarginContainer/VBoxMain/HBoxTop/MainSceneTexture")    
 
     viewport.size.x = viewport_texture.rect_size.x
@@ -17,67 +32,39 @@ func _ready():
     viewport_texture.texture = viewport.get_texture()  
     set_process(true)
 
-    sql_client = SqlModule.new()
-    sql_client.create_database()
-
-func _notification(what):
-    if what == NOTIFICATION_PREDELETE:
-        sql_client.close_database()
-
 func _on_ExecuteButton_pressed():
-    var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
-    var item_list_panel = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular")
-    var item_list = item_list_panel.get_child(0)
-    var sql_info_panel = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo")
-    var sql_info = sql_info_panel.get_child(0)
+    var sql = sql_editor.get_text()
+    if (sql_node.get_clause(sql) in ["delete", "select", "insert", "update"]):
+        sql_node.execute_sql(sql)
 
-    sql_info.set_text("Executing: " + sql_editor.get_text())
-    sql_info_panel.visible = true
-    item_list_panel.visible = false
-
-    var result
-
-    result = sql_client.prepare_statement(sql_editor.get_text())
-    if (result != null):
-        sql_info.set_text("Error: " + result)
-        return
-
-    var first = true
-    while (1):
-        result = sql_client.get_row()
-        if (result.size() == 0):
-            break
-
-        if (first):
-            var headings = sql_client.get_column_names()
-            item_list_panel.visible = true
-            item_list.max_columns = headings.size()
-            item_list.fixed_column_width = (item_list.rect_size.x - 20) / headings.size() - 8;
-            print(item_list.fixed_column_width)
-
-            item_list.clear()
-            for heading in headings:
-                item_list.add_item(String(heading))
-        for value in result:
-            if value != null:
-                item_list.add_item(String(value))
-            else:
-                item_list.add_item("")
-                
-        first = false
-
-    var a = Array()
-
-    if first:
-        if typeof(result) == TYPE_STRING:
-            sql_info.set_text("Error: " + result)
-        else:
-            sql_info.set_text(sql_info.get_text() + "\nDone")
+func _start_statement(sql, clause, original_sql):
+    if (clause == "select"):
+        sql_info.get_parent().visible = false
     else:
-        sql_info_panel.visible = false
-                        
-    result = sql_client.finalize_statement()
-    if (result != null):
-        sql_info.set_text("Error finalizing: " + result)
-        sql_info_panel.visible = true
-    sql_editor.set_text("")
+        sql_info.get_parent().visible = true
+    item_list.get_parent().visible = false
+
+func _show_sql_error(error):
+    sql_info.set_text("Error: " + error)
+    sql_info.get_parent().visible = true
+
+func _insert_headings(headings, clause):
+    # Initiate list
+    item_list.clear()
+    item_list.max_columns = headings.size()
+    item_list.fixed_column_width = (item_list.rect_size.x - 20) / headings.size() - 8;
+    print(item_list.fixed_column_width)
+
+    for heading in headings:
+        item_list.add_item(String(heading))
+    item_list.get_parent().visible = true
+
+func _insert_row(row, headings, clause):
+    for value in row:
+        if value != null:
+            item_list.add_item(String(value))
+        else:
+            item_list.add_item("")    
+
+func _finish_statement(sql, clause):
+    pass

@@ -108,13 +108,12 @@ _sections_unfolded = [ "Anchor", "Rect" ]
 
 [node name="ScrollInfo" type="ScrollContainer" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 220.0
-margin_bottom = 210.0
+margin_right = 300.0
+margin_bottom = 422.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
@@ -129,8 +128,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 220.0
-margin_bottom = 210.0
+margin_right = 300.0
+margin_bottom = 422.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -151,10 +150,12 @@ _sections_unfolded = [ "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mo
 
 [node name="ScrollTabular" type="ScrollContainer" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 213.0
 margin_right = 300.0
 margin_bottom = 422.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -172,7 +173,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 300.0
-margin_bottom = 422.0
+margin_bottom = 209.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 3
