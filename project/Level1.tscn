@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Level1.gd" type="Script" id=1]
-[ext_resource path="res://GameUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://SQLTools.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Person.gd" type="Script" id=2]
+[ext_resource path="res://GameUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://SQLTools.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=1]
 
@@ -104,6 +105,12 @@ skeleton = NodePath("..")
 material/0 = SubResource( 5 )
 _sections_unfolded = [ "LOD", "Transform", "Visibility", "material" ]
 
+[node name="Node" type="Node" parent="SceneVp/Spatial/MeshInstance"]
+
+script = ExtResource( 2 )
+color = Color( 0, 0, 0, 1 )
+stuff = [  ]
+
 [node name="Camera" type="Camera" parent="SceneVp/Spatial"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.46983 )
@@ -144,8 +151,8 @@ directional_shadow_bias_split_scale = 0.25
 directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 
-[node name="UI" parent="." instance=ExtResource( 2 )]
+[node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="SQLTools" parent="." instance=ExtResource( 3 )]
+[node name="SQLTools" parent="." instance=ExtResource( 4 )]
 
 

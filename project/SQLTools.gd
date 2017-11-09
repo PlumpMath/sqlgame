@@ -11,7 +11,7 @@ signal sql_complete
 func _ready():
     # Initiate the client - connect to the database
     sql_client = SqlModule.new()
-    sql_client.create_database()
+    sql_client.open_database()
     pass
 
 func _notification(what):
@@ -85,13 +85,13 @@ func execute_select(sql):
 
 func get_clause(sql):
     var clause
-    if sql.strip_edges(" ;").left(11).to_lower() == "delete from":
+    if sql.strip_edges(" ;").left(6).to_lower() == "delete":
         return "delete"
     if sql.strip_edges(" ;").left(6).to_lower() == "select":
         return "select"
     if sql.strip_edges(" ;").left(6).to_lower() == "update":
         return "update"
-    if sql.strip_edges(" ;").left(11).to_lower() == "insert into":
+    if sql.strip_edges(" ;").left(6).to_lower() == "insert":
         return "insert"
     return "unknown";
 

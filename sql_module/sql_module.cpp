@@ -8,9 +8,9 @@ SqlModule::SqlModule()
 }
 
 
-Variant SqlModule::createDatabase()
+Variant SqlModule::openDatabase(String filename)
 {
-    int rc = sqlite3_open_v2(":memory:", &activeDb, SQLITE_OPEN_READWRITE, NULL);
+    int rc = sqlite3_open_v2(filename.ascii(), &activeDb, SQLITE_OPEN_READWRITE, NULL);
 
     if (rc != SQLITE_OK) {
         return Variant(sqlite3_errmsg(activeDb));
@@ -191,7 +191,7 @@ Variant SqlModule::closeDatabase()
 
 void SqlModule::_bind_methods() {
 
-    ClassDB::bind_method(D_METHOD("create_database"), &SqlModule::createDatabase);
+    ClassDB::bind_method(D_METHOD("open_database", "filename"), &SqlModule::openDatabase, DEFVAL(String(":memory:")));
     ClassDB::bind_method(D_METHOD("prepare_statement", "statement"), &SqlModule::prepareStatement);
     ClassDB::bind_method(D_METHOD("bind_parameter", "value"), &SqlModule::bindParameter);
     ClassDB::bind_method(D_METHOD("get_column_names"), &SqlModule::getColumnNames);

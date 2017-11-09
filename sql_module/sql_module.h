@@ -21,7 +21,7 @@ protected:
 public:
 
     SqlModule();
-    Variant createDatabase();
+    Variant openDatabase(String filename);
     Variant prepareStatement(String statement);
     Variant bindParameter(Variant value);
     Variant executeInsert();

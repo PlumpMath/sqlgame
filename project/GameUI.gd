@@ -39,7 +39,7 @@ func _on_ExecuteButton_pressed():
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
-func _start_statement(sql, clause, original_sql):
+func _start_statement(sql, clause):
     if (clause == "select"):
         sql_info.get_parent().visible = false
     else:
