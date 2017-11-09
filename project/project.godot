@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="SQLGame"
-run/main_scene="res://Level1.tscn"
+run/main_scene="res://Level1/Level1.tscn"
 config/icon="res://icon.png"
 
 [gdnative]

@@ -1,10 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://GameUI.gd" type="Script" id=1]
-[ext_resource path="res://ViewportTexture.gd" type="Script" id=2]
-[ext_resource path="res://SqlErrors.gd" type="Script" id=3]
-[ext_resource path="res://ItemList.gd" type="Script" id=4]
+[ext_resource path="res://Base/GameUI.gd" type="Script" id=1]
+[ext_resource path="res://Base/ViewportTexture.gd" type="Script" id=2]
+[ext_resource path="res://Base/SqlErrors.gd" type="Script" id=3]
+[ext_resource path="res://Base/ItemList.gd" type="Script" id=4]
 [ext_resource path="res://TreeTest.gd" type="Script" id=5]
+
+
+
+
 
 [node name="UI" type="Control"]
 

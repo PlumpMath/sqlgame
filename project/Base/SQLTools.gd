@@ -6,6 +6,7 @@ signal sql_start
 signal sql_error
 signal sql_headings_retrieved
 signal sql_row_retrieved
+signal sql_seed_row_retrieved
 signal sql_complete
 
 func _ready():
@@ -18,6 +19,30 @@ func _notification(what):
     if what == NOTIFICATION_PREDELETE:
         # Destructor
         sql_client.close_database()
+
+func select_seed_data(database, sql, signal_tag):
+    var sql_seed_client = SqlModule.new()
+    sql_seed_client.open_database(database)
+
+    var prepare_result = sql_seed_client.prepare_statement(sql)
+    if (prepare_result != null):
+        emit_signal("sql_error", prepare_result)
+        return
+    var first_row = true
+    var row
+    var headings
+    while (1):
+        row = sql_client.get_row()
+        if typeof(row) != TYPE_ARRAY || row.size() == 0:
+            break
+        if (first_row):
+            headings = sql_client.get_column_names()
+        emit_signal("sql_seed_row_retrieved", row, headings, signal_tag)
+        first_row = false
+
+    var finalize_result = sql_client.finalize_statement()
+    if (finalize_result != null):
+        emit_signal("sql_error", finalize_result)
 
 # Returns an error or the number of effected rows
 func execute_raw(sql):

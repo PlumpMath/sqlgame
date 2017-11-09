@@ -1,9 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Level1.gd" type="Script" id=1]
+[ext_resource path="res://Base/Level.gd" type="Script" id=1]
 [ext_resource path="res://Person.gd" type="Script" id=2]
-[ext_resource path="res://GameUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://SQLTools.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=4]
+
+
+
+
 
 [sub_resource type="Shader" id=1]
 
@@ -52,13 +56,14 @@ render_priority = 0
 shader = SubResource( 4 )
 shader_param/speed = null
 
-[node name="Level1" type="Node"]
+[node name="Level" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Size Flags" ]
 
 [node name="SceneVp" type="Viewport" parent="."]
 
+editor/display_folded = true
 arvr = false
 size = Vector2( 0, 0 )
 own_world = false
@@ -154,5 +159,15 @@ directional_shadow_max_distance = 200.0
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="SQLTools" parent="." instance=ExtResource( 4 )]
+
+[node name="SQLSeeder" type="Node" parent="."]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Start" type="Node" parent="States"]
+
+[node name="Victory" type="Node" parent="States"]
+
+[node name="Failure" type="Node" parent="States"]
 
 

@@ -1,16 +1,11 @@
 extends Control
 
-var sql_node
-var sql_editor
-var sql_info
-var item_list
+onready var sql_node = get_parent().get_node("SQLTools")
+onready var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
+onready var sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
+onready var item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
 
 func _ready():
-    # Create node references
-    sql_node = get_parent().get_node("SQLTools")
-    sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
-    sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
-    item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
     
     # Handle signals
     sql_node.connect("sql_start", self, "_start_statement")
