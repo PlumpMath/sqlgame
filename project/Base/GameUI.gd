@@ -1,5 +1,6 @@
 extends Control
 
+onready var level_node = get_parent()
 onready var sql_node = get_parent().get_node("SQLTools")
 onready var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
 onready var sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
@@ -13,6 +14,7 @@ func _ready():
     sql_node.connect("sql_headings_retrieved", self, "_insert_headings")
     sql_node.connect("sql_row_retrieved", self, "_insert_row")
     sql_node.connect("sql_complete", self, "_finish_statement")
+    level_node.connect("state_updated", self, "_show_state_update")
 
     # Configure the viewport
     var viewport = get_parent().get_node("SceneVp")
@@ -35,10 +37,7 @@ func _on_ExecuteButton_pressed():
         _show_sql_error('Not a valid or allowed SQL statement')
 
 func _start_statement(sql, clause):
-    if (clause == "select"):
-        sql_info.get_parent().visible = false
-    else:
-        sql_info.get_parent().visible = true
+    sql_info.get_parent().visible = true
     item_list.get_parent().visible = false
 
 func _show_sql_error(error):
@@ -65,3 +64,7 @@ func _insert_row(row, headings, clause):
 
 func _finish_statement(sql, clause):
     pass
+
+func _show_state_update(message):
+    sql_info.get_parent().visible = true
+    sql_info.set_text(message)

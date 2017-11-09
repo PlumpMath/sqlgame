@@ -1,23 +1,19 @@
-extends Node
+extends "res://Base/StateNode.gd"
 
 onready var states = get_parent().get_children()
-onready var level = get_parent().get_parent()
 
 func _ready():
     pass
 
 func check_state_change(row, headings, clause):
     if clause == "insert":
-        level.state_history.push_back("Failure")
+        level.set_state("Failure", "No more animals - you failed.")
     if clause == "update":
-        level.state_history.push_back("Failure")
+        level.set_state("Failure", "Oh no, you shouldn't have updated that.")
     if clause == "delete":
         for i in range(row.size()):
             if (headings[i] == "owner" && row[i] == "Jill"):
-                level.state_history.push_back("Victory")
+                level.set_state("Victory", "Wohoo. You killed the critter.")
                 
-        if (level.state_history[level.state_history.size() - 1] != "Victory"):
-            level.state_history.push_back("Failure")
-    # What to do on victory??
-    if (level.state_history[level.state_history.size() - 1] == "Victory"):
-        level.get_node("SceneVp/Spatial/MeshInstance").scale = Vector3(0.2,0.2,0.2)
+        if !level.is_state("Victory"):
+            level.set_state("Failure", "Oops. You killed the wrong critter.")
