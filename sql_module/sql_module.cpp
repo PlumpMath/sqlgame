@@ -15,6 +15,8 @@ Variant SqlModule::openDatabase(String filename)
     if (rc != SQLITE_OK) {
         return Variant(sqlite3_errmsg(activeDb));
     }
+
+    return Variant();
 }
 
 Variant SqlModule::prepareStatement(String statement)

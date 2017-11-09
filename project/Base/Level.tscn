@@ -5,10 +5,6 @@
 [ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=4]
 
-
-
-
-
 [sub_resource type="Shader" id=1]
 
 code = "shader_type spatial;
@@ -160,8 +156,6 @@ directional_shadow_max_distance = 200.0
 
 [node name="SQLTools" parent="." instance=ExtResource( 4 )]
 
-[node name="SQLSeeder" type="Node" parent="."]
-
 [node name="States" type="Node" parent="."]
 
 [node name="Start" type="Node" parent="States"]
@@ -169,5 +163,7 @@ directional_shadow_max_distance = 200.0
 [node name="Victory" type="Node" parent="States"]
 
 [node name="Failure" type="Node" parent="States"]
+
+[node name="SQLSeeder" type="Node" parent="."]
 
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=2]
-[ext_resource path="res://Level1/States.gd" type="Script" id=3]
-[ext_resource path="res://Level1/Start.gd" type="Script" id=4]
+[ext_resource path="res://Level1/States.gd" type="Script" id=2]
+[ext_resource path="res://Level1/Start.gd" type="Script" id=3]
+[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=4]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -11,15 +11,15 @@
 
 light_cull_mask = -1
 
-[node name="SQLSeeder" parent="."]
+[node name="States" parent="."]
 
 script = ExtResource( 2 )
 
-[node name="States" parent="."]
+[node name="Start" parent="States"]
 
 script = ExtResource( 3 )
 
-[node name="Start" parent="States"]
+[node name="SQLSeeder" parent="."]
 
 script = ExtResource( 4 )
 

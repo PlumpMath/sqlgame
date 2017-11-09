@@ -1,19 +1,20 @@
 extends Control
 
 onready var level_node = get_parent()
-onready var sql_node = get_parent().get_node("SQLTools")
+onready var sql_tools = get_parent().get_node("SQLTools")
 onready var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
 onready var sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
 onready var item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
+onready var table_tree = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/Tree")
 
 func _ready():
     
     # Handle signals
-    sql_node.connect("sql_start", self, "_start_statement")
-    sql_node.connect("sql_error", self, "_show_sql_error")
-    sql_node.connect("sql_headings_retrieved", self, "_insert_headings")
-    sql_node.connect("sql_row_retrieved", self, "_insert_row")
-    sql_node.connect("sql_complete", self, "_finish_statement")
+    sql_tools.connect("sql_start", self, "_start_statement")
+    sql_tools.connect("sql_error", self, "_show_sql_error")
+    sql_tools.connect("sql_headings_retrieved", self, "_insert_headings")
+    sql_tools.connect("sql_row_retrieved", self, "_insert_row")
+    sql_tools.connect("sql_complete", self, "_finish_statement")
     level_node.connect("state_updated", self, "_show_state_update")
 
     # Configure the viewport
@@ -31,8 +32,8 @@ func _ready():
 
 func _on_ExecuteButton_pressed():
     var sql = sql_editor.get_text()
-    if (sql_node.get_clause(sql) in ["delete", "select", "insert", "update"]):
-        sql_node.execute_select(sql)
+    if (sql_tools.get_clause(sql) in ["delete", "select", "insert", "update"]):
+        sql_tools.execute_select(sql)
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
@@ -68,3 +69,6 @@ func _finish_statement(sql, clause):
 func _show_state_update(message):
     sql_info.get_parent().visible = true
     sql_info.set_text(message)
+
+func _on_Tree_item_selected():
+    sql_tools.describe_table("Animals")

@@ -2,3 +2,4 @@ extends TextEdit
 
 func _ready():
     set_readonly(true)
+    set_wrap(true)

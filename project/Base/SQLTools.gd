@@ -20,29 +20,66 @@ func _notification(what):
         # Destructor
         sql_client.close_database()
 
+func describe_table(table):
+    var clause = "describe"
+    var sql = "PRAGMA table_info([" + table + "])"
+    emit_signal("sql_start", sql, clause)
+
+    var headings = ["name", "type"]
+
+    var prepare_result = sql_client.prepare_statement(sql)
+    if (prepare_result != null):
+        emit_signal("sql_error", prepare_result)
+        return
+
+    var first_row = true
+    var results
+    while (1):
+        results = sql_client.get_row()
+        if typeof(results) == TYPE_STRING:
+            emit_signal("sql_error", results)
+            break
+        if typeof(results) != TYPE_ARRAY || results.size() == 0:
+            break
+        if (first_row):
+            emit_signal("sql_headings_retrieved", headings, clause)
+        emit_signal("sql_row_retrieved", [results[1], results[2]], headings, clause)
+        first_row = false
+    
+    var finalize_result = sql_client.finalize_statement()
+    if (finalize_result != null):
+        emit_signal("sql_error", finalize_result)
+    emit_signal("sql_complete", sql, clause)
+
+
 func select_seed_data(database, sql, signal_tag):
     var sql_seed_client = SqlModule.new()
-    sql_seed_client.open_database(database)
-
+    var connect_result = sql_seed_client.open_database(database)
+    if (connect_result != null):
+        emit_signal("sql_error", connect_result)
+        return
+    
     var prepare_result = sql_seed_client.prepare_statement(sql)
     if (prepare_result != null):
         emit_signal("sql_error", prepare_result)
         return
+
     var first_row = true
     var row
     var headings
     while (1):
-        row = sql_client.get_row()
+        row = sql_seed_client.get_row()
         if typeof(row) != TYPE_ARRAY || row.size() == 0:
             break
         if (first_row):
-            headings = sql_client.get_column_names()
+            headings = sql_seed_client.get_column_names()
         emit_signal("sql_seed_row_retrieved", row, headings, signal_tag)
         first_row = false
 
-    var finalize_result = sql_client.finalize_statement()
+    var finalize_result = sql_seed_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
+    sql_seed_client.close_database()
 
 # Returns an error or the number of effected rows
 func execute_raw(sql):

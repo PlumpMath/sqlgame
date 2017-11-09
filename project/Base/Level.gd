@@ -6,11 +6,10 @@ onready var sql_tools = get_node("SQLTools")
 onready var sql_seeder = get_node("SQLSeeder")
 onready var states = get_node("States")
 
-onready var state_history = ["Start"]
+var state_history = Array()
 
 func _ready():
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
-
 
 func _check_row(row, headings, clause):
     # Get current State

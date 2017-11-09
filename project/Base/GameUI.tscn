@@ -115,13 +115,14 @@ anchor_bottom = 0.0
 margin_right = 300.0
 margin_bottom = 122.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 scroll_horizontal = true
 scroll_vertical = true
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Grow Direction", "Scroll", "Size Flags" ]
 
 [node name="InfoText" type="TextEdit" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo"]
 
@@ -137,7 +138,7 @@ mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = false
-syntax_highlighting = true
+syntax_highlighting = false
 show_line_numbers = false
 highlight_all_occurrences = false
 override_selected_font_color = false
@@ -147,7 +148,7 @@ caret_block_mode = false
 caret_blink = false
 caret_blink_speed = 0.65
 script = ExtResource( 3 )
-_sections_unfolded = [ "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
+_sections_unfolded = [ "Anchor", "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
 
 [node name="ScrollTabular" type="ScrollContainer" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn"]
 
@@ -275,6 +276,10 @@ group = null
 text = "Execute"
 flat = false
 _sections_unfolded = [ "Anchor", "Rect", "Theme", "Visibility" ]
+
+[connection signal="item_double_clicked" from="MarginContainer/VBoxMain/HBoxTop/DataColumn/Tree" to="." method="_on_Tree_item_double_clicked"]
+
+[connection signal="item_selected" from="MarginContainer/VBoxMain/HBoxTop/DataColumn/Tree" to="." method="_on_Tree_item_selected"]
 
 [connection signal="pressed" from="MarginContainer/VBoxMain/HBoxBottom/ExecuteButton" to="." method="_on_ExecuteButton_pressed"]
 

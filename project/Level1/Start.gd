@@ -1,7 +1,5 @@
 extends "res://Base/StateNode.gd"
 
-onready var states = get_parent().get_children()
-
 func _ready():
     pass
 
