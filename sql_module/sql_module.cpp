@@ -3,6 +3,14 @@
 #include "sql_module.h"
 #include "external/sqlite3.h"
 
+// SQLite extention functions
+void sqlitePower(sqlite3_context *context, int argc, sqlite3_value **argv) {
+    double num = sqlite3_value_double(argv[0]);
+    double exp = sqlite3_value_double(argv[1]);
+    double res = pow(num, exp);
+    sqlite3_result_double(context, res);
+}
+
 SqlModule::SqlModule()
 {
 }
@@ -16,16 +24,62 @@ Variant SqlModule::openDatabase(String filename)
         return Variant(sqlite3_errmsg(activeDb));
     }
 
+    int res = sqlite3_create_function(activeDb, "POW", 2, SQLITE_UTF8, NULL, &sqlitePower, NULL, NULL);
+
     return Variant();
 }
 
-Variant SqlModule::prepareStatement(String statement)
+Variant SqlModule::injectData(String sql, Array rows)
 {
-    int rc; // return code
+    int rc = sqlite3_prepare_v3(activeDb, sql.ascii(), -1, 0, &preparedStatement, NULL);
+    if (rc != SQLITE_OK) {
+        return Variant(sqlite3_errmsg(activeDb));
+    }
 
-    rc = sqlite3_prepare_v3(activeDb, statement.ascii(), -1, 0, &preparedStatement, NULL);
+    for (int row = 0; row < rows.size(); ++row) {
+        Array columns = (Array)rows[row];
+        for (int col = 0; col < rows.size(); ++col) {
+            bindParameter(col, columns[col]);
+        }
+        int row_id = executeInsert();
+        columns[0] = row_id;
+    }
 
-    // rc = sqlite3_prepare16_v3(activeDb, statement.c_str(), -1, 0, &preparedStatement, NULL);
+    finalizeStatement();
+    return Variant();
+}
+
+Variant SqlModule::injectDuplicates(String sql, Array column_data, int count)
+
+{
+    int rc = sqlite3_prepare_v3(activeDb, sql.ascii(), -1, 0, &preparedStatement, NULL);
+    if (rc != SQLITE_OK) {
+            return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
+    }
+
+    for (int col = 0; col < column_data.size(); ++col)
+    {
+        rc = bindParameter(col, column_data[col]);
+        if (rc != SQLITE_OK) {
+            return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
+        }
+    }
+
+    for (int row = 0; row < count; ++row) {
+        rc = sqlite3_step(preparedStatement);
+
+        if (rc != SQLITE_DONE) {
+            return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
+        }
+    }
+
+    return finalizeStatement();
+}
+
+
+Variant SqlModule::prepareStatement(String sql)
+{
+    int rc = sqlite3_prepare_v3(activeDb, sql.ascii(), -1, 0, &preparedStatement, NULL);
 
     if (rc != SQLITE_OK) {
         return Variant(sqlite3_errmsg(activeDb));
@@ -34,11 +88,22 @@ Variant SqlModule::prepareStatement(String statement)
     return Variant();
 }
 
-Variant SqlModule::bindParameter(Variant value)
+Variant SqlModule::bindParameter(int position, Variant value)
 {
     int rc;
-
-    // rc = sqlite3_bind_*(preparedStatement, -1, 0, &preparedStatement, NULL);
+    switch (value.get_type()) {
+        case Variant::INT:
+            sqlite3_bind_int(preparedStatement, position, (int)value);
+            break;
+        case Variant::STRING:
+            sqlite3_bind_text(preparedStatement, position, ((String)value).ascii(), -1, NULL);
+            break;
+        case Variant::REAL:
+            sqlite3_bind_double(preparedStatement, position, (double)value);
+            break;
+        default:
+            sqlite3_bind_null(preparedStatement, position);
+    }
 
     if (rc != SQLITE_OK) {
         return Variant(sqlite3_errmsg(activeDb));
@@ -194,6 +259,8 @@ Variant SqlModule::closeDatabase()
 void SqlModule::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("open_database", "filename"), &SqlModule::openDatabase, DEFVAL(String(":memory:")));
+    ClassDB::bind_method(D_METHOD("inject_data", "sql", "rows"), &SqlModule::injectData);
+    ClassDB::bind_method(D_METHOD("inject_duplicates", "sql", "column_data", "count"), &SqlModule::injectDuplicates);
     ClassDB::bind_method(D_METHOD("prepare_statement", "statement"), &SqlModule::prepareStatement);
     ClassDB::bind_method(D_METHOD("bind_parameter", "value"), &SqlModule::bindParameter);
     ClassDB::bind_method(D_METHOD("get_column_names"), &SqlModule::getColumnNames);

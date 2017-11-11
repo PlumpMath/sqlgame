@@ -56,10 +56,10 @@ shader_param/speed = null
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Size Flags" ]
+test = null
 
 [node name="SceneVp" type="Viewport" parent="."]
 
-editor/display_folded = true
 arvr = false
 size = Vector2( 0, 0 )
 own_world = false

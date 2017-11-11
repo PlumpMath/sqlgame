@@ -1,5 +1,4 @@
-extends TextEdit
+extends RichTextLabel
 
 func _ready():
-    set_readonly(true)
-    set_wrap(true)
+    pass

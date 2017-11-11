@@ -6,7 +6,7 @@ signal sql_start
 signal sql_error
 signal sql_headings_retrieved
 signal sql_row_retrieved
-signal sql_seed_row_retrieved
+signal sql_seeder_row_retrieved
 signal sql_complete
 
 func _ready():
@@ -32,54 +32,30 @@ func describe_table(table):
         emit_signal("sql_error", prepare_result)
         return
 
-    var first_row = true
+    var count = 0
     var results
-    while (1):
+    while (count < 1000):
         results = sql_client.get_row()
         if typeof(results) == TYPE_STRING:
             emit_signal("sql_error", results)
             break
         if typeof(results) != TYPE_ARRAY || results.size() == 0:
             break
-        if (first_row):
+        if (count == 0):
             emit_signal("sql_headings_retrieved", headings, clause)
         emit_signal("sql_row_retrieved", [results[1], results[2]], headings, clause)
-        first_row = false
+        count += 1
     
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
     emit_signal("sql_complete", sql, clause)
 
+func inject_data(sql, rows):
+    return sql_client.inject_data(sql, rows)
 
-func select_seed_data(database, sql, signal_tag):
-    var sql_seed_client = SqlModule.new()
-    var connect_result = sql_seed_client.open_database(database)
-    if (connect_result != null):
-        emit_signal("sql_error", connect_result)
-        return
-    
-    var prepare_result = sql_seed_client.prepare_statement(sql)
-    if (prepare_result != null):
-        emit_signal("sql_error", prepare_result)
-        return
-
-    var first_row = true
-    var row
-    var headings
-    while (1):
-        row = sql_seed_client.get_row()
-        if typeof(row) != TYPE_ARRAY || row.size() == 0:
-            break
-        if (first_row):
-            headings = sql_seed_client.get_column_names()
-        emit_signal("sql_seed_row_retrieved", row, headings, signal_tag)
-        first_row = false
-
-    var finalize_result = sql_seed_client.finalize_statement()
-    if (finalize_result != null):
-        emit_signal("sql_error", finalize_result)
-    sql_seed_client.close_database()
+func inject_duplicates(sql, column_data, count):
+    return sql_client.inject_duplicates(sql, column_data, count)
 
 # Returns an error or the number of effected rows
 func execute_raw(sql):
@@ -94,8 +70,15 @@ func execute_raw_insert(sql):
         return prepare_result
     return sql_client.execute_insert()
 
+func seeder_select(sql):
+    var clause = get_clause(sql)
+    
+
 # Translates the statement to an SELECT and 'signals' the results
-func execute_select(sql):    
+func execute_select(sql, use_signal = true):    
+    # Where no signal is used
+    var data = Array()
+
     var clause = get_clause(sql)
 
     # Translate SQL to a select statement
@@ -105,45 +88,57 @@ func execute_select(sql):
     elif clause == "insert":
         var result = execute_raw_insert(sql)
         if (typeof(result) == TYPE_STRING):
-            emit_signal("sql_error", result)
-            return
+            if use_signal:
+                emit_signal("sql_error", result)
+            return result
         var table = get_table_name(sql, clause)
         new_sql = "SELECT * FROM " + table + " WHERE id = " + str(result)
     else:
         new_sql = sql
 
-    emit_signal("sql_start", sql, clause)
+    if use_signal:
+        emit_signal("sql_start", sql, clause)
 
     var prepare_result = sql_client.prepare_statement(new_sql)
     if (prepare_result != null):
-        emit_signal("sql_error", prepare_result)
-        return
+        if use_signal:
+            emit_signal("sql_error", prepare_result)
+        return prepare_result
 
-    var first_row = true
+    var count = 0
     var results
     var headings
-    while (1):
+    while (count < 1000):
         results = sql_client.get_row()
         if typeof(results) == TYPE_STRING:
-            emit_signal("sql_error", results)
+            if use_signal:
+                emit_signal("sql_error", results)
             break
         if typeof(results) == TYPE_INT:
-            emit_signal("sql_error", results)
+            if use_signal:
+                emit_signal("sql_error", results)
             break
         if typeof(results) != TYPE_ARRAY || results.size() == 0:
             break
-        if (first_row):
+        if (count == 0):
             headings = sql_client.get_column_names()
-            emit_signal("sql_headings_retrieved", headings, clause)
-        emit_signal("sql_row_retrieved", results, headings, clause)
-        first_row = false
+            if use_signal:
+                emit_signal("sql_headings_retrieved", headings, clause)
+        if use_signal:
+            emit_signal("sql_row_retrieved", results, headings, clause)
+        else:
+            data.append(results)
+        count += 1
     
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
-        emit_signal("sql_error", finalize_result)
-
-    emit_signal("sql_complete", sql, clause)
-
+        if use_signal:
+            emit_signal("sql_error", finalize_result)
+        return finalize_result
+    if use_signal:
+        emit_signal("sql_complete", sql, clause)
+    else:
+        return data
 
 func get_clause(sql):
     var clause

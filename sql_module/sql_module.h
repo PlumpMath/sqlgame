@@ -22,8 +22,11 @@ public:
 
     SqlModule();
     Variant openDatabase(String filename);
+    Variant injectData(String sql, Array rows);
+    Variant injectDuplicates(String sql, Array column_data, int count);
+
     Variant prepareStatement(String statement);
-    Variant bindParameter(Variant value);
+    Variant bindParameter(int position, Variant value);
     Variant executeInsert();
     Variant executeUpdate();
     Variant executeDelete();

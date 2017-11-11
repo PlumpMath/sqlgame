@@ -6,6 +6,8 @@ onready var sql_tools = get_node("SQLTools")
 onready var sql_seeder = get_node("SQLSeeder")
 onready var states = get_node("States")
 
+export(Array) var test
+
 var state_history = Array()
 
 func _ready():

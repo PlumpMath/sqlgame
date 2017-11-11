@@ -7,6 +7,12 @@
 
 [node name="Level1" instance=ExtResource( 1 )]
 
+test = [ 0 ]
+
+[node name="SceneVp" parent="."]
+
+editor/display_folded = true
+
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
 light_cull_mask = -1
@@ -22,5 +28,6 @@ script = ExtResource( 3 )
 [node name="SQLSeeder" parent="."]
 
 script = ExtResource( 4 )
+max_criminals = 10000
 
 
