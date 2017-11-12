@@ -6,7 +6,8 @@ onready var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
 onready var sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
 onready var item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
 onready var table_tree = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/Tree")
-
+onready var viewport_texture = get_node("MarginContainer/VBoxMain/HBoxTop/TabContainer/Scene")
+    
 func _ready():
     
     # Handle signals
@@ -19,7 +20,6 @@ func _ready():
 
     # Configure the viewport
     var viewport = get_parent().get_node("SceneVp")
-    var viewport_texture = get_node("MarginContainer/VBoxMain/HBoxTop/MainSceneTexture")    
 
     viewport.size.x = viewport_texture.rect_size.x
     viewport.size.y = viewport_texture.rect_size.y
@@ -75,7 +75,7 @@ func _finish_statement(sql, clause):
 
 func _show_state_update(message):
     sql_info.get_parent().visible = true
-    sql_info.set_text(message)
+    sql_info.set_bbcode(message)
 
 func _on_Tree_item_selected():
     sql_tools.describe_table("Criminals")

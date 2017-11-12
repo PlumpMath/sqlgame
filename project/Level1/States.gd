@@ -2,7 +2,7 @@ extends "res://Base/StateNode.gd"
 
 func _ready():
     level.connect("state_updated", self, "_state_update")
-    level.set_state("Start", "We're looking for a criminal with a Royal red\nshirt. Find and DELETE him!")
+    level.set_state("Start", "We're looking for a criminal with a [color=#9B1C31]Royal red[/color] shirt. Find and DELETE him!")
     pass
 
 func check_state_change(row, headings, clause):

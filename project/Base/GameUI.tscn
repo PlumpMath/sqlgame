@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Base/GameUI.gd" type="Script" id=1]
-[ext_resource path="res://Base/ViewportTexture.gd" type="Script" id=2]
-[ext_resource path="res://Base/SqlErrors.gd" type="Script" id=3]
-[ext_resource path="res://Base/ItemList.gd" type="Script" id=4]
-[ext_resource path="res://TreeTest.gd" type="Script" id=5]
+[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Base/GameUI.gd" type="Script" id=2]
+[ext_resource path="res://Base/ViewportTexture.gd" type="Script" id=3]
+[ext_resource path="res://Base/SqlErrors.gd" type="Script" id=4]
+[ext_resource path="res://Base/ItemList.gd" type="Script" id=5]
+[ext_resource path="res://TreeTest.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=8]
+
+size = 12
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 1 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Theme" id=9]
+
+default_font = SubResource( 8 )
 
 [node name="UI" type="Control"]
 
@@ -17,8 +30,9 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Hint", "Rect", "Size Flags" ]
+theme = SubResource( 9 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Anchor", "Hint", "Rect", "Size Flags", "Theme" ]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 
@@ -70,7 +84,7 @@ size_flags_vertical = 3
 alignment = 0
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags" ]
 
-[node name="MainSceneTexture" type="TextureRect" parent="MarginContainer/VBoxMain/HBoxTop"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxMain/HBoxTop"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -80,12 +94,51 @@ margin_right = 692.0
 margin_bottom = 476.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+tabs_visible = true
+_sections_unfolded = [ "Size Flags", "Theme" ]
+
+[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxMain/HBoxTop/TabContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 34.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+override_selected_font_color = false
+
+[node name="Scene" type="TextureRect" parent="MarginContainer/VBoxMain/HBoxTop/TabContainer"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_right = 4.0
+margin_bottom = -36.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 1
 expand = true
 stretch_mode = 7
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 _sections_unfolded = [ "Size Flags" ]
 
 [node name="DataColumn" type="VBoxContainer" parent="MarginContainer/VBoxMain/HBoxTop"]
@@ -129,21 +182,21 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 5.0
-margin_top = 5.0
+margin_top = 4.0
 margin_right = 295.0
-margin_bottom = 117.0
+margin_bottom = 116.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-bbcode_enabled = false
+bbcode_enabled = true
 bbcode_text = ""
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
-script = ExtResource( 3 )
-_sections_unfolded = [ "Anchor", "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
+script = ExtResource( 4 )
+_sections_unfolded = [ "BBCode", "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
 
 [node name="ScrollTabular" type="ScrollContainer" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn"]
 
@@ -182,7 +235,7 @@ auto_height = true
 max_columns = 10
 same_column_width = true
 icon_mode = 1
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Columns", "Grow Direction", "Margin", "Material", "Rect", "Size Flags", "Visibility", "custom_constants" ]
 
 [node name="Tree" type="Tree" parent="MarginContainer/VBoxMain/HBoxTop/DataColumn"]
@@ -201,8 +254,8 @@ mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/scroll_border = 5
-script = ExtResource( 5 )
-_sections_unfolded = [ "Grow Direction", "Rect", "Size Flags", "Theme", "custom_constants" ]
+script = ExtResource( 6 )
+_sections_unfolded = [ "Grow Direction", "Rect", "Size Flags", "Theme", "custom_constants", "custom_fonts" ]
 
 [node name="HBoxBottom" type="HBoxContainer" parent="MarginContainer/VBoxMain"]
 
@@ -228,7 +281,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 922.0
+margin_left = -1.0
+margin_right = 921.0
 margin_bottom = 100.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -242,10 +296,10 @@ highlight_all_occurrences = false
 override_selected_font_color = false
 smooth_scrolling = false
 v_scroll_speed = 80.0
-caret_block_mode = false
+caret_block_mode = true
 caret_blink = true
 caret_blink_speed = 0.65
-_sections_unfolded = [ "Caret", "Focus", "Grow Direction", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Visibility", "custom_constants" ]
+_sections_unfolded = [ "Caret", "Focus", "Grow Direction", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Visibility", "custom_constants", "custom_fonts" ]
 
 [node name="ExecuteButton" type="Button" parent="MarginContainer/VBoxMain/HBoxBottom"]
 
