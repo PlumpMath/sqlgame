@@ -1,4 +1,4 @@
-extends "res://Base/StateNode.gd"
+extends "res://Base/States.gd"
 
 func _ready():
     pass

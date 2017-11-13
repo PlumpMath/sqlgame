@@ -1,6 +1,7 @@
 extends Node
 
 signal state_updated
+signal seeder_finished
 
 onready var sql_tools = get_node("SQLTools")
 onready var sql_seeder = get_node("SQLSeeder")
