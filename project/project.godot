@@ -14,6 +14,11 @@ config/name="SQLGame"
 run/main_scene="res://Level1/Level1.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/test_width=1024
+window/size/test_height=600
+
 [gdnative]
 
 singletons=[  ]

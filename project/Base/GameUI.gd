@@ -82,3 +82,10 @@ func _show_state_update(message):
 
 func _on_Tree_item_selected():
     sql_tools.describe_table("Criminals")
+
+
+func _on_SQLEdit_gui_input( ev ):
+    print(typeof(ev))
+    #if ev.type == InputEvent.KEY && ev.scancode == KEY_ENTER:
+    #    _on_ExecuteButton_pressed()
+    #    return false
