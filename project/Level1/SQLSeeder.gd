@@ -35,14 +35,14 @@ func _ready():
         + "        LEFT JOIN SeedDb.FirstNames fn ON fn.id =  (random_fn * random_fn * random_fn / (fmax * fmax) + 1)"
         + "        LEFT JOIN SeedDb.LastNames ln ON ln.id = (random_ln * random_ln * random_ln / (lmax * lmax) + 1)"
         + "        LEFT JOIN SeedDb.Colours c ON c.id = random_c + 1"
-        + "        LIMIT " + str(max_criminals)
+        + "        LIMIT " + str(level.max_criminals)
         + "    );"
     )
     # Remove anyone with Royal red
     sql_tools.execute_raw("UPDATE Criminals SET shirt_colour = 'Rose red' WHERE shirt_colour = 'Royal red'")
 
     # Give our primary criminal a Royal red shirt
-    sql_tools.execute_raw("UPDATE Criminals SET shirt_colour = 'Royal red' WHERE id = " + str(primary_criminal_id))
+    sql_tools.execute_raw("UPDATE Criminals SET shirt_colour = 'Royal red' WHERE id = " + str(level.primary_criminal_id))
 
     var root = get_parent().get_node("UI").table_tree.create_item()
     root.set_text(0,"Criminals")

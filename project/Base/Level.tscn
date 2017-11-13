@@ -58,7 +58,6 @@ shader_param/speed = null
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Size Flags" ]
-test = null
 
 [node name="SceneVp" type="Viewport" parent="."]
 
