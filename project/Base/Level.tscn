@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Level1/Level.gd" type="Script" id=1]
+[ext_resource path="res://Base/Level.gd" type="Script" id=1]
 [ext_resource path="res://Person.gd" type="Script" id=2]
 [ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=4]
@@ -59,7 +59,6 @@ shader_param/speed = null
 script = ExtResource( 1 )
 _sections_unfolded = [ "Size Flags" ]
 test = null
-max_criminals = 10000
 
 [node name="SceneVp" type="Viewport" parent="."]
 
