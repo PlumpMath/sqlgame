@@ -11,9 +11,9 @@
 script = ExtResource( 2 )
 max_criminals = 10000
 
-[node name="SceneVp" parent="."]
+[node name="Node" parent="SceneVp/Spatial/MeshInstance"]
 
-editor/display_folded = true
+script = null
 
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 

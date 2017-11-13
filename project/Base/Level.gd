@@ -12,11 +12,6 @@ var state_history = Array()
 
 func _ready():
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
-    var player = UI.get_node("AnimationPlayer")
-    yield(get_tree().create_timer(5.0), "timeout")
-    player.play("StartCutscene")
-    yield(get_tree().create_timer(5.0), "timeout")
-    player.queue("EndCutscene")
 
 func _check_row(row, headings, clause):
     # Get current State

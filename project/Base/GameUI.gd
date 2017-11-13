@@ -38,7 +38,7 @@ func _on_ExecuteButton_pressed():
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
-func _start_statement(sql, clause):
+func _start_statement(sql, clause, max_rows):
     sql_info.get_parent().visible = true
     item_list.get_parent().visible = false
 
@@ -71,8 +71,10 @@ func _insert_row(row, headings, clause):
                 item_list.add_item("")
         index += 1
 
-func _finish_statement(sql, clause):
-    pass
+func _finish_statement(sql, clause, row_count, max_rows):
+    if row_count == max_rows:
+        item_list.add_item("**Limited to")
+        item_list.add_item(str(max_rows) + " rows")
 
 func _show_state_update(message):
     sql_info.get_parent().visible = true

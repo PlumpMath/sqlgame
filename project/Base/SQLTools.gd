@@ -75,7 +75,7 @@ func seeder_select(sql):
     
 
 # Translates the statement to an SELECT and 'signals' the results
-func execute_select(sql, use_signal = true):    
+func execute_select(sql, use_signal = true, max_rows=1000):    
     # Where no signal is used
     var data = Array()
 
@@ -97,7 +97,7 @@ func execute_select(sql, use_signal = true):
         new_sql = sql
 
     if use_signal:
-        emit_signal("sql_start", sql, clause)
+        emit_signal("sql_start", sql, clause, max_rows)
 
     var prepare_result = sql_client.prepare_statement(new_sql)
     if (prepare_result != null):
@@ -108,7 +108,7 @@ func execute_select(sql, use_signal = true):
     var count = 0
     var results
     var headings
-    while (count < 1000):
+    while (count < max_rows):
         results = sql_client.get_row()
         if typeof(results) == TYPE_STRING:
             if use_signal:
@@ -136,7 +136,7 @@ func execute_select(sql, use_signal = true):
             emit_signal("sql_error", finalize_result)
         return finalize_result
     if use_signal:
-        emit_signal("sql_complete", sql, clause)
+        emit_signal("sql_complete", sql, clause, count, max_rows)
     else:
         return data
 

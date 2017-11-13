@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Base/Level.gd" type="Script" id=1]
-[ext_resource path="res://Person.gd" type="Script" id=2]
-[ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Base/States.gd" type="Script" id=5]
-[ext_resource path="res://Base/SQLSeeder.gd" type="Script" id=6]
+[ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Base/States.gd" type="Script" id=4]
+[ext_resource path="res://Base/SQLSeeder.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=1]
 
@@ -109,10 +108,6 @@ _sections_unfolded = [ "LOD", "Transform", "Visibility", "material" ]
 
 [node name="Node" type="Node" parent="SceneVp/Spatial/MeshInstance"]
 
-script = ExtResource( 2 )
-color = Color( 0, 0, 0, 1 )
-stuff = [  ]
-
 [node name="Camera" type="Camera" parent="SceneVp/Spatial"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.46983 )
@@ -153,13 +148,13 @@ directional_shadow_bias_split_scale = 0.25
 directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
+[node name="UI" parent="." instance=ExtResource( 2 )]
 
-[node name="SQLTools" parent="." instance=ExtResource( 4 )]
+[node name="SQLTools" parent="." instance=ExtResource( 3 )]
 
 [node name="States" type="Node" parent="."]
 
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Start" type="Node" parent="States"]
 
@@ -169,6 +164,6 @@ script = ExtResource( 5 )
 
 [node name="SQLSeeder" type="Node" parent="."]
 
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 

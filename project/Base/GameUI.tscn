@@ -1,11 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Base/GameUI.gd" type="Script" id=2]
-[ext_resource path="res://Base/ViewportTexture.gd" type="Script" id=3]
-[ext_resource path="res://Base/SqlErrors.gd" type="Script" id=4]
-[ext_resource path="res://Base/ItemList.gd" type="Script" id=5]
-[ext_resource path="res://TreeTest.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -292,7 +288,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 expand = true
 stretch_mode = 7
-script = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Size Flags", "Visibility" ]
 
 [node name="DataColumn" type="VBoxContainer" parent="VBoxMain/HBoxTop"]
@@ -350,7 +345,6 @@ bbcode_text = ""
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
-script = ExtResource( 4 )
 _sections_unfolded = [ "Anchor", "BBCode", "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
 
 [node name="ScrollTabular" type="ScrollContainer" parent="VBoxMain/HBoxTop/DataColumn"]
@@ -391,7 +385,6 @@ auto_height = true
 max_columns = 10
 same_column_width = true
 icon_mode = 1
-script = ExtResource( 5 )
 _sections_unfolded = [ "Columns", "Grow Direction", "Margin", "Material", "Rect", "Size Flags", "Visibility", "custom_constants" ]
 
 [node name="Tree" type="Tree" parent="VBoxMain/HBoxTop/DataColumn"]
@@ -411,8 +404,7 @@ mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/scroll_border = 5
-script = ExtResource( 6 )
-_sections_unfolded = [ "Grow Direction", "Rect", "Size Flags", "Theme", "Visibility", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Rect", "Size Flags", "Theme", "Visibility", "custom_constants", "custom_fonts" ]
 
 [node name="HBoxBottom" type="HBoxContainer" parent="VBoxMain"]
 
