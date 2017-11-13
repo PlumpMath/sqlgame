@@ -1,6 +1,7 @@
 extends Node
 
-onready var level = get_tree().get_root().get_child(0)
+export(NodePath) var levelPath
+onready var level
 
 func _ready():
     pass

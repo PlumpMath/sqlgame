@@ -20,10 +20,12 @@ light_cull_mask = -1
 [node name="States" parent="."]
 
 script = ExtResource( 2 )
+levelPath = NodePath("..")
 
 [node name="Start" parent="States"]
 
 script = ExtResource( 3 )
+levelPath = null
 
 [node name="SQLSeeder" parent="."]
 
