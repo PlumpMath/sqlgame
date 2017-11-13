@@ -2,11 +2,11 @@ extends Control
 
 onready var level_node = get_parent()
 onready var sql_tools = get_parent().get_node("SQLTools")
-onready var sql_editor = get_node("MarginContainer/VBoxMain/HBoxBottom/SQLEdit")
-onready var sql_info = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
-onready var item_list = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
-onready var table_tree = get_node("MarginContainer/VBoxMain/HBoxTop/DataColumn/Tree")
-onready var viewport_texture = get_node("MarginContainer/VBoxMain/HBoxTop/TabContainer/Scene")
+onready var sql_editor = get_node("VBoxMain/HBoxBottom/SQLEdit")
+onready var sql_info = get_node("VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
+onready var item_list = get_node("VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
+onready var table_tree = get_node("VBoxMain/HBoxTop/DataColumn/Tree")
+onready var viewport_texture = get_node("VBoxMain/HBoxTop/TabContainer/Scene")
     
 func _ready():
     
@@ -21,8 +21,9 @@ func _ready():
     # Configure the viewport
     var viewport = get_parent().get_node("SceneVp")
 
-    viewport.size.x = viewport_texture.rect_size.x
-    viewport.size.y = viewport_texture.rect_size.y
+    var window_size = OS.get_window_size()
+    viewport.size.x = window_size.x
+    viewport.size.y = window_size.y
 
     # Let two frames pass to make sure the screen was captured
     yield(get_tree(), "idle_frame")
