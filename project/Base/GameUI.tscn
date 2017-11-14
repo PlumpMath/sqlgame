@@ -614,8 +614,6 @@ _sections_unfolded = [ "Playback Options", "playback" ]
 
 [connection signal="tab_changed" from="VBoxMain/HBoxTop/TabContainer" to="." method="_on_TabContainer_tab_changed"]
 
-[connection signal="tab_selected" from="VBoxMain/HBoxTop/TabContainer" to="." method="_on_TabContainer_tab_selected"]
-
 [connection signal="meta_clicked" from="VBoxMain/HBoxTop/TabContainer/Objectives/Out" to="." method="_on_Out_meta_clicked"]
 
 [connection signal="button_pressed" from="VBoxMain/HBoxTop/DataColumn/Tree" to="." method="_on_Tree_button_pressed"]

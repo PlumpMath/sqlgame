@@ -11,14 +11,23 @@ onready var states = get_node("States")
 onready var UI = get_node("UI")
 onready var anim = UI.get_node("AnimationPlayer")
 var objectives_shown = false
+var level_started = false
 
 var state_history = Array()
 
 func _ready():
+    set_process(true)
+    set_process_input(true)
+
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
 
     connect("end_objective_intro", self, "_start_dialog")
     connect("end_dialog", self, "_start_level")
+
+func _input(ev):
+    if !level_started:
+        if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
+            _start_level()
 
 func _check_row(row, headings, clause):
     # Get current State
@@ -93,12 +102,15 @@ func _start_dialog(dialog_array):
         comment_node.get_node("Comment").text = comment[1]
         comment_node.get_node("Face").texture = load(comment[2])
         UI.dialog.add_child(comment_node)
-        yield(get_tree().create_timer(comment[3]), "timeout")
-    emit_signal("end_dialog")
+        if !level_started:
+            yield(get_tree().create_timer(comment[3]), "timeout")
+    if !level_started:
+        emit_signal("end_dialog")
 
 func _start_level():
     anim.play("EndCutscene")
     UI.objectives.get_node('Out').visible = true
+    level_started = true
 
 func _start_objective_intro():
     pass

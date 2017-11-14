@@ -130,3 +130,4 @@ func _on_Tree_button_pressed( item, column, id ):
 func _on_TabContainer_tab_changed( tab ):
     if (tab == 0):
         level_node._show_objectives()
+

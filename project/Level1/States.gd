@@ -11,3 +11,7 @@ func check_state_change(row, headings, clause):
 func _state_update(message):
     if level._is_state("Victory"):
         level.get_node("SceneVp/Spatial/MeshInstance").scale = Vector3(0.2,0.2,0.2)
+    if level._is_state("Failure"):
+        level.UI.viewport_texture.modulate.r = 1
+        level.UI.viewport_texture.modulate.g = 0.5
+        level.UI.viewport_texture.modulate.b = 0.5
