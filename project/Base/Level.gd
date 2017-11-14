@@ -84,13 +84,13 @@ func _objective_comment_right(text, icon_path):
     comment_node.get_node("Comment").text = text
     UI.dialog.add_child(comment_node)
 
-func _preview_scene(period):
+func _preview_scene():
     anim.play("StartCutscene")
     # Without a delay the tab is not getting selected???
     yield(get_tree().create_timer(0.01), "timeout")
     UI.tab_container.set_current_tab(1)
 
-func _start_dialog(dialog_array):
+func _start_dialog(characters, dialog_array):
     for comment in dialog_array:
         var comment_scene
         if comment[0] == 'left':
@@ -100,7 +100,9 @@ func _start_dialog(dialog_array):
 
         var comment_node = comment_scene.instance()
         comment_node.get_node("Comment").text = comment[1]
-        comment_node.get_node("Face").texture = load(comment[2])
+        comment_node.get_node("Avatar/Face").texture = load(characters[comment[2]])
+        comment_node.get_node("Avatar/Label").text = comment[2]
+        
         UI.dialog.add_child(comment_node)
         if !level_started:
             yield(get_tree().create_timer(comment[3]), "timeout")
