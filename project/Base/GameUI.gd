@@ -9,6 +9,8 @@ onready var table_tree = get_node("VBoxMain/HBoxTop/DataColumn/Tree")
 onready var tab_container = get_node("VBoxMain/HBoxTop/TabContainer")
 onready var viewport_texture = tab_container.get_node("Scene")
 onready var execute_button = get_node("VBoxMain/HBoxBottom/ExecuteButton")
+onready var objectives = get_node("VBoxMain/HBoxTop/TabContainer/Objectives")
+onready var dialog = objectives.get_node("Dialog")
 
 func _ready():
     
@@ -123,3 +125,8 @@ func _on_Tree_button_pressed( item, column, id ):
     elif id == 1:
         level_node._table_add(item.get_text(column))
         execute_button.grab_focus()
+
+
+func _on_TabContainer_tab_changed( tab ):
+    if (tab == 0):
+        level_node._show_objectives()
