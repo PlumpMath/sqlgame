@@ -22,14 +22,14 @@ func _check_row(row, headings, clause):
     if states.has_method("check_state_change"):
         states.check_state_change(row, headings, clause)
 
-func set_state(new_state, message):
+func _set_state(new_state, message):
     state_history.push_back(new_state)
     emit_signal("state_updated", message)
 
-func get_state():
+func _get_state():
     state_history.back()
 
-func is_state(state):
+func _is_state(state):
     return state == state_history.back()
     
 func _table_show(name):

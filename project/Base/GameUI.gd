@@ -8,6 +8,7 @@ onready var item_list = get_node("VBoxMain/HBoxTop/DataColumn/ScrollTabular/Item
 onready var table_tree = get_node("VBoxMain/HBoxTop/DataColumn/Tree")
 onready var tab_container = get_node("VBoxMain/HBoxTop/TabContainer")
 onready var viewport_texture = tab_container.get_node("Scene")
+onready var execute_button = get_node("VBoxMain/HBoxBottom/ExecuteButton")
 
 func _ready():
     
@@ -18,6 +19,8 @@ func _ready():
     sql_tools.connect("sql_row_retrieved", self, "_insert_row")
     sql_tools.connect("sql_complete", self, "_finish_statement")
     level_node.connect("state_updated", self, "_show_state_update")
+
+    execute_button.disabled = true
 
     # Configure the viewport
     var viewport = get_parent().get_node("SceneVp")
@@ -87,6 +90,28 @@ func _on_Tree_item_selected():
 func _on_SQLEdit_gui_input( ev ):
     if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
         _on_ExecuteButton_pressed()
+    # Check SQL clause
+    var clause = sql_tools.get_clause(sql_editor.get_text())
+    if clause == "select":
+        execute_button.disabled = false
+        execute_button.theme = load("res://Base/Themes/SelectButton.tres")
+        execute_button.text = "SELECT"
+    elif clause == "delete":
+        execute_button.disabled = false
+        execute_button.theme = load("res://Base/Themes/DestructiveButton.tres")
+        execute_button.text = "DELETE"
+    elif clause == "update":
+        execute_button.disabled = false
+        execute_button.theme = load("res://Base/Themes/DestructiveButton.tres")
+        execute_button.text = "UPDATE"
+    elif clause == "insert":
+        execute_button.disabled = false
+        execute_button.theme = load("res://Base/Themes/DestructiveButton.tres")
+        execute_button.text = "INSERT"
+    else:
+        execute_button.disabled = true
+        execute_button.theme = load("res://Base/Themes/SelectButton.tres")
+        execute_button.text = ""
 
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':
@@ -97,3 +122,4 @@ func _on_Tree_button_pressed( item, column, id ):
         level_node._table_show(item.get_text(column))
     elif id == 1:
         level_node._table_add(item.get_text(column))
+        execute_button.grab_focus()
