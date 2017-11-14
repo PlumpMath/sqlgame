@@ -31,3 +31,25 @@ func get_state():
 
 func is_state(state):
     return state == state_history.back()
+    
+func _table_show(name):
+    sql_tools.describe_table(name)
+
+func _table_add(name):
+    var sql = UI.sql_editor.get_text()
+    if sql.ends_with(name):
+        pass
+    elif sql == "":
+        sql = "SELECT * FROM " + name
+    elif sql.ends_with("\t") || sql.ends_with(" "):
+        sql += name
+    else:
+        sql += " " + name
+    UI.sql_editor.set_text(sql)
+
+func _add_table(table_name):
+    var item = UI.table_tree.create_item()
+    item.add_button(0, load("res://Base/Images/view.png"))
+    item.add_button(0, load("res://Base/Images/add.png"))
+    item.set_text(0, table_name)
+    item.set_selectable (0, false)

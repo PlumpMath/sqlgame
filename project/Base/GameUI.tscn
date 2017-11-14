@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Base/GameUI.gd" type="Script" id=2]
+[ext_resource path="res://Base/Fonts/Monoid-Italic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Base/Images/agent1.png" type="Texture" id=4]
+[ext_resource path="res://Base/Images/agent1.svg" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -15,9 +18,44 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 default_font = SubResource( 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="DynamicFont" id=3]
 
-resource_name = "EndCutscene"
+size = 13
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 1 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 13
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 13
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFontData" id=6]
+
+font_path = "res://Base/Fonts/Monoid-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+
+size = 13
+use_mipmaps = false
+use_filter = false
+font_data = SubResource( 6 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=8]
+
 length = 0.5
 loop = false
 step = 0.1
@@ -88,7 +126,14 @@ tracks/5/keys = {
 "values": [ false, false, true, true ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=9]
+
+resource_name = "RevealComments"
+length = 1.0
+loop = false
+step = 0.1
+
+[sub_resource type="Animation" id=10]
 
 length = 0.5
 loop = false
@@ -226,27 +271,275 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 tabs_visible = true
-_sections_unfolded = [ "Theme", "Visibility" ]
+_sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "custom_styles" ]
 
-[node name="Objectives" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer"]
+[node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 34.0
+margin_top = 26.0
 margin_right = -4.0
 margin_bottom = -4.0
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
+rect_clip_content = false
+mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
+alignment = 0
+_sections_unfolded = [ "Margin" ]
+
+[node name="Intro" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 598.0
+margin_bottom = 85.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = SubResource( 3 )
+custom_fonts/bold_italics_font = SubResource( 4 )
+custom_fonts/italics_font = SubResource( 5 )
+custom_fonts/bold_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "This is some intro text. Images can go here
+
+[img]res://Base/Images/handler.png[/img]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
+_sections_unfolded = [ "Anchor", "BBCode", "Margin", "Rect", "Size Flags", "custom_fonts", "custom_styles" ]
+
+[node name="HSeparator" type="HSeparator" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 89.0
+margin_right = 598.0
+margin_bottom = 93.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Dialog" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 97.0
+margin_right = 500.0
+margin_bottom = 353.0
+rect_min_size = Vector2( 500, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+alignment = 0
+_sections_unfolded = [ "Anchor", "Rect", "Size Flags" ]
+
+[node name="LeftCommentTemplate" type="HBoxContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 500.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Face" type="TextureRect" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/LeftCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility" ]
+
+[node name="Spacer" type="MarginContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/LeftCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_right = 42.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Comment" type="Label" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/LeftCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 46.0
+margin_top = 7.0
+margin_right = 198.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0.375, 1, 0.399414, 1 )
+text = "Is that a capsicum?"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+[node name="RightCommentTemplate" type="HBoxContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 34.0
+margin_right = 500.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 2
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Rect" ]
+
+[node name="Comment" type="Label" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/RightCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 390.0
+margin_top = 7.0
+margin_right = 454.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0.930176, 1, 0.3125, 1 )
+text = "Yes. So?"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors" ]
+
+[node name="Spacer" type="MarginContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/RightCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 458.0
+margin_right = 466.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Face" type="TextureRect" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Dialog/RightCommentTemplate"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 470.0
+margin_right = 500.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility" ]
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 357.0
+margin_right = 598.0
+margin_bottom = 361.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Out" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 365.0
+margin_right = 598.0
+margin_bottom = 452.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = SubResource( 3 )
+custom_fonts/bold_italics_font = SubResource( 4 )
+custom_fonts/italics_font = SubResource( 5 )
+custom_fonts/bold_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Okay, time to check out the [url=view_scene]scene[/url]"
+visible_characters = -1
+percent_visible = 1.0
+override_selected_font_color = false
+_sections_unfolded = [ "Anchor", "BBCode", "Margin", "Rect", "Size Flags", "custom_fonts", "custom_styles" ]
 
 [node name="Scene" type="TextureRect" parent="VBoxMain/HBoxTop/TabContainer"]
 
@@ -256,7 +549,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 34.0
+margin_top = 26.0
 margin_right = -4.0
 margin_bottom = -4.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -382,7 +675,7 @@ mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/scroll_border = 5
-_sections_unfolded = [ "Rect", "Size Flags", "Theme", "Visibility", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Size Flags", "Theme", "Visibility", "custom_constants", "custom_fonts" ]
 
 [node name="HBoxBottom" type="HBoxContainer" parent="VBoxMain"]
 
@@ -417,11 +710,14 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 15
+text = ""
+readonly = false
 highlight_current_line = false
 syntax_highlighting = false
 show_line_numbers = false
 highlight_all_occurrences = false
 override_selected_font_color = false
+context_menu_enabled = true
 smooth_scrolling = false
 v_scroll_speed = 80.0
 caret_block_mode = true
@@ -459,13 +755,18 @@ _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/EndCutscene = SubResource( 3 )
-anims/StartCutscene = SubResource( 4 )
+anims/EndCutscene = SubResource( 8 )
+anims/RevealComments = SubResource( 9 )
+anims/StartCutscene = SubResource( 10 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
-autoplay = ""
+autoplay = "RevealComments"
 _sections_unfolded = [ "Playback Options", "playback" ]
+
+[connection signal="meta_clicked" from="VBoxMain/HBoxTop/TabContainer/Objectives/Out" to="." method="_on_Out_meta_clicked"]
+
+[connection signal="button_pressed" from="VBoxMain/HBoxTop/DataColumn/Tree" to="." method="_on_Tree_button_pressed"]
 
 [connection signal="item_selected" from="VBoxMain/HBoxTop/DataColumn/Tree" to="." method="_on_Tree_item_selected"]
 

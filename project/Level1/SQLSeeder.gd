@@ -44,7 +44,4 @@ func _ready():
     # Give our primary criminal a Royal red shirt
     sql_tools.execute_raw("UPDATE Criminals SET shirt_colour = 'Royal red' WHERE id = " + str(level.primary_criminal_id))
 
-    var root = get_parent().get_node("UI").table_tree.create_item()
-    root.set_text(0,"Criminals")
-
     level.emit_signal("seeder_finished")

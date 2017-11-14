@@ -23,7 +23,7 @@ func _notification(what):
 func describe_table(table):
     var clause = "describe"
     var sql = "PRAGMA table_info([" + table + "])"
-    emit_signal("sql_start", sql, clause)
+    emit_signal("sql_start", sql, clause, 100)
 
     var headings = ["name", "type"]
 
@@ -49,7 +49,7 @@ func describe_table(table):
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
-    emit_signal("sql_complete", sql, clause)
+    emit_signal("sql_complete", sql, clause, 100, count)
 
 func inject_data(sql, rows):
     return sql_client.inject_data(sql, rows)

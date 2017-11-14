@@ -6,8 +6,9 @@ onready var sql_editor = get_node("VBoxMain/HBoxBottom/SQLEdit")
 onready var sql_info = get_node("VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
 onready var item_list = get_node("VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
 onready var table_tree = get_node("VBoxMain/HBoxTop/DataColumn/Tree")
-onready var viewport_texture = get_node("VBoxMain/HBoxTop/TabContainer/Scene")
-    
+onready var tab_container = get_node("VBoxMain/HBoxTop/TabContainer")
+onready var viewport_texture = tab_container.get_node("Scene")
+
 func _ready():
     
     # Handle signals
@@ -81,11 +82,18 @@ func _show_state_update(message):
     sql_info.set_bbcode(message)
 
 func _on_Tree_item_selected():
-    sql_tools.describe_table("Criminals")
-
+    pass
 
 func _on_SQLEdit_gui_input( ev ):
-    print(typeof(ev))
-    #if ev.type == InputEvent.KEY && ev.scancode == KEY_ENTER:
-    #    _on_ExecuteButton_pressed()
-    #    return false
+    if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
+        _on_ExecuteButton_pressed()
+
+func _on_Out_meta_clicked( meta ):
+    if meta == 'view_scene':
+        tab_container.set_current_tab(1)
+
+func _on_Tree_button_pressed( item, column, id ):
+    if id == 0:
+        level_node._table_show(item.get_text(column))
+    elif id == 1:
+        level_node._table_add(item.get_text(column))
