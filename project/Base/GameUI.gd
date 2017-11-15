@@ -10,7 +10,7 @@ onready var tab_container = get_node("VBoxMain/HBoxTop/TabContainer")
 onready var viewport_texture = tab_container.get_node("Scene")
 onready var execute_button = get_node("VBoxMain/HBoxBottom/ExecuteButton")
 onready var objectives = get_node("VBoxMain/HBoxTop/TabContainer/Objectives")
-onready var dialog = objectives.get_node("Dialog")
+onready var dialog = objectives.get_node("DialogScroll/Dialog")
 
 func _ready():
     

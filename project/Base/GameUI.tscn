@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Base/GameUI.gd" type="Script" id=2]
@@ -52,6 +52,24 @@ use_mipmaps = false
 use_filter = false
 font_data = SubResource( 6 )
 _sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=10]
+
+resource_name = "AutoScroll"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxMain/HBoxTop/TabContainer/Objectives/DialogScroll:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=8]
 
@@ -290,19 +308,18 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 598.0
-margin_bottom = 106.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 1
 custom_fonts/mono_font = SubResource( 3 )
 custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 5 )
 custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "This is some intro text. Images can go here
-
-[img]res://Base/Images/handler.png[/img]"
+bbcode_text = "This is some intro text."
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
@@ -314,9 +331,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 110.0
+margin_top = 44.0
 margin_right = 598.0
-margin_bottom = 114.0
+margin_bottom = 48.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -324,15 +341,32 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="Dialog" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+[node name="DialogScroll" type="ScrollContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 118.0
-margin_right = 500.0
+margin_top = 52.0
+margin_right = 598.0
 margin_bottom = 436.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+scroll_horizontal = true
+scroll_vertical = true
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Scroll", "Size Flags" ]
+
+[node name="Dialog" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives/DialogScroll"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 500.0
+margin_bottom = 384.0
 rect_min_size = Vector2( 500, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -341,7 +375,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 alignment = 0
-_sections_unfolded = [ "Anchor", "Rect", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Rect", "Size Flags", "custom_constants" ]
 
 [node name="DialogTimer" type="Timer" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
@@ -604,6 +638,7 @@ _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
+anims/AutoScroll = SubResource( 10 )
 anims/EndCutscene = SubResource( 8 )
 anims/StartCutscene = SubResource( 9 )
 playback/active = true
