@@ -91,21 +91,44 @@ func _preview_scene():
     UI.tab_container.set_current_tab(1)
 
 func _start_dialog(characters, dialog_array):
+    var last_character = ''
     for comment in dialog_array:
+
+        var animate_seconds = comment[1].length() / 20
+
         var comment_scene
-        if comment[0] == 'left':
+        if characters[comment[0]][0] == 'left':
             comment_scene = load("res://Base/LeftComment.tscn")
         else:
             comment_scene = load("res://Base/RightComment.tscn")
 
         var comment_node = comment_scene.instance()
         comment_node.get_node("Comment").text = comment[1]
-        comment_node.get_node("Avatar/Face").texture = load(characters[comment[2]])
-        comment_node.get_node("Avatar/Label").text = comment[2]
-        
+        # For the moment display duplicate icons
+        # if comment[0] == last_character:
+        comment_node.get_node("Avatar/Face").texture = load(characters[comment[0]][1])
+        comment_node.get_node("Avatar/Label").text = comment[0]
+
+        comment_node.get_node("AnimationPlayer").play("RevealComment", -1, 1/(animate_seconds + 0.001))
+
         UI.dialog.add_child(comment_node)
+        yield(get_tree().create_timer(0.01), "timeout")
+
+        last_character = comment[0]
+        # AUTO SCROLL:
+        var current_scroll = UI.objectives.get_node("DialogScroll").get_v_scroll()
+        # Determine max scroll
+        UI.objectives.get_node("DialogScroll").set_v_scroll(100000)
+        var max_scroll = UI.objectives.get_node("DialogScroll").get_v_scroll()
+        UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
+        # Poors man's animate (cannot use animation for v_scroll)
+        while current_scroll < max_scroll:
+            current_scroll += 2
+            UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
+            yield(get_tree().create_timer(0.0005), "timeout")
+
         if !level_started:
-            yield(get_tree().create_timer(comment[3]), "timeout")
+            yield(get_tree().create_timer(animate_seconds + comment[2]), "timeout")
     if !level_started:
         emit_signal("end_dialog")
 
