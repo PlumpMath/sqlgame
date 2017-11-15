@@ -20,7 +20,7 @@ editor/display_folded = true
 
 light_cull_mask = -1
 
-[node name="CRT Effect" type="Node" parent="SceneVp" instance=ExtResource( 3 )]
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 3 )]
 
 _sections_unfolded = [ "Material", "Mouse", "Pause", "Visibility" ]
 
