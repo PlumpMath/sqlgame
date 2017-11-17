@@ -1,30 +1,314 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1/Level.gd" type="Script" id=2]
-[ext_resource path="res://Level1/States.gd" type="Script" id=3]
-[ext_resource path="res://Level1/Start.gd" type="Script" id=4]
-[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=5]
+[ext_resource path="res://Base/Models/Material.material" type="Material" id=3]
+[ext_resource path="res://Base/SQLEntities/SQLRat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Level1/States.gd" type="Script" id=5]
+[ext_resource path="res://Level1/Start.gd" type="Script" id=6]
+[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=7]
+
+[sub_resource type="ArrayMesh" id=2]
+
+surfaces/0 = {
+"aabb": Rect3( -6.58546, 1.99642, -6.58546, 13.1709, 7.34467, 13.1709 ),
+"array_data": PoolByteArray( 149, 70, 252, 63, 149, 198, 0, 60, 0, 129, 0, 0, 149, 70, 252, 63, 149, 70, 0, 60, 0, 129, 0, 0, 149, 198, 252, 63, 149, 70, 0, 60, 0, 129, 0, 0, 149, 198, 252, 63, 149, 198, 0, 60, 0, 129, 0, 0, 67, 70, 144, 64, 67, 198, 0, 60, 0, 126, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 0, 126, 0, 0, 67, 198, 144, 64, 67, 70, 0, 60, 0, 126, 0, 0, 67, 70, 144, 64, 67, 70, 0, 60, 0, 126, 0, 0, 149, 198, 252, 63, 149, 198, 0, 60, 129, 0, 0, 0, 149, 198, 252, 63, 149, 70, 0, 60, 129, 0, 0, 0, 149, 198, 135, 72, 149, 70, 0, 60, 129, 0, 0, 0, 149, 198, 135, 72, 149, 198, 0, 60, 129, 0, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 0, 0, 126, 0, 67, 70, 144, 64, 67, 198, 0, 60, 0, 0, 126, 0, 67, 70, 171, 72, 67, 198, 0, 60, 0, 0, 126, 0, 67, 198, 171, 72, 67, 198, 0, 60, 0, 0, 126, 0, 149, 70, 252, 63, 149, 70, 0, 60, 127, 0, 0, 0, 149, 70, 252, 63, 149, 198, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 198, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 127, 0, 0, 0, 67, 198, 144, 64, 67, 70, 0, 60, 127, 0, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 127, 0, 0, 0, 67, 198, 171, 72, 67, 198, 0, 60, 127, 0, 0, 0, 67, 198, 171, 72, 67, 70, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 198, 0, 60, 84, 94, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 84, 94, 0, 0, 67, 70, 171, 72, 67, 70, 0, 60, 84, 94, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 84, 94, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 0, 94, 84, 0, 67, 70, 171, 72, 67, 70, 0, 60, 0, 94, 84, 0, 67, 198, 171, 72, 67, 70, 0, 60, 0, 94, 84, 0, 149, 198, 135, 72, 149, 70, 0, 60, 0, 94, 84, 0, 149, 198, 135, 72, 149, 70, 0, 60, 172, 94, 0, 0, 67, 198, 171, 72, 67, 70, 0, 60, 172, 94, 0, 0, 67, 198, 171, 72, 67, 198, 0, 60, 172, 94, 0, 0, 149, 198, 135, 72, 149, 198, 0, 60, 172, 94, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 0, 94, 172, 0, 149, 70, 135, 72, 149, 198, 0, 60, 0, 94, 172, 0, 149, 198, 135, 72, 149, 198, 0, 60, 0, 94, 172, 0, 67, 198, 171, 72, 67, 198, 0, 60, 0, 94, 172, 0, 149, 198, 252, 63, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 252, 63, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 135, 72, 149, 70, 0, 60, 0, 0, 127, 0, 149, 198, 135, 72, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 252, 63, 149, 198, 0, 60, 0, 0, 129, 0, 149, 198, 252, 63, 149, 198, 0, 60, 0, 0, 129, 0, 149, 198, 135, 72, 149, 198, 0, 60, 0, 0, 129, 0, 149, 70, 135, 72, 149, 198, 0, 60, 0, 0, 129, 0, 67, 70, 144, 64, 67, 70, 0, 60, 0, 0, 129, 0, 67, 198, 144, 64, 67, 70, 0, 60, 0, 0, 129, 0, 67, 198, 171, 72, 67, 70, 0, 60, 0, 0, 129, 0, 67, 70, 171, 72, 67, 70, 0, 60, 0, 0, 129, 0, 67, 70, 144, 64, 67, 198, 0, 60, 130, 0, 0, 0, 67, 70, 144, 64, 67, 70, 0, 60, 130, 0, 0, 0, 67, 70, 171, 72, 67, 70, 0, 60, 130, 0, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 130, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 4, 0, 6, 0, 5, 0, 4, 0, 7, 0, 6, 0, 8, 0, 10, 0, 9, 0, 8, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 12, 0, 15, 0, 14, 0, 16, 0, 18, 0, 17, 0, 16, 0, 19, 0, 18, 0, 20, 0, 22, 0, 21, 0, 20, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 24, 0, 27, 0, 26, 0, 28, 0, 30, 0, 29, 0, 28, 0, 31, 0, 30, 0, 32, 0, 34, 0, 33, 0, 32, 0, 35, 0, 34, 0, 36, 0, 38, 0, 37, 0, 36, 0, 39, 0, 38, 0, 40, 0, 42, 0, 41, 0, 40, 0, 43, 0, 42, 0, 44, 0, 46, 0, 45, 0, 44, 0, 47, 0, 46, 0, 48, 0, 50, 0, 49, 0, 48, 0, 51, 0, 50, 0, 52, 0, 54, 0, 53, 0, 52, 0, 55, 0, 54, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 84,
+"material": ExtResource( 3 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 56
+}
+custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
+
+[sub_resource type="SpatialMaterial" id=3]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.69
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.53
+roughness_texture_channel = 0
+emission_enabled = true
+emission = Color( 0.546875, 0.546875, 0.546875, 1 )
+emission_energy = 1.0
+emission_operator = 0
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Emission" ]
+
+[sub_resource type="BoxShape" id=4]
+
+extents = Vector3( 1, 1, 1 )
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 1.0
+height = 1.0
 
 [node name="Level1" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 max_criminals = 10000
 
+[node name="SceneVp" parent="."]
+
+msaa = 2
+
+[node name="Camera" parent="SceneVp/Spatial"]
+
+transform = Transform( 0.761476, 0.433494, -0.48191, -5.22405e-08, 0.743467, 0.668774, 0.648193, -0.509255, 0.566132, -13.4321, 10.0135, 13.4334 )
+
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
+transform = Transform( 1, 0, 0, 0, 0.793003, 0.609217, 0, -0.609217, 0.793003, 1.48545, 2.33484, 3.43687 )
 light_cull_mask = -1
+
+[node name="Area" type="Area" parent="SceneVp/Spatial"]
+
+transform = Transform( 50.8015, 0, 0, 0, 13.5757, 0, 0, 0, 65.604, 0.0438729, 2.2004, 0.0600871 )
+input_ray_pickable = false
+input_capture_on_drag = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision_layer = 1
+collision_mask = 1
+audio_bus_override = false
+audio_bus_name = "Master"
+reverb_bus_enable = false
+reverb_bus_name = "Master"
+reverb_bus_amount = 0.0
+reverb_bus_uniformity = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="Walls" type="StaticBody" parent="SceneVp/Spatial"]
+
+editor/display_folded = true
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+
+[node name="Cube" type="MeshInstance" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 2.33288, 0, 0, 0, 2.33288, 0, 0, 0, 2.33288, 0, -5.32815, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = true
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = SubResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, 14.645 )
+shape = SubResource( 4 )
+disabled = false
+
+[node name="CollisionShape3" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, -14.6112 )
+shape = SubResource( 4 )
+disabled = false
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, 14.6923, 5.67825, -0.950584 )
+shape = SubResource( 4 )
+disabled = false
+
+[node name="CollisionShape4" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, -14.6807, 5.67825, -0.45567 )
+shape = SubResource( 4 )
+disabled = false
+
+[node name="RatSpawn" type="Spatial" parent="SceneVp/Spatial"]
+
+[node name="SQLRat" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( 0.869334, 0, -0.494225, 0, 1, 0, 0.494225, 0, 0.869334, 0, 0.274698, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat2" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( 0.605567, 0, 0.795795, 0, 1, 0, -0.795795, 0, 0.605567, 4.78726, 0.274698, -6.2911 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat2"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat3" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( 0.90854, 0, 0.417798, 0, 1, 0, -0.417798, 0, 0.90854, 9.51004, 0.274698, 5.87305 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat3"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat4" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( 0.184645, 0, -0.982805, 0, 1, 0, 0.982805, 0, 0.184645, -8.83602, 0.274629, 0.314502 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat5" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( 0.923899, 0, 0.382636, 0, 1, 0, -0.382636, 0, 0.923899, -2.76043, 0.276149, -6.05607 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat5"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat6" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( -0.94672, 0, 0.322057, 0, 1, 0, -0.322057, 0, -0.94672, 2.11578, 0.273023, 7.00033 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat6"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat7" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( -0.350694, 0, 0.93649, 0, 1, 0, -0.93649, 0, -0.350694, -6.77589, 0.273157, 6.45283 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat7"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat8" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( -0.0231432, 0, 0.999732, 0, 1, 0, -0.999732, 0, -0.0231432, -9.52039, 0.27589, -4.96454 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat8"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="SQLRat9" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform = Transform( -0.668934, 0, -0.743322, 0, 1, 0, 0.743322, 0, -0.668934, 7.2516, 0.274175, 2.16733 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat9"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
+shape = SubResource( 1 )
+disabled = false
 
 [node name="States" parent="."]
 
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 
 [node name="Start" parent="States"]
 
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [node name="SQLSeeder" parent="."]
 
-script = ExtResource( 5 )
+script = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[connection signal="area_exited" from="SceneVp/Spatial/Area" to="SceneVp/Spatial/RatSpawn/SQLRat" method="_on_Area_area_exited"]
+
+[connection signal="body_exited" from="SceneVp/Spatial/Area" to="SceneVp/Spatial/RatSpawn/SQLRat" method="_on_Area_body_exited"]
 
 

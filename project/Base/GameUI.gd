@@ -131,3 +131,10 @@ func _on_TabContainer_tab_changed( tab ):
     if (tab == 0):
         level_node._show_objectives()
 
+
+
+func _on_UI_resized():
+    var viewport = get_parent().get_node("SceneVp")
+    var window_size = OS.get_window_size()
+    viewport.size.x = window_size.x
+    viewport.size.y = window_size.y
