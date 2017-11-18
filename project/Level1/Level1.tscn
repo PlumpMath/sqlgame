@@ -7,6 +7,7 @@
 [ext_resource path="res://Level1/States.gd" type="Script" id=5]
 [ext_resource path="res://Level1/Start.gd" type="Script" id=6]
 [ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=7]
+[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ArrayMesh" id=2]
 
@@ -97,9 +98,12 @@ max_criminals = 10000
 
 msaa = 2
 
+[node name="Spatial" parent="SceneVp"]
+
 [node name="Camera" parent="SceneVp/Spatial"]
 
 transform = Transform( 0.761476, 0.433494, -0.48191, -5.22405e-08, 0.743467, 0.668774, 0.648193, -0.509255, 0.566132, -13.4321, 10.0135, 13.4334 )
+editor/display_folded = true
 
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
@@ -130,6 +134,11 @@ reverb_bus_name = "Master"
 reverb_bus_amount = 0.0
 reverb_bus_uniformity = 0.0
 _sections_unfolded = [ "Collision" ]
+
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 3 )]
+
+_sections_unfolded = [ "Material", "Mouse", "Pause", "Visibility" ]
+
 
 [node name="Walls" type="StaticBody" parent="SceneVp/Spatial"]
 
