@@ -13,6 +13,8 @@ void sqlitePower(sqlite3_context *context, int argc, sqlite3_value **argv) {
 
 SqlModule::SqlModule()
 {
+    preparedStatement = NULL;
+    activeDb = NULL;
 }
 
 
@@ -37,21 +39,34 @@ Variant SqlModule::injectData(String sql, Array rows)
     }
 
     for (int row = 0; row < rows.size(); ++row) {
-        Array columns = (Array)rows[row];
-        for (int col = 0; col < rows.size(); ++col) {
-            bindParameter(col, columns[col]);
+        printf("NEXT ROW\n");
+
+        if (rows[row].get_type() == Variant::ARRAY) {
+            Array columns = rows[row];
+            for (int col = 0; col < columns.size(); ++col) {
+                rc = bindParameter(col + 1, columns[col]);
+                if (rc != SQLITE_OK) {
+                    return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
+                }
+            }
+            Variant row_id = executeInsert();
+            if (row_id.get_type() == Variant::STRING) {
+                return row_id;
+            }
+            printf("INSERTD %d\n", (int)row_id);
+            columns[0] = row_id;
         }
-        int row_id = executeInsert();
-        columns[0] = row_id;
     }
 
-    finalizeStatement();
-    return Variant();
+    return finalizeStatement();
 }
 
 Variant SqlModule::injectDuplicates(String sql, Array column_data, int count)
-
 {
+    if (preparedStatement != NULL) {
+        Variant(String("Previous statement not finalized."));
+    }
+
     int rc = sqlite3_prepare_v3(activeDb, sql.ascii(), -1, 0, &preparedStatement, NULL);
     if (rc != SQLITE_OK) {
             return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
@@ -59,7 +74,7 @@ Variant SqlModule::injectDuplicates(String sql, Array column_data, int count)
 
     for (int col = 0; col < column_data.size(); ++col)
     {
-        rc = bindParameter(col, column_data[col]);
+        rc = bindParameter(col + 1, column_data[col]);
         if (rc != SQLITE_OK) {
             return Variant(String("Error: ") + String(sqlite3_errmsg(activeDb)));
         }
@@ -93,15 +108,19 @@ Variant SqlModule::bindParameter(int position, Variant value)
     int rc;
     switch (value.get_type()) {
         case Variant::INT:
+            printf("Bind INT %d\n", (int)value);
             sqlite3_bind_int(preparedStatement, position, (int)value);
             break;
         case Variant::STRING:
+            printf("Bind String %s\n", ((String)value).ascii());
             sqlite3_bind_text(preparedStatement, position, ((String)value).ascii(), -1, NULL);
             break;
         case Variant::REAL:
+            printf("Bind Double %f\n", (double)value);
             sqlite3_bind_double(preparedStatement, position, (double)value);
             break;
         default:
+            printf("Bind NULL\n");
             sqlite3_bind_null(preparedStatement, position);
     }
 
@@ -238,9 +257,11 @@ Variant SqlModule::finalizeStatement()
     rc = sqlite3_finalize(preparedStatement);
 
     if (rc != SQLITE_OK) {
+        preparedStatement = NULL;
         return Variant(sqlite3_errmsg(activeDb));
     }
 
+    preparedStatement = NULL;
     return Variant();
 }
 

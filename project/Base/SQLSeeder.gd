@@ -10,7 +10,7 @@ func _ready():
     level.connect("seeder_finished", self, "_seeder_finished")
 
 func _seeder_finished():
-    sql_tools.execute_raw("detach SeedDb")
+    sql_tools.execute_raw("DETACH SeedDb")
 
 func _set_max_rows(max_rows):
     # Use the SeedDb.Counter as a base table for creating seed data

@@ -89,9 +89,7 @@ func _show_state_update(message):
 func _on_Tree_item_selected():
     pass
 
-func _on_SQLEdit_gui_input( ev ):
-    if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
-        _on_ExecuteButton_pressed()
+func _update_execute_button():
     # Check SQL clause
     var clause = sql_tools.get_clause(sql_editor.get_text())
     if clause == "select":
@@ -115,6 +113,10 @@ func _on_SQLEdit_gui_input( ev ):
         execute_button.theme = load("res://Base/Themes/SelectButton.tres")
         execute_button.text = ""
 
+func _on_SQLEdit_gui_input( ev ):
+    if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
+        _on_ExecuteButton_pressed()
+
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':
         tab_container.set_current_tab(1)
@@ -125,7 +127,7 @@ func _on_Tree_button_pressed( item, column, id ):
     elif id == 1:
         level_node._table_add(item.get_text(column))
         execute_button.grab_focus()
-
+        _update_execute_button()
 
 func _on_TabContainer_tab_changed( tab ):
     if (tab == 0):
@@ -138,3 +140,8 @@ func _on_UI_resized():
     var window_size = OS.get_window_size()
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
+    var crt = get_parent().get_node("SceneVp/CRT Effect/CRT")
+    crt.rect_size.x = viewport.size.x
+    crt.rect_size.y = viewport.size.y
+    crt.material.set_shader_param("screen_width", viewport.size.x)
+    crt.material.set_shader_param("screen_height", viewport.size.y)

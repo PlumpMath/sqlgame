@@ -1,11 +1,13 @@
 extends "res://Base/Level.gd"
 
-export var max_criminals = 10000
-var primary_criminal_id = (randi() % max_criminals) + 1
+export var max_rats = 10
+var primary_criminal_id = (randi() % max_rats) + 1
+
+onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 
 func _ready():
     # Set tables
-    _add_table("Criminals")
+    _add_table("LabRats")
 
     _preview_scene()
 

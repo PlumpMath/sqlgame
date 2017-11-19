@@ -2,14 +2,13 @@
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1/Level.gd" type="Script" id=2]
-[ext_resource path="res://Base/Models/Material.material" type="Material" id=3]
-[ext_resource path="res://Base/SQLEntities/SQLRat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Base/SQLEntities/SQLRat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level1/States.gd" type="Script" id=5]
 [ext_resource path="res://Level1/Start.gd" type="Script" id=6]
 [ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=7]
-[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=3]
 
-[sub_resource type="ArrayMesh" id=2]
+[sub_resource type="ArrayMesh" id=1]
 
 surfaces/0 = {
 "aabb": Rect3( -6.58546, 1.99642, -6.58546, 13.1709, 7.34467, 13.1709 ),
@@ -18,7 +17,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98051,
 "index_count": 84,
-"material": ExtResource( 3 ),
 "name": "Material",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -26,7 +24,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 
 render_priority = 0
 flags_transparent = false
@@ -80,11 +78,11 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Emission" ]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=3]
 
 extents = Vector3( 1, 1, 1 )
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="CapsuleShape" id=4]
 
 radius = 1.0
 height = 1.0
@@ -92,18 +90,16 @@ height = 1.0
 [node name="Level1" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
-max_criminals = 10000
+max_rats = 10
 
 [node name="SceneVp" parent="."]
 
 msaa = 2
 
-[node name="Spatial" parent="SceneVp"]
-
 [node name="Camera" parent="SceneVp/Spatial"]
 
-transform = Transform( 0.761476, 0.433494, -0.48191, -5.22405e-08, 0.743467, 0.668774, 0.648193, -0.509255, 0.566132, -13.4321, 10.0135, 13.4334 )
 editor/display_folded = true
+transform = Transform( 0.761476, 0.433494, -0.48191, -5.22405e-08, 0.743467, 0.668774, 0.648193, -0.509255, 0.566132, -13.4321, 10.0135, 13.4334 )
 
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
@@ -135,11 +131,6 @@ reverb_bus_amount = 0.0
 reverb_bus_uniformity = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 3 )]
-
-_sections_unfolded = [ "Material", "Mouse", "Pause", "Visibility" ]
-
-
 [node name="Walls" type="StaticBody" parent="SceneVp/Spatial"]
 
 editor/display_folded = true
@@ -164,38 +155,40 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 skeleton = NodePath("..")
-material/0 = SubResource( 3 )
+material/0 = SubResource( 2 )
 _sections_unfolded = [ "material" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
 transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, 14.645 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = false
 
 [node name="CollisionShape3" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
 transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, -14.6112 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = false
 
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
 transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, 14.6923, 5.67825, -0.950584 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = false
 
 [node name="CollisionShape4" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
 transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, -14.6807, 5.67825, -0.45567 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = false
 
 [node name="RatSpawn" type="Spatial" parent="SceneVp/Spatial"]
 
-[node name="SQLRat" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+editor/display_folded = true
+
+[node name="SQLRat" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( 0.869334, 0, -0.494225, 0, 1, 0, 0.494225, 0, 0.869334, 0, 0.274698, 0 )
@@ -203,10 +196,10 @@ transform = Transform( 0.869334, 0, -0.494225, 0, 1, 0, 0.494225, 0, 0.869334, 0
 [node name="CollisionShape" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat2" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat2" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( 0.605567, 0, 0.795795, 0, 1, 0, -0.795795, 0, 0.605567, 4.78726, 0.274698, -6.2911 )
@@ -214,10 +207,10 @@ transform = Transform( 0.605567, 0, 0.795795, 0, 1, 0, -0.795795, 0, 0.605567, 4
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat2"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat3" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat3" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( 0.90854, 0, 0.417798, 0, 1, 0, -0.417798, 0, 0.90854, 9.51004, 0.274698, 5.87305 )
@@ -225,10 +218,10 @@ transform = Transform( 0.90854, 0, 0.417798, 0, 1, 0, -0.417798, 0, 0.90854, 9.5
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat3"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat4" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat4" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( 0.184645, 0, -0.982805, 0, 1, 0, 0.982805, 0, 0.184645, -8.83602, 0.274629, 0.314502 )
@@ -236,10 +229,10 @@ transform = Transform( 0.184645, 0, -0.982805, 0, 1, 0, 0.982805, 0, 0.184645, -
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat4"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat5" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat5" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( 0.923899, 0, 0.382636, 0, 1, 0, -0.382636, 0, 0.923899, -2.76043, 0.276149, -6.05607 )
@@ -247,10 +240,10 @@ transform = Transform( 0.923899, 0, 0.382636, 0, 1, 0, -0.382636, 0, 0.923899, -
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat5"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat6" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat6" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( -0.94672, 0, 0.322057, 0, 1, 0, -0.322057, 0, -0.94672, 2.11578, 0.273023, 7.00033 )
@@ -258,10 +251,10 @@ transform = Transform( -0.94672, 0, 0.322057, 0, 1, 0, -0.322057, 0, -0.94672, 2
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat6"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat7" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat7" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( -0.350694, 0, 0.93649, 0, 1, 0, -0.93649, 0, -0.350694, -6.77589, 0.273157, 6.45283 )
@@ -269,10 +262,10 @@ transform = Transform( -0.350694, 0, 0.93649, 0, 1, 0, -0.93649, 0, -0.350694, -
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat7"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat8" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat8" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( -0.0231432, 0, 0.999732, 0, 1, 0, -0.999732, 0, -0.0231432, -9.52039, 0.27589, -4.96454 )
@@ -280,10 +273,10 @@ transform = Transform( -0.0231432, 0, 0.999732, 0, 1, 0, -0.999732, 0, -0.023143
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat8"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 
-[node name="SQLRat9" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 4 )]
+[node name="SQLRat9" parent="SceneVp/Spatial/RatSpawn" instance=ExtResource( 3 )]
 
 editor/display_folded = true
 transform = Transform( -0.668934, 0, -0.743322, 0, 1, 0, 0.743322, 0, -0.668934, 7.2516, 0.274175, 2.16733 )
@@ -291,8 +284,14 @@ transform = Transform( -0.668934, 0, -0.743322, 0, 1, 0, 0.743322, 0, -0.668934,
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/RatSpawn/SQLRat9"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633063, 0.165549 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
+
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 4 )]
+
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Material", "Mouse", "Pause", "Size Flags", "Visibility" ]
 
 [node name="States" parent="."]
 

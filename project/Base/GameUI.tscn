@@ -285,6 +285,7 @@ _sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "cust
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -443,7 +444,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 expand = true
 stretch_mode = 7
-_sections_unfolded = [ "Material", "Size Flags", "Visibility" ]
+_sections_unfolded = [ "Material", "Rect", "Size Flags", "Visibility" ]
 
 [node name="DataColumn" type="VBoxContainer" parent="VBoxMain/HBoxTop"]
 

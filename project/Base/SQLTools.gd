@@ -77,7 +77,7 @@ func seeder_select(sql):
 # Translates the statement to an SELECT and 'signals' the results
 func execute_select(sql, use_signal = true, max_rows=1000):    
     # Where no signal is used
-    var data = Array()
+    var data = []
 
     var clause = get_clause(sql)
 
