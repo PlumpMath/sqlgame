@@ -1,0 +1,129 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Base/Main Menu.gd" type="Script" id=1]
+[ext_resource path="res://Base/Themes/SelectButton.tres" type="Theme" id=2]
+[ext_resource path="res://Base/Themes/DestructiveButton.tres" type="Theme" id=3]
+
+[node name="Main Menu" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
+next_scene = "res://Level1/Level1.tscn"
+loading_scene = "res://Base/Loading Screen.tscn"
+
+[node name="Background" type="ColorRect" parent="."]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.209566, 0.214844, 0.208969, 1 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags" ]
+
+[node name="Buttons" type="Control" parent="."]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1024.0
+margin_top = -601.0
+margin_bottom = -1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="Start Game" type="Button" parent="Buttons"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -521.0
+margin_top = -180.0
+margin_right = 2.0
+margin_bottom = -148.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start Game"
+flat = false
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "Rect", "Size Flags", "Theme" ]
+
+[node name="Options" type="Button" parent="Buttons"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -521.0
+margin_top = -120.0
+margin_right = 1.0
+margin_bottom = -88.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Options"
+flat = false
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme" ]
+
+[node name="Exit" type="Button" parent="Buttons"]
+
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -521.0
+margin_top = -60.0
+margin_right = 1.0
+margin_bottom = -28.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Exit"
+flat = false
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Theme" ]
+
+[connection signal="button_up" from="Buttons/Start Game" to="." method="_on_Start_Game_button_up"]
+
+[connection signal="button_up" from="Buttons/Exit" to="." method="_on_Exit_button_up"]
+
+

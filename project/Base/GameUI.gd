@@ -142,7 +142,8 @@ func _on_UI_resized():
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
     var crt = get_parent().get_node("SceneVp/CRT Effect/CRT")
-    crt.rect_size.x = viewport.size.x
-    crt.rect_size.y = viewport.size.y
-    crt.material.set_shader_param("screen_width", viewport.size.x)
-    crt.material.set_shader_param("screen_height", viewport.size.y)
+    if crt:
+        crt.rect_size.x = viewport.size.x
+        crt.rect_size.y = viewport.size.y
+        crt.material.set_shader_param("screen_width", viewport.size.x)
+        crt.material.set_shader_param("screen_height", viewport.size.y)

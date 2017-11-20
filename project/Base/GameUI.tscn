@@ -15,7 +15,10 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Theme" id=2]
 
+resource_local_to_scene = true
+resource_name = "GameUITheme"
 default_font = SubResource( 1 )
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="DynamicFont" id=3]
 
@@ -281,7 +284,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
 tabs_visible = true
-_sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "custom_styles" ]
+_sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
@@ -479,7 +482,7 @@ mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-_sections_unfolded = [ "Grow Direction", "Margin", "Scroll", "Size Flags", "Visibility" ]
+_sections_unfolded = [ "Grow Direction", "Margin", "Scroll", "Size Flags", "Theme", "Visibility" ]
 
 [node name="InfoText" type="RichTextLabel" parent="VBoxMain/HBoxTop/DataColumn/ScrollInfo"]
 

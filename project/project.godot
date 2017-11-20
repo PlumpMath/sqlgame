@@ -11,8 +11,12 @@ config_version=3
 [application]
 
 config/name="SQLGame"
-run/main_scene="res://Level1/Level1.tscn"
+run/main_scene="res://Base/Splash Screen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SceneSwitcher="*res://Base/SceneSwitcher/SceneSwitcher.gd"
 
 [display]
 
