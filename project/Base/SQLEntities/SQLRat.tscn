@@ -1362,7 +1362,7 @@ tracks/26/keys = PoolRealArray( 0, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, -
 [sub_resource type="Animation" id=10]
 
 length = 64.7083
-loop = false
+loop = true
 step = 0.1
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature")
@@ -1866,7 +1866,7 @@ tracks/26/keys = PoolRealArray( 0, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0
 [sub_resource type="Animation" id=13]
 
 length = 0.416667
-loop = false
+loop = true
 step = 0.1
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature")
@@ -2034,7 +2034,7 @@ tracks/26/keys = PoolRealArray( 0, 1, 2.4869e-14, 0, 2.5332e-07, -0.252914, -1.4
 [sub_resource type="Animation" id=14]
 
 length = 0.0416667
-loop = false
+loop = true
 step = 0.1
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature")
@@ -2656,7 +2656,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Collision", "Transform", "Visibility", "collision" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 

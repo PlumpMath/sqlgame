@@ -143,7 +143,6 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Walls" type="StaticBody" parent="SceneVp/Spatial"]
 
-editor/display_folded = true
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
@@ -191,6 +190,12 @@ disabled = false
 [node name="CollisionShape4" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
 transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, -14.6807, 5.67825, -0.45567 )
+shape = SubResource( 3 )
+disabled = false
+
+[node name="CollisionShape5" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
+
+transform = Transform( 0.28827, 0, -16.8669, 0, 0.936599, 0, 17.1087, 0, 0.284195, 0.00248429, -0.902782, -0.703071 )
 shape = SubResource( 3 )
 disabled = false
 

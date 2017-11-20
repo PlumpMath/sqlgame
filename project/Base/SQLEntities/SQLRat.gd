@@ -18,18 +18,19 @@ func _physics_process(delta):
     var forward = get_transform().basis[2]
 
     var move_vector = Vector3(forward.x, 0, forward.z) * adrenaline * 2;
-    move_and_collide(move_vector * delta)
+    move_and_slide(move_vector)
 
     var current_rot = Quat(get_transform().basis)
 
     #var angle_diff = (target_rot.get_euler() - Basis(current_rot).get_euler())
     #if abs(angle_diff.y) > 0.1:
     var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
-    set_transform(Transform(smooth_rot, get_transform().origin))
+    var origin = get_transform().origin
+    origin.y = 0
+    set_transform(Transform(smooth_rot, origin))
 
     var t = get_transform()
-    t.origin.y = 0
-    set_transform(t)
+
     var look_at
     if t.origin.x > 11 and forward.x > 0:
         look_at = Vector3(randf() * 10 + 100, 0, randf() * 100 - 50)
@@ -61,9 +62,20 @@ func _set_parameter(param, value):
         set_scale(Vector3(value, value, value))
     elif param == 'adrenaline':
         adrenaline = value
+        if adrenaline == 0:
+            get_player().play("Idle.00" + str(randi()%3))
+            get_player().seek(randf()*30)
+        elif adrenaline < 1.5:
+            get_player().play("Walk", -1, adrenaline)
+            get_player().seek(randf())
+        else:
+            get_player().play("Run", -1, adrenaline * 0.5)
+            get_player().seek(randf())
+
     elif param == 'nickname':
+        get_player().play("Run", -1, adrenaline * 0.5)
         nickname = value
-    elif param == 'colour':
+    elif param == 'eye_colour':
         colour = value
         var colour_rgbs = {
             "Red" : [0.901,0.098,0.294],
