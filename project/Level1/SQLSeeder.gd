@@ -1,14 +1,17 @@
 extends "res://Base/SQLSeeder.gd"
 
 func _ready():
+    pass
 
+func _seed():
+    ._seed()
     _set_max_rows(level.max_rats)
     
     # Create Criminals table
     sql_tools.execute_raw("CREATE TABLE `LabRats` (" +
         "`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
         "`nickname` TEXT NOT NULL," +
-        "`colour` TEXT NOT NULL," +
+        "`eye_colour` TEXT NOT NULL," +
         "`adrenaline` NUMERIC NOT NULL," +
         "`size` NUMERIC NOT NULL);")
 
@@ -17,9 +20,9 @@ func _ready():
         + "    SELECT"
         + "        NULL as id,"
         + "        first_name as nickname,"
-        + "        colour,"
-        + "        1 as adrenaline,"
-        + "        1 as size"
+        + "        colour as eye_colour,"
+        + "        (Random() % 1000 + 3000) / 3000.0 as adrenaline,"
+        + "        (Random() % 1000 + 3000) / 3000.0 as size"
         + "    FROM ("
         + "        SELECT"
         + "            fn.first_name,"
@@ -35,5 +38,9 @@ func _ready():
         + "        LIMIT " + str(level.max_rats)
         + "    );"
     )
-    print(result)
+    
+    var headings = ['id', 'nickname', 'eye_colour', 'adrenaline', 'size']
+    var rows = sql_tools.execute_select("SELECT * FROM LabRats",  false)
+    for row in rows:
+        level.states.process_row(row, headings, 'insert')
     level.emit_signal("seeder_finished")

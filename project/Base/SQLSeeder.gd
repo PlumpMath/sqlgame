@@ -3,7 +3,7 @@ extends Node
 onready var level = get_parent()
 onready var sql_tools = get_parent().get_node("SQLTools")
 
-func _ready():
+func _seed():
     # Seed parameters
     sql_tools.execute_raw("ATTACH 'SeedData.db' as SeedDb")
     

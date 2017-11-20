@@ -116,6 +116,7 @@ func _update_execute_button():
 func _on_SQLEdit_gui_input( ev ):
     if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
         _on_ExecuteButton_pressed()
+    _update_execute_button()
 
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':

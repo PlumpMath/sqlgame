@@ -4,25 +4,28 @@ onready var level = get_tree().get_root().get_node("Level1")
 onready var camera = level.get_node("SceneVp/Spatial/Camera")
 
 onready var target_rot = get_transform().basis
-var rotation_speed = 1
-var translation_speed = 2
+
+var id = 1
+var nickname = ""
+var colour = ""
+var adrenaline = 1
+var size = 1
 
 func _ready():
     set_physics_process(true)
-    
 
 func _physics_process(delta):
     var forward = get_transform().basis[2]
 
-    var move_vector = Vector3(forward.x, 0, forward.z) * translation_speed;
+    var move_vector = Vector3(forward.x, 0, forward.z) * adrenaline * 2;
     move_and_collide(move_vector * delta)
 
     var current_rot = Quat(get_transform().basis)
 
-    var angle_diff = (target_rot.get_euler() - Basis(current_rot).get_euler())
-    if abs(angle_diff.y) > 0.1:
-        var smooth_rot = current_rot.slerp(target_rot, delta * rotation_speed)
-        set_transform(Transform(smooth_rot, get_transform().origin))
+    #var angle_diff = (target_rot.get_euler() - Basis(current_rot).get_euler())
+    #if abs(angle_diff.y) > 0.1:
+    var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
+    set_transform(Transform(smooth_rot, get_transform().origin))
 
     var t = get_transform()
     t.origin.y = 0
@@ -52,17 +55,49 @@ func _physics_process(delta):
         #print(target_rot.get_euler())
         #set_rotation(target_rot.get_euler())
 
-
-
-
-
-func _on_Area_body_shape_exited( body_id, body, body_shape, area_shape ):
-    print("HELP")
-
-
-func _on_Area_area_exited( area ):
-    print("HELP")
-
-
-func _on_Area_body_exited( body ):
-    print("HELP")
+func _set_parameter(param, value):
+    if param == 'size':
+        size = value
+        set_scale(Vector3(value, value, value))
+    elif param == 'adrenaline':
+        adrenaline = value
+    elif param == 'nickname':
+        nickname = value
+    elif param == 'colour':
+        colour = value
+        var colour_rgbs = {
+            "Red" : [0.901,0.098,0.294],
+            "Green" : [0.235,0.705,0.294],
+            "Yellow" : [1,0.882,0.098],
+            "Blue" : [0,0.509,0.784],
+            "Orange" : [0.960,0.509,0.188],
+            "Purple" : [0.568,0.117,0.705],
+            "Cyan" : [0.274,0.941,0.941],
+            "Magenta" : [0.941,0.196,0.901],
+            "Lime" : [0.823,0.960,0.235],
+            "Pink" : [0.980,0.745,0.745],
+            "Teal" : [0,0.501,0.501],
+            "Lavender" : [0.901,0.745,1],
+            "Brown" : [0.666,0.431,0.156],
+            "Beige" : [1,0.980,0.784],
+            "Maroon" : [0.501,0,0],
+            "Mint" : [0.666,1,0.764],
+            "Olive" : [0.501,0.501,0],
+            "Coral" : [1,0.843,0.705],
+            "Navy" : [0,0,0.501],
+            "Grey" : [0.501,0.501,0.501],
+            "White" : [1,1,1],
+            "Black" : [0,0,0]            
+        }
+        var rgb = colour_rgbs[colour]
+        var body = get_node("Scene Root2/Armature/Skeleton/Eyes")
+        var material = body.get_surface_material(0)
+        #material.set_albedo(Color(rgb[0], rgb[1], rgb[2]))
+        material.set_emission(Color(rgb[0], rgb[1], rgb[2]))
+        material.set_emission_energy(10)
+        material.set_feature(material.FEATURE_EMISSION, true)
+    elif param == 'id':
+        id = value
+        
+func get_player():
+    return get_node("Scene Root2/AnimationPlayer")

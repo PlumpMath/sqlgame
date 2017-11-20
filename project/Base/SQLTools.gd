@@ -83,7 +83,10 @@ func execute_select(sql, use_signal = true, max_rows=1000):
 
     # Translate SQL to a select statement
     var new_sql
-    if clause in ["update", "delete"]:
+    if clause == "delete":
+        new_sql = translate_to_select(sql, clause)
+    if clause == "update":
+        var result = execute_raw(sql)
         new_sql = translate_to_select(sql, clause)
     elif clause == "insert":
         var result = execute_raw_insert(sql)
@@ -157,10 +160,10 @@ func translate_to_select(sql, clause):
         return sql.replacen("DELETE FROM", "SELECT * FROM")
     if (clause == "update"):
         var select_sql = sql.replacen("UPDATE ", "SELECT * FROM ")
-        var set_location = sql.findn(" SET ")
-        var part1 = sql.left(set_location)
-        var where_location = sql.findn(" WHERE ")
-        var part2 = sql.right(where_location)
+        var set_location = select_sql.findn(" SET ")
+        var part1 = select_sql.left(set_location)
+        var where_location = select_sql.findn(" WHERE ")
+        var part2 = select_sql.right(where_location)
         return part1 + part2
 
 func get_table_name(sql, clause):
