@@ -1,57 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Base/Level.gd" type="Script" id=1]
 [ext_resource path="res://Base/GameUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Base/SQLTools.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Base/States.gd" type="Script" id=4]
 [ext_resource path="res://Base/SQLSeeder.gd" type="Script" id=5]
-
-[sub_resource type="Shader" id=1]
-
-code = "shader_type spatial;
-uniform vec4 color : hint_color;
-
-void fragment(){
-    ALBEDO = vec3(color[0],color[1],color[2]);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-
-render_priority = 0
-shader = SubResource( 1 )
-shader_param/color = null
-
-[sub_resource type="CylinderMesh" id=3]
-
-material = SubResource( 2 )
-top_radius = 1.0
-bottom_radius = 1.0
-height = 2.0
-radial_segments = 64
-rings = 4
-
-[sub_resource type="Shader" id=4]
-
-code = "shader_type canvas_item; 
-
-uniform sampler2D frame0;
-uniform sampler2D frame1;
-uniform float speed = 1.0;
-
-void fragment() {
-float time = fract(TIME*speed);
-if (time < 0.4) {
-    COLOR = texture(frame0, UV);
-} else {
-    COLOR = texture(frame1, UV);
-}
-}"
-
-[sub_resource type="ShaderMaterial" id=5]
-
-render_priority = 0
-shader = SubResource( 4 )
-shader_param/speed = null
 
 [node name="Level" type="Node"]
 
@@ -88,25 +41,6 @@ _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Ren
 [node name="Spatial" type="Spatial" parent="SceneVp"]
 
 _sections_unfolded = [ "Transform", "Visibility" ]
-
-[node name="MeshInstance" type="MeshInstance" parent="SceneVp/Spatial"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0200701, 9.53674e-07, -0.663394 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 3 )
-skeleton = NodePath("..")
-material/0 = SubResource( 5 )
-_sections_unfolded = [ "LOD", "Transform", "Visibility", "material" ]
-
-[node name="Node" type="Node" parent="SceneVp/Spatial/MeshInstance"]
 
 [node name="Camera" type="Camera" parent="SceneVp/Spatial"]
 

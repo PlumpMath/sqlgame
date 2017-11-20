@@ -80,7 +80,7 @@ shader = SubResource( 1 )
 shader_param/screen_width = 1024.0
 shader_param/screen_height = 600.0
 shader_param/color_bleeding = 1.0
-shader_param/bleeding_range_x = 3.0
+shader_param/bleeding_range_x = 1.0
 shader_param/bleeding_range_y = 0.0
 shader_param/lines_distance = 2.0
 shader_param/scan_size = 5.0
@@ -99,9 +99,9 @@ margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse" ]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Mouse", "Size Flags" ]
 
 [node name="sample" type="Sprite" parent="."]
 
@@ -122,9 +122,9 @@ margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color( 0.539062, 0.0484314, 0.0484314, 0 )
-_sections_unfolded = [ "Material", "Mouse", "Pause" ]
+_sections_unfolded = [ "Material", "Mouse", "Pause", "Rect", "Size Flags" ]
 
 

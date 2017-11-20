@@ -23,6 +23,7 @@ func _ready():
 
     connect("end_objective_intro", self, "_start_dialog")
     connect("end_dialog", self, "_start_level")
+    sql_seeder._seed()
 
 func _input(ev):
     if !level_started:
@@ -33,10 +34,10 @@ func _check_row(row, headings, clause):
     # Get current State
     var state_name = state_history[state_history.size() - 1]
     var state = states.get_node(state_name)
-    if state.has_method("check_state_change"):
-        state.check_state_change(row, headings, clause)
-    if states.has_method("check_state_change"):
-        states.check_state_change(row, headings, clause)
+    if state.has_method("process_row"):
+        state.process_row(row, headings, clause)
+    if states.has_method("process_row"):
+        states.process_row(row, headings, clause)
 
 func _set_state(new_state, message):
     state_history.push_back(new_state)

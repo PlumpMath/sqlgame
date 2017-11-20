@@ -53,7 +53,7 @@ use_filter = false
 font_data = SubResource( 6 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 
 resource_name = "AutoScroll"
 length = 1.0
@@ -71,7 +71,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 
 length = 0.5
 loop = false
@@ -143,7 +143,7 @@ tracks/5/keys = {
 "values": [ false, false, true, true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 
 length = 0.5
 loop = false
@@ -285,6 +285,7 @@ _sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "cust
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -443,7 +444,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 expand = true
 stretch_mode = 7
-_sections_unfolded = [ "Material", "Size Flags", "Visibility" ]
+_sections_unfolded = [ "Material", "Rect", "Size Flags", "Visibility" ]
 
 [node name="DataColumn" type="VBoxContainer" parent="VBoxMain/HBoxTop"]
 
@@ -638,14 +639,16 @@ _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/AutoScroll = SubResource( 10 )
-anims/EndCutscene = SubResource( 8 )
-anims/StartCutscene = SubResource( 9 )
+anims/AutoScroll = SubResource( 8 )
+anims/EndCutscene = SubResource( 9 )
+anims/StartCutscene = SubResource( 10 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "RevealComments"
 _sections_unfolded = [ "Playback Options", "playback" ]
+
+[connection signal="resized" from="." to="." method="_on_UI_resized"]
 
 [connection signal="tab_changed" from="VBoxMain/HBoxTop/TabContainer" to="." method="_on_TabContainer_tab_changed"]
 

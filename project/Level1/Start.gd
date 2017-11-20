@@ -3,7 +3,7 @@ extends "res://Base/State.gd"
 func _ready():
     pass
 
-func check_state_change(row, headings, clause):
+func process_row(row, headings, clause):
     if clause == "insert":
         level._set_state("Failure", "We don't need any more criminals to deal with.")
     if clause == "update":
