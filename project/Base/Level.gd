@@ -15,20 +15,24 @@ var level_started = false
 
 var state_history = Array()
 
+var characters = {}
+var dialog = []
+
 func _ready():
     set_process(true)
     set_process_input(true)
-
+    sql_seeder._seed()
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
 
-    connect("end_objective_intro", self, "_start_dialog")
-    connect("end_dialog", self, "_start_level")
-    sql_seeder._seed()
+func _run_intro():
+    _start_objective_intro()
+    yield(self, "end_objective_intro")
+    _start_dialog(characters, dialog)
+    yield(self, "end_dialog")
+    _start_level()
 
-func _input(ev):
-    if !level_started:
-        if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
-            _start_level()
+func _start_objective_intro():
+    emit_signal("end_objective_intro")
 
 func _check_row(row, headings, clause):
     # Get current State
@@ -110,6 +114,8 @@ func _start_dialog(characters, dialog_array):
         comment_node.get_node("Avatar/Face").texture = load(characters[comment[0]][1])
         comment_node.get_node("Avatar/Label").text = comment[0]
 
+        if level_started:
+            animate_seconds = 0
         comment_node.get_node("AnimationPlayer").play("RevealComment", -1, 1/(animate_seconds + 0.001))
 
         UI.dialog.add_child(comment_node)
@@ -120,26 +126,22 @@ func _start_dialog(characters, dialog_array):
         var current_scroll = UI.objectives.get_node("DialogScroll").get_v_scroll()
         # Determine max scroll
         UI.objectives.get_node("DialogScroll").set_v_scroll(100000)
-        var max_scroll = UI.objectives.get_node("DialogScroll").get_v_scroll()
-        UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
-        # Poors man's animate (cannot use animation for v_scroll)
-        while current_scroll < max_scroll:
-            current_scroll += 2
-            UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
-            yield(get_tree().create_timer(0.0005), "timeout")
-
         if !level_started:
+            var max_scroll = UI.objectives.get_node("DialogScroll").get_v_scroll()
+            UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
+            # Poors man's animate (cannot use animation for v_scroll)
+            while current_scroll < max_scroll:
+                current_scroll += 2
+                UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
+                yield(get_tree().create_timer(0.0005), "timeout")
+    
             yield(get_tree().create_timer(animate_seconds + comment[2]), "timeout")
-    if !level_started:
         emit_signal("end_dialog")
 
 func _start_level():
     anim.play("EndCutscene")
     UI.objectives.get_node('Out').visible = true
     level_started = true
-
-func _start_objective_intro():
-    pass
 
 func _show_objectives():
     if !objectives_shown:

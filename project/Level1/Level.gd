@@ -8,20 +8,16 @@ onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 func _ready():
     # Set tables
     _add_table("LabRats")
-
     _preview_scene()
 
 func _start_objective_intro():
-    print("Hide scene")
-    UI.tab_container.set_current_tab(0)
-
-    var characters = {
+    characters = {
         'Agent1' : ["left", "res://Base/Images/agent1.png"],
         'Agent154' : ["left", "res://Base/Images/agent1.png"],
         'Messenger' : ["right", "res://Base/Images/handler.png"],
         'Trainer' : ["right", "res://Base/Images/handler.png"]
     }
-    var dialog = [
+    dialog = [
         ['Agent154', 'Agent154 reporting, sir!', 1],
         ['Messenger', 'You are no longer Agent154, you are now Agent1', 1],
         ['Agent1', 'Okay...\nCan I ask what happened to Agents 1 - 153', 1],
@@ -39,5 +35,9 @@ func _start_objective_intro():
         ['Messenger', 'I have authority to DELETE you.', 1],
         ['Trainer', 'For your first mission....', 4]
     ]
+
+    print("Hide scene")
+    UI.tab_container.set_current_tab(0)
+
     yield(get_tree().create_timer(2), "timeout")
     emit_signal("end_objective_intro", characters, dialog)

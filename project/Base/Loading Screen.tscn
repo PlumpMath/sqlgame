@@ -42,7 +42,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angle", "Angular Velocity", "Color", "Emission Shape", "Flags", "Initial Velocity", "Radial Accel", "Spread", "Tangential Accel", "Trail" ]
 
-[sub_resource type="BitmapFont" id=3]
+[sub_resource type="BitmapFont" id=2]
 
 textures = [  ]
 chars = PoolIntArray(  )
@@ -51,7 +51,7 @@ height = 1.0
 ascent = 0.0
 distance_field = false
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
 length = 9.0
 loop = true
@@ -145,8 +145,8 @@ anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Margin", "Material", "Rect", "Size Flags", "Theme", "Visibility" ]
 
@@ -204,7 +204,7 @@ rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/mono_font = SubResource( 3 )
+custom_fonts/mono_font = SubResource( 2 )
 custom_colors/default_color = Color( 0.242188, 1, 0, 0.656781 )
 bbcode_enabled = false
 bbcode_text = "FREEDOM IS SLAVERY"
@@ -218,7 +218,7 @@ _sections_unfolded = [ "Anchor", "BBCode", "Focus", "Grow Direction", "Hint", "M
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Rotation = SubResource( 2 )
+anims/Rotation = SubResource( 3 )
 "anims/Rotation (copy)" = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0

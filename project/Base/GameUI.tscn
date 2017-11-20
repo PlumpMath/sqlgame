@@ -288,7 +288,6 @@ _sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants", "cust
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0

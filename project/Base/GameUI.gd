@@ -114,6 +114,10 @@ func _update_execute_button():
         execute_button.text = ""
 
 func _on_SQLEdit_gui_input( ev ):
+    if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
+        if !level_node.level_started:
+            level_node._start_level()
+
     if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
         _on_ExecuteButton_pressed()
     _update_execute_button()
@@ -132,9 +136,7 @@ func _on_Tree_button_pressed( item, column, id ):
 
 func _on_TabContainer_tab_changed( tab ):
     if (tab == 0):
-        level_node._show_objectives()
-
-
+        level_node._run_intro()
 
 func _on_UI_resized():
     var viewport = get_parent().get_node("SceneVp")
