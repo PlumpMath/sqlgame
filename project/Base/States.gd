@@ -9,4 +9,11 @@ func process_row(row, headings, clause):
     pass
     
 func _state_update(message):
-    pass
+    if level._is_state("Victory"):
+        level.UI.viewport_texture.modulate.r = 0.0
+        level.UI.viewport_texture.modulate.g = 0.6
+        level.UI.viewport_texture.modulate.b = 0.0
+    if level._is_state("Failure"):
+        level.UI.viewport_texture.modulate.r = 0.9
+        level.UI.viewport_texture.modulate.g = 0.3
+        level.UI.viewport_texture.modulate.b = 0.3

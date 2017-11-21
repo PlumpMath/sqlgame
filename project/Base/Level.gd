@@ -11,6 +11,7 @@ onready var states = get_node("States")
 onready var UI = get_node("UI")
 onready var anim = UI.get_node("AnimationPlayer")
 var objectives_shown = false
+var intro_started = false
 var level_started = false
 
 var state_history = Array()
@@ -32,6 +33,7 @@ func _input(ev):
 
 
 func _run_intro():
+    intro_started = true
     _start_objective_intro()
     yield(self, "end_objective_intro")
     _start_dialog(characters, dialog)
@@ -43,7 +45,7 @@ func _start_objective_intro():
 
 func _check_row(row, headings, clause):
     # Get current State
-    var state_name = state_history[state_history.size() - 1]
+    var state_name = state_history.back()
     var state = states.get_node(state_name)
     if state.has_method("process_row"):
         state.process_row(row, headings, clause)
@@ -51,7 +53,8 @@ func _check_row(row, headings, clause):
         states.process_row(row, headings, clause)
 
 func _set_state(new_state, message):
-    state_history.push_back(new_state)
+    if new_state and new_state != state_history.back():
+        state_history.push_back(new_state)
     emit_signal("state_updated", message)
 
 func _get_state():
@@ -146,12 +149,14 @@ func _start_dialog(characters, dialog_array):
     emit_signal("end_dialog")
 
 func _start_level():
-    anim.play("EndCutscene")
     UI.objectives.get_node('Out').visible = true
-    level_started = true
+    if !level_started:
+        anim.play("EndCutscene")
+        level_started = true
+    yield(anim, "animation_finished")
+    UI.sql_editor.grab_focus()
 
 func _show_objectives():
     if !objectives_shown:
         objectives_shown = true
         _start_objective_intro()
-        

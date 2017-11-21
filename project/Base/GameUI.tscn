@@ -424,11 +424,11 @@ custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 5 )
 custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "Okay, time to check out the [url=view_scene]scene[/url] and execute some SQL
-
-Quickstart:
+bbcode_text = "Quickstart:
 - First, look at the table structure by click the [img]res://Base/Images/view.png[/img] next to the LabRats
-- Next, click the [img]res://Base/Images/add.png[/img] icon to quickly create a basic SELECT statement"
+- Next, click the [img]res://Base/Images/add.png[/img] icon to quickly create a basic SELECT statement
+
+Okay, time to check out the [url=view_scene]scene[/url] and execute some SQL"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false

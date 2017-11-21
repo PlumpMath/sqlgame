@@ -85,7 +85,7 @@ func execute_select(sql, use_signal = true, max_rows=1000):
     var new_sql
     if clause == "delete":
         new_sql = translate_to_select(sql, clause)
-    if clause == "update":
+    elif clause == "update":
         var result = execute_raw(sql)
         new_sql = translate_to_select(sql, clause)
     elif clause == "insert":
@@ -138,6 +138,10 @@ func execute_select(sql, use_signal = true, max_rows=1000):
         if use_signal:
             emit_signal("sql_error", finalize_result)
         return finalize_result
+
+    if clause == "delete":
+        execute_raw(sql)
+
     if use_signal:
         emit_signal("sql_complete", sql, clause, count, max_rows)
     else:

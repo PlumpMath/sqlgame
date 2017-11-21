@@ -45,9 +45,7 @@ func _set_parameter(param, value):
     if param == 'size':
         size = min(value, 2.0)
         if value > 2:
-            alive = false
-            get_node("Model/AnimationPlayer").stop_all()
-            get_node("Model/AnimationPlayer").play("Die")
+            level.states._kill_rat(self, 0.5, "Oops. I don't think they're meant to get that size")
 
         var shape = get_node("CollisionShape")
         var model = get_node("Model")
@@ -62,11 +60,7 @@ func _set_parameter(param, value):
     elif param == 'adrenaline':
         adrenaline = min(value, 5.0)
         if value > 5:
-            print("Die")
-            alive = false
-            get_node("Model/AnimationPlayer").stop_all()
-            get_node("Model/AnimationPlayer").play("Die")
-
+            level.states._kill_rat(self, 5, "Heart attack I guess")
         if adrenaline == 0:
             get_player().play("Idle.00" + str(randi()%3))
             get_player().seek(randf()*30)
@@ -115,6 +109,14 @@ func _set_parameter(param, value):
         material.set_feature(material.FEATURE_EMISSION, true)
     elif param == 'id':
         id = value
-        
+
+func _highlight():
+    var head_material = get_node("Model/Armature/Skeleton/Head").get_surface_material(0)
+    head_material.set_emission(Color(1,1,1))
+    head_material.set_emission_energy(0.2)
+    head_material.set_feature(head_material.FEATURE_EMISSION, true)
+    yield(get_tree().create_timer(2), "timeout")
+    head_material.set_feature(head_material.FEATURE_EMISSION, false)
+
 func get_player():
     return get_node("Model/AnimationPlayer")

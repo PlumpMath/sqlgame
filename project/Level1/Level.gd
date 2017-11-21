@@ -1,14 +1,22 @@
 extends "res://Base/Level.gd"
 
 export var max_rats = 10
-var primary_criminal_id = (randi() % max_rats) + 1
+onready var primary_rat_id = (randi() % max_rats) + 1
 
 onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 
 func _ready():
     # Set tables
+    print("Primary Rat")
+    print(primary_rat_id)
     _add_table("LabRats")
     _preview_scene()
+    var rat_node = rat_spawner.get_child(states.rat_id_indices[primary_rat_id])
+    var body = rat_node.get_node("Model/Armature/Skeleton/Body")
+    var body_mat = body.get_surface_material(0).duplicate()
+    body_mat.albedo_color = Color(0, 0, 0)
+    body.set_surface_material(0, body_mat)
+    
 
 func _start_objective_intro():
     characters = {
@@ -27,14 +35,17 @@ func _start_objective_intro():
         ['Director', 'No, never say that again', 1],
         ['Director', 'SQL allows us to quickly manipulate data', 1],
         ['Director', 'We can DELETE huge sets of data with one small command', 1],
-        ['Agent154', 'Interesting, I wish we could manipulate people like that', 1],
-        ['Director', 'So did I. So that\'s why we started the SQL-Genome project', 1],
-        ['Agent154', '..Okay..', 1],
+        ['Agent154', 'Interesting. I wish we could manipulate people like that', 1],
+        ['Director', 'So do I. So that\'s why I started the SQL-Genome project', 1],
+        ['Agent154', '..okay..', 1],
         ['Director', 'It\'s basically a wrapper between SQL and Human DNA' , 1],
         ['Agent154', 'Are we sure it\'s safe.' , 1],
         ['Director', 'No. Hence the Rats. We need you to learn SQL, and fast', 1],
         ['Agent154', 'How should I train?' , 1],
-        ['Director', 'You\'ll figure it out. Go show these rats the power of SQL' , 4]
+        ['Director', 'You\'ll figure it out' , 1],
+        ['Director', 'Just one more thing - don\'t kill the black rat.' , 1],
+        ['Director', 'I\'ve grown rather fond of it' , 1],
+        ['Director', 'Now go show those rats the power of SQL' , 4]
     ]
 
     print("Hide scene")
