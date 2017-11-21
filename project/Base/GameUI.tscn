@@ -324,7 +324,7 @@ custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[b]Level 1: Lab Rats[/b]
 
-[i]A responsable use of power[/i]"
+[i]A responsible use of power[/i]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
@@ -613,6 +613,7 @@ override_selected_font_color = false
 context_menu_enabled = true
 smooth_scrolling = false
 v_scroll_speed = 80.0
+hiding_enabled = 0
 caret_block_mode = true
 caret_blink = true
 caret_blink_speed = 0.65
