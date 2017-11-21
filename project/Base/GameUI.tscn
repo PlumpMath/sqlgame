@@ -322,9 +322,9 @@ custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 5 )
 custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[b]Level 1: Lab Rat Slab Raf[/b]
+bbcode_text = "[b]Level 1: Lab Rats[/b]
 
-[i]Show those Rats who's in charge[/i]"
+[i]A responsable use of power[/i]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
