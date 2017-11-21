@@ -38,6 +38,8 @@ func _ready():
     set_process(true)
 
 func _on_ExecuteButton_pressed():
+    # Show the scene
+    tab_container.set_current_tab(1)
     var sql = sql_editor.get_text()
     if (sql_tools.get_clause(sql) in ["unknown", "delete", "select", "insert", "update"]):
         sql_tools.execute_select(sql)
@@ -114,10 +116,6 @@ func _update_execute_button():
         execute_button.text = ""
 
 func _on_SQLEdit_gui_input( ev ):
-    if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
-        if !level_node.level_started:
-            level_node._start_level()
-
     if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
         _on_ExecuteButton_pressed()
     _update_execute_button()

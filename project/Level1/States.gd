@@ -18,6 +18,9 @@ func process_row(row, headings, clause):
             rat_node._set_parameter(headings[i], row[i])
         rat_node.set_translation(Vector3(randi()%21-10, 0, randi()%21-10))
         rat_node.set_rotation(Vector3(0, randf()*PI*2, 0))
+        # create individual instance for eye material
+        var eyes = rat_node.get_node("Model/Armature/Skeleton/Eyes")
+        eyes.set_surface_material(0, eyes.get_surface_material(0).duplicate())
 
         spawn.add_child(rat_node)
         rat_id_indices[id] = rat_node.get_index()

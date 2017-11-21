@@ -311,8 +311,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 598.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 3
@@ -322,7 +322,9 @@ custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 5 )
 custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "This is some intro text."
+bbcode_text = "[b]Level 1: Lab Rat Slab Raf[/b]
+
+[i]Show those Rats who's in charge[/i]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
@@ -334,9 +336,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 44.0
+margin_top = 64.0
 margin_right = 598.0
-margin_bottom = 48.0
+margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -350,7 +352,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 52.0
+margin_top = 72.0
 margin_right = 598.0
 margin_bottom = 436.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -369,7 +371,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 500.0
-margin_bottom = 384.0
+margin_bottom = 364.0
 rect_min_size = Vector2( 500, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -422,7 +424,11 @@ custom_fonts/bold_italics_font = SubResource( 4 )
 custom_fonts/italics_font = SubResource( 5 )
 custom_fonts/bold_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "Okay, time to check out the [url=view_scene]scene[/url]"
+bbcode_text = "Okay, time to check out the [url=view_scene]scene[/url] and execute some SQL
+
+Quickstart:
+- First, look at the table structure by click the [img]res://Base/Images/view.png[/img] next to the LabRats
+- Next, click the [img]res://Base/Images/add.png[/img] icon to quickly create a basic SELECT statement"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false

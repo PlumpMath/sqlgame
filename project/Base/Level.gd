@@ -24,6 +24,13 @@ func _ready():
     sql_seeder._seed()
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
 
+func _input(ev):
+    if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
+        if !level_started:
+            print("Level Skip Start")
+            _start_level()
+
+
 func _run_intro():
     _start_objective_intro()
     yield(self, "end_objective_intro")
@@ -136,7 +143,7 @@ func _start_dialog(characters, dialog_array):
                 yield(get_tree().create_timer(0.0005), "timeout")
     
             yield(get_tree().create_timer(animate_seconds + comment[2]), "timeout")
-        emit_signal("end_dialog")
+    emit_signal("end_dialog")
 
 func _start_level():
     anim.play("EndCutscene")
