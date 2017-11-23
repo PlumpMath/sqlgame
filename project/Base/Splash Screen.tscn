@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Base/Splash Screen.gd" type="Script" id=1]
+[ext_resource path="res://Base/livebranchstudioslogo.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -9,26 +10,59 @@ length = 3.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Logo:color")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Black Mask:color")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( -0.3, 0, 3 ),
-"transitions": PoolRealArray( -3.50955, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.210968, 0.871094, 0, 0 ), Color( 0.210968, 0.871094, 0, 0 ), Color( 0.210968, 0.871094, 0, 1 ) ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Black Mask:color")
+tracks/1/path = NodePath("Logo Background:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 0.870588, 0.870588, 0.870588, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Logo Background:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( -4, 1 ),
+"update": 0,
+"values": [ Vector2( 1024, 0 ), Vector2( 1024, 256 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Logo Background:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( -4, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 300 ), Vector2( 0, 172 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Logo/livebranchstudioslogo:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1.67713, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="Splash Screen" type="Control"]
@@ -44,7 +78,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags" ]
-time_before_main_menu = 4.3
+time_before_main_menu = 5.0
 next_scene = "res://Base/Main Menu.tscn"
 
 [node name="Background" type="ColorRect" parent="."]
@@ -58,26 +92,64 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0.207843, 0.211765, 0.207843, 1 )
-_sections_unfolded = [ "Grow Direction", "Margin", "Rect", "Size Flags" ]
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags" ]
 
-[node name="Logo" type="ColorRect" parent="."]
+[node name="Logo Background" type="ColorRect" parent="."]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -128.0
+margin_right = 512.0
+margin_bottom = 128.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Grow Direction", "Rect" ]
+
+[node name="Logo Background2" type="ColorRect" parent="."]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = -64.0
-margin_right = 64.0
-margin_bottom = 64.0
-rect_pivot_offset = Vector2( 64, 64 )
+margin_left = -512.0
+margin_top = -128.0
+margin_right = 512.0
+margin_bottom = 128.0
+rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.210968, 0.871094, 0, 0 )
-_sections_unfolded = [ "Anchor", "Material", "Rect", "Visibility" ]
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Grow Direction", "Rect" ]
+
+[node name="Logo" type="Control" parent="."]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Hint", "Rect" ]
+
+[node name="livebranchstudioslogo" type="Sprite" parent="Logo"]
+
+scale = Vector2( 0.31293, 0.31293 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Black Mask" type="ColorRect" parent="."]
 
@@ -90,7 +162,7 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 _sections_unfolded = [ "Anchor" ]
 
 [node name="Fade In" type="AnimationPlayer" parent="."]
