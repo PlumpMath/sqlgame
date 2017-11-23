@@ -85,7 +85,7 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     # Let the loading_scene tell us when it's ready to transition to next scene
 
     # Check for signal!!
-    loading_scene.connect("finished", self, "_callback_loading_scene_finished")
+    loading_scene.connect("finished", self, "_callback_all_done")
 
     # Let us tell the loading_scene when we're done loading
     if loading_scene.has_method("on_loading_finished"):
@@ -94,7 +94,21 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     if loading_scene.has_method("on_loading_progress"):
         self.connect("scene_progress", loading_scene, "on_loading_progress")
 
-func _callback_loading_scene_finished():
+func _callback_all_done():
+    # Remove loading scene
+    call_deferred("_free_loading_scene")
+
+    # Show the destination scene
+    if destination_scene.has_method('scene_switcher_show'):
+        destination_scene.scene_switcher_show()
+
+    # Update current scene to be accurate
+    current_scene = destination_scene
+
+    # Stop processing
+    set_process(false)
+
+func _add_destination_scene_to_tree():
     # Spin up a new thread to add the next scene to the root scene
     _thread = Thread.new()
     _thread.start(self, "_thread_func", 0)
@@ -144,27 +158,16 @@ func _process(delta):
             _thread.wait_to_finish()
             _mutex.unlock()
             # Thread finished work, clean up
-            # Remove loading scene
-            call_deferred("_free_loading_scene")
-
-            # Show the destination scene
-            if destination_scene.has_method('scene_switcher_show'):
-                destination_scene.scene_switcher_show()
-
-            # Update current scene to be accurate
-            current_scene = destination_scene
-
-            # Stop processing
-            set_process(false)
-
             _thread_started = false
+
+            # Send 'scene_loaded' signal (to loading_scene)
+            emit_signal("scene_loaded")
 
 func _on_loading_finished():
     # Instance destination scene
     destination_scene = loader_non_blocking.get_resource().instance()
 
-    # Send 'scene_loaded' signal (to loading_scene)
-    emit_signal("scene_loaded")
+    _add_destination_scene_to_tree()
 
 func _on_loading_progress():
     # Send 'scene_progress' signal (to loading_scene)
