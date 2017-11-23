@@ -53,7 +53,7 @@ func _check_row(row, headings, clause):
         states.process_row(row, headings, clause)
 
 func _set_state(new_state, message):
-    if new_state and new_state != state_history.back():
+    if new_state and state_history.size() and new_state != state_history.back():
         state_history.push_back(new_state)
     emit_signal("state_updated", message)
 
@@ -61,8 +61,8 @@ func _get_state():
     state_history.back()
 
 func _is_state(state):
-    return state == state_history.back()
-    
+    return state_history.size() and state == state_history.back()
+
 func _table_show(name):
     sql_tools.describe_table(name)
 
