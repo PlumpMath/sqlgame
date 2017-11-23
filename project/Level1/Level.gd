@@ -17,6 +17,11 @@ func _ready():
     body_mat.albedo_color = Color(0, 0, 0)
     body.set_surface_material(0, body_mat)
     
+func scene_switcher_hide():
+    get_node("UI").visible = false
+
+func scene_switcher_show():
+    get_node("UI").visible = true
 
 func _start_objective_intro():
     characters = {
