@@ -77,6 +77,7 @@ func seeder_select(sql):
 # Translates the statement to an SELECT and 'signals' the results
 func execute_select(sql, use_signal = true, max_rows=1000):    
     # Where no signal is used
+    sql = clean_sql(sql)
     var data = []
 
     var clause = get_clause(sql)
@@ -181,9 +182,15 @@ func get_table_name(sql, clause):
     else:
         lead = " FROM "
 
-    var start = sql.findn(lead) + 11
+    var start = sql.findn(lead) + lead.length()
     var remaining = sql.right(start).strip_edges(" ")
     var end = 0
     while remaining.substr(end, 1) != " ":
         end += 1
     return remaining.left(end)
+    
+func clean_sql(sql):
+    sql = sql.replace("\n", " ")
+    for i in range(20):
+        sql = sql.replace("  ", " ")
+    return sql

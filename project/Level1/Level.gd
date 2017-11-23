@@ -15,7 +15,6 @@ func _ready():
     body_mat.albedo_color = Color(0, 0, 0)
     body.set_surface_material(0, body_mat)
 
-
 func _start_objective_intro():
     characters = {
         'Agent1' : ["left", "res://Base/Images/agent1.png"],

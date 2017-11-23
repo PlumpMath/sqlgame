@@ -1,6 +1,6 @@
 extends Node
 
-signal state_updated
+signal message_updated
 signal seeder_finished
 signal end_objective_intro
 signal end_dialog
@@ -10,27 +10,30 @@ onready var sql_seeder = get_node("SQLSeeder")
 onready var states = get_node("States")
 onready var UI = get_node("UI")
 onready var anim = UI.get_node("AnimationPlayer")
-var objectives_shown = false
-var intro_started = false
-var level_started = false
+onready var objectives_shown = false
+onready var intro_started = false
+onready var level_started = false
 
-var state_history = Array()
+onready var state_history = Array()
 
-var characters = {}
-var dialog = []
+onready var characters = {}
+onready var dialog = []
 
 func _ready():
     set_process(true)
     set_process_input(true)
     sql_seeder._seed()
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
+    sql_tools.connect("sql_headings_retrieved", self, "_check_headings")
+    sql_tools.connect("sql_complete", self, "_finish_statement")
 
 func _input(ev):
-    if ev is InputEventKey and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
-        if !level_started:
+    if ev is InputEventKey:
+        if !level_started and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
             print("Level Skip Start")
             _start_level()
-
+        if ev.get_scancode() == KEY_E and ev.get_control():
+            UI._on_ExecuteButton_pressed()
 
 func _run_intro():
     intro_started = true
@@ -43,6 +46,16 @@ func _run_intro():
 func _start_objective_intro():
     emit_signal("end_objective_intro")
 
+
+func _check_headings(headings, clause):
+    # Get current State
+    var state_name = state_history.back()
+    var state = states.get_node(state_name)
+    if state.has_method("process_headings"):
+        state.process_headings(headings, clause)
+    if states.has_method("process_headings"):
+        states.process_headings(headings, clause)
+
 func _check_row(row, headings, clause):
     # Get current State
     var state_name = state_history.back()
@@ -52,16 +65,41 @@ func _check_row(row, headings, clause):
     if states.has_method("process_row"):
         states.process_row(row, headings, clause)
 
-func _set_state(new_state, message):
-    if new_state and state_history.size() and new_state != state_history.back():
+func _finish_statement(sql, clause, row_count, max_rows):
+    # Get current State
+    var state_name = state_history.back()
+    var state = states.get_node(state_name)
+    if state.has_method("finish_statement"):
+        state.finish_statement(sql, clause, row_count, max_rows)
+    if states.has_method("finish_statement"):
+        states.finish_statement(sql, clause, row_count, max_rows)
+
+func _set_state(new_state, message = null):
+    if state_history.size() > 0 and state_history.back() == "Failure" and new_state != "Start":
+        # No state change allowed..
+        return
+    var old_state
+    if state_history.size() > 0:
+        old_state = state_history.back()
+    else:
+        old_state = null
+
+    var state = states.get_node(new_state)
+    if state:
         state_history.push_back(new_state)
-    emit_signal("state_updated", message)
+        state.enter_state(old_state, message)
 
 func _get_state():
     state_history.back()
 
 func _is_state(state):
     return state_history.size() and state == state_history.back()
+
+func _set_message(message):
+    if state_history.size() > 0 and state_history.back() == "Failure":
+        # No message change allowed..
+        return
+    emit_signal("message_updated", message)
 
 func _table_show(name):
     sql_tools.describe_table(name)
@@ -155,6 +193,7 @@ func _start_level():
         level_started = true
     yield(anim, "animation_finished")
     UI.sql_editor.grab_focus()
+    _set_state("Start")
 
 func _show_objectives():
     if !objectives_shown:

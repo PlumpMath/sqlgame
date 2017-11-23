@@ -2663,7 +2663,7 @@ _sections_unfolded = [ "Collision", "Transform", "Visibility", "collision" ]
 transform = Transform( 0.28576, 0, 0, 0, 0.464939, 0, 0, 0, 0.629319, 0, 0.472235, 0.681639 )
 shape = SubResource( 1 )
 disabled = false
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Model" type="Spatial" parent="."]
 

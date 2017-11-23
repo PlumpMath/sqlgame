@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1/Level.gd" type="Script" id=2]
@@ -6,7 +6,11 @@
 [ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Level1/States.gd" type="Script" id=5]
 [ext_resource path="res://Level1/Start.gd" type="Script" id=6]
-[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=7]
+[ext_resource path="res://Level1/State-Victory.gd" type="Script" id=7]
+[ext_resource path="res://Level1/State-AddFiltering.gd" type="Script" id=8]
+[ext_resource path="res://Level1/State-Proficient.gd" type="Script" id=9]
+[ext_resource path="res://Level1/State-OtherClauses.gd" type="Script" id=10]
+[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=11]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -217,9 +221,25 @@ script = ExtResource( 5 )
 
 script = ExtResource( 6 )
 
-[node name="SQLSeeder" parent="."]
+[node name="Victory" parent="States"]
 
 script = ExtResource( 7 )
+
+[node name="AddFiltering" type="Node" parent="States"]
+
+script = ExtResource( 8 )
+
+[node name="Proficient" type="Node" parent="States"]
+
+script = ExtResource( 9 )
+
+[node name="OtherClauses" type="Node" parent="States"]
+
+script = ExtResource( 10 )
+
+[node name="SQLSeeder" parent="."]
+
+script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

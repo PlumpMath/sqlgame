@@ -1,12 +1,14 @@
 extends "res://Base/States.gd"
 
 func _ready():
-    level._set_state("Start", "We're looking for a criminal with a [color=#9B1C31]Royal red[/color] shirt. Find and DELETE him!")
     pass
 
 var rat_id_indices = {}
 
 func process_row(row, headings, clause):
+    if level._is_state("Failure"):
+        return
+
     var spawn = level.get_node("SceneVp/Spatial/RatSpawn")
     var id = row[0]
 
@@ -38,6 +40,8 @@ func process_row(row, headings, clause):
             _kill_rat(rat_node, 0, "Nice, cold, clean kill")
 
     if clause == 'update':
+        if id == level.primary_rat_id:
+            level._set_message("Hey, you just updated my furry friend. Careful - hurt him and you'll be the next test subject.")
         var rat_node = spawn.get_child(rat_id_indices[id])
         for i in range(1, row.size()):
             if rat_node.alive:
@@ -46,14 +50,19 @@ func process_row(row, headings, clause):
 func _kill_rat(rat, delay = 0, message = ''):
     yield(get_tree().create_timer(delay), "timeout")
     rat.alive = false
+    rat.get_node("CollisionShape").disabled = true
     rat.get_node("Model/AnimationPlayer").stop_all()
     yield(get_tree().create_timer(0.01), "timeout")
     rat.get_node("Model/AnimationPlayer").play("Die")
 
+    if level._is_state("Failure"):
+        return
+
     if rat.id == level.primary_rat_id:
-        level._set_state("Failure", "You killed my favourite rat. You're fired!")
+        level._set_state("Failure", "You killed my favourite rat. You're dead!")
+        return
     elif message:
-        level._set_state(null, message)
+        level._set_message(message)
 
     # Check how many rats are left
     var rats = level.get_node("SceneVp/Spatial/RatSpawn").get_children()

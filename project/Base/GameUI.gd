@@ -19,7 +19,7 @@ func _ready():
     sql_tools.connect("sql_headings_retrieved", self, "_insert_headings")
     sql_tools.connect("sql_row_retrieved", self, "_insert_row")
     sql_tools.connect("sql_complete", self, "_finish_statement")
-    level_node.connect("state_updated", self, "_show_state_update")
+    level_node.connect("message_updated", self, "_show_state_update")
 
     execute_button.disabled = true
 
@@ -38,9 +38,14 @@ func _ready():
 
 func _on_ExecuteButton_pressed():
     # Show the scene
+    if level_node._is_state("Failure"):
+        level_node._set_state("Start")
+        get_tree().reload_current_scene()
+        return
+
     tab_container.set_current_tab(1)
     var sql = sql_editor.get_text()
-    if (sql_tools.get_clause(sql) in ["unknown", "delete", "select", "insert", "update"]):
+    if (sql_tools.get_clause(sql) in ["delete", "select", "insert", "update"]):
         sql_tools.execute_select(sql)
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
@@ -92,6 +97,9 @@ func _on_Tree_item_selected():
 
 func _update_execute_button():
     # Check SQL clause
+    if level_node._is_state("Failure"):
+        return
+
     var clause = sql_tools.get_clause(sql_editor.get_text())
     if clause == "select":
         execute_button.disabled = false
@@ -115,9 +123,15 @@ func _update_execute_button():
         execute_button.text = ""
 
 func _on_SQLEdit_gui_input( ev ):
-    if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
-        _on_ExecuteButton_pressed()
+    if level_node._is_state("Failure"):
+        return
     _update_execute_button()
+    #if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
+    #    if !ev.get_control():
+    #        print ("Execute pressed")
+    #        _on_ExecuteButton_pressed()
+
+
 
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':
