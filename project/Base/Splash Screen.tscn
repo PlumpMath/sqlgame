@@ -6,7 +6,7 @@
 [sub_resource type="Animation" id=1]
 
 resource_name = "Fade In"
-length = 3.0
+length = 1.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -15,7 +15,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 3 ),
+"times": PoolRealArray( 0, 0.5, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
@@ -59,8 +59,8 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1.67713, 1 ),
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 2.6778, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
@@ -103,15 +103,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -512.0
-margin_top = -128.0
 margin_right = 512.0
-margin_bottom = 128.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
+color = Color( 0.870588, 0.870588, 0.870588, 0 )
 _sections_unfolded = [ "Grow Direction", "Rect" ]
 
 [node name="Logo Background2" type="ColorRect" parent="."]
