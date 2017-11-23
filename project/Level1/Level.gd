@@ -7,8 +7,6 @@ onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 
 func _ready():
     # Set tables
-    print("Primary Rat")
-    print(primary_rat_id)
     _add_table("LabRats")
     _preview_scene()
     var rat_node = rat_spawner.get_child(states.rat_id_indices[primary_rat_id])
@@ -16,7 +14,7 @@ func _ready():
     var body_mat = body.get_surface_material(0).duplicate()
     body_mat.albedo_color = Color(0, 0, 0)
     body.set_surface_material(0, body_mat)
-    
+
 
 func _start_objective_intro():
     characters = {
