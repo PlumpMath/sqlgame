@@ -2,7 +2,6 @@ extends Spatial
 
 onready var level = get_tree().get_root().get_node("Level1")
 onready var camera = level.get_node("SceneVp/Spatial/Camera")
-
 onready var target_rot = get_transform().basis
 
 var id = 1
@@ -10,60 +9,72 @@ var nickname = ""
 var colour = ""
 var adrenaline = 1
 var size = 1
+var alive = true
 
 func _ready():
     set_physics_process(true)
 
 func _physics_process(delta):
-    var forward = get_transform().basis[2]
-
-    var move_vector = Vector3(forward.x, 0, forward.z) * adrenaline * 2;
-    move_and_collide(move_vector * delta)
-
-    var current_rot = Quat(get_transform().basis)
-
-    #var angle_diff = (target_rot.get_euler() - Basis(current_rot).get_euler())
-    #if abs(angle_diff.y) > 0.1:
-    var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
-    set_transform(Transform(smooth_rot, get_transform().origin))
-
-    var t = get_transform()
-    t.origin.y = 0
-    set_transform(t)
-    var look_at
-    if t.origin.x > 11 and forward.x > 0:
-        look_at = Vector3(randf() * 10 + 100, 0, randf() * 100 - 50)
-        target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-    if t.origin.x < -11 and forward.x < 0:
-        look_at = Vector3(randf() * -10 - 100, 0, randf() * 100 - 50)
-        target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-    if t.origin.z > 11 and forward.z > 0:
-        look_at = Vector3(randf() * 100 - 50, 0, randf() * 100 + 100)
-        target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-    if t.origin.z < -11 and forward.z < 0:
-        look_at = Vector3(randf() * 100 - 50, 0, randf() * -100 - 100)
-        target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-
-        #if t.origin.x > 11 or t.origin.z > 11 or t.origin.x < -11 or t.origin.z < -11:
-        #    var look_x = forward.x * 10#randf() * 20 - 10#position.x * 20 + (randi() % 30) - 15
-        #    var look_z = forward.z * 10#randf() * 20 - 10#position.z * 20 + (randi() % 30) - 15
-        #    look_at(Vector3(look_x, 0, look_z), Vector3(0,1,0))
-        #    #var look_at = Vector3()
-        #look_at(look_at, Vector3(0,1,0))
-        #set_translation(look_at)
-        #target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-        #print(target_rot.get_euler())
-        #set_rotation(target_rot.get_euler())
+    if alive:
+        var t = get_transform()
+        var forward = get_global_transform().basis.xform(Vector3(0, 0, adrenaline * 2))
+        var current_rot = Quat(t.basis)
+        var look_at
+        if t.origin.x + size > 12 and forward.x > 0:
+            look_at = Vector3(randf() * 10 + 100, 0, randf() * 100 - 50)
+            target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
+        if t.origin.x - size < -12 and forward.x < 0:
+            look_at = Vector3(randf() * -10 - 100, 0, randf() * 100 - 50)
+            target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
+        if t.origin.z + size > 12 and forward.z > 0:
+            look_at = Vector3(randf() * 100 - 50, 0, randf() * 100 + 100)
+            target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
+        if t.origin.z - size < -12 and forward.z < 0:
+            look_at = Vector3(randf() * 100 - 50, 0, randf() * -100 - 100)
+            target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
+    
+        var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
+        var origin = t.origin
+        origin.y = 0
+        set_transform(Transform(smooth_rot, origin))
+        move_and_slide(forward)
 
 func _set_parameter(param, value):
+    if !alive:
+        return
     if param == 'size':
-        size = value
-        set_scale(Vector3(value, value, value))
+        size = min(value, 2.0)
+        if value > 2:
+            level.states._kill_rat(self, 0.5, "Oops. I don't think they're meant to get that size")
+
+        var shape = get_node("CollisionShape")
+        var model = get_node("Model")
+        shape.scale.x = 0.4 * size
+        shape.scale.y = 0.5 * size
+        shape.scale.z = 0.6 * size
+        model.scale.x = size
+        model.scale.y = size
+        model.scale.z = size
+
+        #set_scale(Vector3(value, value, value))
     elif param == 'adrenaline':
-        adrenaline = value
+        adrenaline = min(value, 5.0)
+        if value > 5:
+            level.states._kill_rat(self, 5, "Heart attack I guess")
+        if adrenaline == 0:
+            get_player().play("Idle.00" + str(randi()%3))
+            get_player().seek(randf()*30)
+        elif adrenaline < 1.5:
+            get_player().play("Walk", -1, adrenaline)
+            get_player().seek(randf())
+        else:
+            get_player().play("Run", -1, adrenaline * 0.5)
+            get_player().seek(randf())
+
     elif param == 'nickname':
+        get_player().play("Run", -1, adrenaline * 0.5)
         nickname = value
-    elif param == 'colour':
+    elif param == 'eye_colour':
         colour = value
         var colour_rgbs = {
             "Red" : [0.901,0.098,0.294],
@@ -90,14 +101,22 @@ func _set_parameter(param, value):
             "Black" : [0,0,0]            
         }
         var rgb = colour_rgbs[colour]
-        var body = get_node("Scene Root2/Armature/Skeleton/Eyes")
+        var body = get_node("Model/Armature/Skeleton/Eyes")
         var material = body.get_surface_material(0)
         #material.set_albedo(Color(rgb[0], rgb[1], rgb[2]))
         material.set_emission(Color(rgb[0], rgb[1], rgb[2]))
-        material.set_emission_energy(10)
+        material.set_emission_energy(1)
         material.set_feature(material.FEATURE_EMISSION, true)
     elif param == 'id':
         id = value
-        
+
+func _highlight():
+    var head_material = get_node("Model/Armature/Skeleton/Head").get_surface_material(0)
+    head_material.set_emission(Color(1,1,1))
+    head_material.set_emission_energy(0.2)
+    head_material.set_feature(head_material.FEATURE_EMISSION, true)
+    yield(get_tree().create_timer(2), "timeout")
+    head_material.set_feature(head_material.FEATURE_EMISSION, false)
+
 func get_player():
-    return get_node("Scene Root2/AnimationPlayer")
+    return get_node("Model/AnimationPlayer")

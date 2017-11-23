@@ -13,7 +13,6 @@ onready var objectives = get_node("VBoxMain/HBoxTop/TabContainer/Objectives")
 onready var dialog = objectives.get_node("DialogScroll/Dialog")
 
 func _ready():
-    
     # Handle signals
     sql_tools.connect("sql_start", self, "_start_statement")
     sql_tools.connect("sql_error", self, "_show_sql_error")
@@ -38,6 +37,8 @@ func _ready():
     set_process(true)
 
 func _on_ExecuteButton_pressed():
+    # Show the scene
+    tab_container.set_current_tab(1)
     var sql = sql_editor.get_text()
     if (sql_tools.get_clause(sql) in ["unknown", "delete", "select", "insert", "update"]):
         sql_tools.execute_select(sql)
@@ -131,10 +132,9 @@ func _on_Tree_button_pressed( item, column, id ):
         _update_execute_button()
 
 func _on_TabContainer_tab_changed( tab ):
-    if (tab == 0):
-        level_node._show_objectives()
-
-
+    if tab == 0:
+        if !level_node.intro_started:
+            level_node._run_intro()
 
 func _on_UI_resized():
     var viewport = get_parent().get_node("SceneVp")
