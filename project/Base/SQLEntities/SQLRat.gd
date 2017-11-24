@@ -111,12 +111,13 @@ func _set_parameter(param, value):
         id = value
 
 func _highlight():
-    var head_material = get_node("Model/Armature/Skeleton/Head").get_surface_material(0)
-    head_material.set_emission(Color(1,1,1))
-    head_material.set_emission_energy(0.2)
-    head_material.set_feature(head_material.FEATURE_EMISSION, true)
-    yield(get_tree().create_timer(2), "timeout")
-    head_material.set_feature(head_material.FEATURE_EMISSION, false)
+    get_node("Model/Highlighter").play("Highlight")
+
+    #var head_material = get_node("Model/Armature/Skeleton/Head").get_surface_material(0)
+    #head_material.set_emission(Color(1,1,1))
+    #head_material.set_emission_energy(0.2)
+    #head_material.set_feature(head_material.FEATURE_EMISSION, true)
+    #head_material.set_feature(head_material.FEATURE_EMISSION, false)
 
 func get_player():
     return get_node("Model/AnimationPlayer")

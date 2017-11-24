@@ -6,7 +6,7 @@ func _ready():
 var attempted
 
 func enter_state(from_state = null, message = null):
-    level._set_message("Perfect - you selected just some of the rats. Now lets get a bit more destructive:\n\n[code]DELETE FROM LabRats WHERE name = '?'[/code]\n[code]UPDATE LabRats SET eye_color = 'Yellow'\n    WHERE size > 1[/code]\n[code]UPDATE LabRats SET adrenaline = 3\n    WHERE eye_color = 'Yellow'[/code]")
+    level._set_message("Perfect - you selected just some of the rats. Now lets get a bit more interactive, try each of the following:\n\n[color=#1C9B1C]DELETE[/color] FROM LabRats WHERE name = '?'\n[color=#1C9B1C]UPDATE[/color] LabRats SET eye_color = 'Yellow'\n    WHERE size > 1\n[color=#1C9B1C]UPDATE[/color] LabRats SET adrenaline = 3\n    WHERE eye_color = 'Yellow'")
 
 func finish_statement(sql, clause, row_count, max_rows):
     if clause in ['update', 'delete']:
@@ -15,4 +15,4 @@ func finish_statement(sql, clause, row_count, max_rows):
         attempted = clause
     if clause != 'select':
         level._set_state("Proficient")
-        
+    

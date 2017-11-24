@@ -129,9 +129,9 @@ const keywords = [
 
 func _ready():
     for word in keywords:
-        add_keyword_color(word, Color(1,0.3,0.3))
-    
-
+        add_keyword_color(word, Color(0.11,0.61,0.11))
+    for word in keywords:
+        add_keyword_color(word.to_lower() , Color(0.11,0.61,0.11))
 
 #func _process(delta):
 #    # Called every frame. Delta is time since last frame.

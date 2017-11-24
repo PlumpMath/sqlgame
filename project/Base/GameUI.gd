@@ -4,6 +4,7 @@ onready var level_node = get_parent()
 onready var sql_tools = get_parent().get_node("SQLTools")
 onready var sql_editor = get_node("VBoxMain/HBoxBottom/SQLEdit")
 onready var sql_info = get_node("VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText")
+onready var sql_errors = get_node("VBoxMain/HBoxTop/DataColumn/Errors/InfoText")
 onready var item_list = get_node("VBoxMain/HBoxTop/DataColumn/ScrollTabular/ItemList")
 onready var table_tree = get_node("VBoxMain/HBoxTop/DataColumn/Tree")
 onready var tab_container = get_node("VBoxMain/HBoxTop/TabContainer")
@@ -51,12 +52,15 @@ func _on_ExecuteButton_pressed():
         _show_sql_error('Not a valid or allowed SQL statement')
 
 func _start_statement(sql, clause, max_rows):
-    sql_info.get_parent().visible = true
-    item_list.get_parent().visible = false
+    pass
 
 func _show_sql_error(error):
-    sql_info.set_text("Error: " + error)
+    sql_errors.set_text("Error: " + error)
+    sql_info.get_parent().visible = false
+    sql_errors.get_parent().visible = true
+    yield(get_tree().create_timer(5), "timeout")
     sql_info.get_parent().visible = true
+    sql_errors.get_parent().visible = false
 
 func _insert_headings(headings, clause):
     # Initiate list
@@ -65,9 +69,11 @@ func _insert_headings(headings, clause):
 
     var item_count = 0
     for heading in headings:
-        if heading != "id" && !heading.ends_with("_id"):
-            item_list.add_item(String(heading))
-            item_count += 1
+        if heading == "id" or heading.ends_with("_id"):
+            continue
+        item_list.add_item(String(heading))
+        item_count += 1
+
     item_list.max_columns = item_count
     if item_count:
         item_list.fixed_column_width = (item_list.rect_size.x - 20) / item_count - 8;
@@ -75,12 +81,17 @@ func _insert_headings(headings, clause):
 
 func _insert_row(row, headings, clause):
     var index = 0
+    if headings[0] == "name" and row[0] == "id":
+        return
     for value in row:
-        if headings[index] != "id" && !headings[index].ends_with("_id"):
-            if value != null:
-                item_list.add_item(String(value))
-            else:
-                item_list.add_item("")
+        if headings[index] == "id" or headings[index].ends_with("_id"):
+            index += 1
+            continue
+
+        if value != null:
+            item_list.add_item(String(value))
+        else:
+            item_list.add_item("")
         index += 1
 
 func _finish_statement(sql, clause, row_count, max_rows):
@@ -131,8 +142,6 @@ func _on_SQLEdit_gui_input( ev ):
     #        print ("Execute pressed")
     #        _on_ExecuteButton_pressed()
 
-
-
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':
         tab_container.set_current_tab(1)
@@ -142,8 +151,10 @@ func _on_Tree_button_pressed( item, column, id ):
         level_node._table_show(item.get_text(column))
     elif id == 1:
         level_node._table_add(item.get_text(column))
-        execute_button.grab_focus()
         _update_execute_button()
+    sql_editor.grab_focus()
+    sql_editor.cursor_set_column(1000, true)
+    sql_editor.cursor_set_line(1000, true)
 
 func _on_TabContainer_tab_changed( tab ):
     if tab == 0:

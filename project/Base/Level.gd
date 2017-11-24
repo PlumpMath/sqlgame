@@ -27,11 +27,18 @@ func _ready():
     sql_tools.connect("sql_headings_retrieved", self, "_check_headings")
     sql_tools.connect("sql_complete", self, "_finish_statement")
 
+func scene_switcher_hide():
+    get_node("UI").visible = false
+
+func scene_switcher_show():
+    get_node("UI").visible = true
+
 func _input(ev):
     if ev is InputEventKey:
-        if !level_started and (ev.get_scancode() == KEY_SPACE or ev.get_scancode() == KEY_ESCAPE):
-            print("Level Skip Start")
-            _start_level()
+        if intro_started and !level_started: 
+            if ev.get_scancode() == KEY_ESCAPE:
+                print("Level Skip Start")
+                _start_level()
         if ev.get_scancode() == KEY_E and ev.get_control():
             UI._on_ExecuteButton_pressed()
 
@@ -109,12 +116,9 @@ func _table_add(name):
     if sql.ends_with(name):
         pass
     elif sql == "":
-        sql = "SELECT * FROM " + name
-    elif sql.ends_with("\t") || sql.ends_with(" "):
-        sql += name
+        UI.sql_editor.set_text("SELECT * FROM " + name)
     else:
-        sql += " " + name
-    UI.sql_editor.set_text(sql)
+        UI.sql_editor.insert_text_at_cursor(name)
 
 func _add_table(table_name):
     var item = UI.table_tree.create_item()
