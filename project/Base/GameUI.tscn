@@ -613,7 +613,6 @@ override_selected_font_color = false
 context_menu_enabled = true
 smooth_scrolling = false
 v_scroll_speed = 80.0
-hiding_enabled = 0
 caret_block_mode = true
 caret_blink = true
 caret_blink_speed = 0.65

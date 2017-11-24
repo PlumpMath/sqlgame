@@ -13,8 +13,5 @@ func _process(delta):
     position = Vector2(mouse_x, y)
 
 func _input(event):
-    if event is InputEventMouseButton and event.is_pressed():
-        var ball = ball_scene.instance()
-        ball.position += Vector2(0, 16)
-        ball.connect("hit_brick", get_parent(), "brick_hit")
-        get_parent().add_child(ball)
+    #if event is InputEventMouseButton and event.is_pressed():
+    pass
