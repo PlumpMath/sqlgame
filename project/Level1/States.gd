@@ -58,7 +58,7 @@ func _kill_rat(rat, delay = 0, message = ''):
     rat.get_node("CollisionBox").disabled = true
     rat.get_node("Model/AnimationPlayer").stop_all()
     yield(get_tree().create_timer(0.01), "timeout")
-    rat.get_node("Model/AnimationPlayer").play("Die")
+    rat.get_node("Model/AnimationPlayer").play("Die.Bloody")
 
     if level._is_state("Failure"):
         return

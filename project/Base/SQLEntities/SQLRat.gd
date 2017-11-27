@@ -38,7 +38,7 @@ func _physics_process(delta):
         var origin = t.origin
         origin.y = 0
         set_transform(Transform(smooth_rot, origin))
-        move_and_slide(forward)
+        move_and_collide(forward * delta)
 
 func _set_parameter(param, value):
     if !alive:

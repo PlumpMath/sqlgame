@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1/Level.gd" type="Script" id=2]
-[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Level1/States.gd" type="Script" id=5]
-[ext_resource path="res://Level1/Start.gd" type="Script" id=6]
-[ext_resource path="res://Level1/State-Victory.gd" type="Script" id=7]
-[ext_resource path="res://Level1/State-AddFiltering.gd" type="Script" id=8]
-[ext_resource path="res://Level1/State-Proficient.gd" type="Script" id=9]
-[ext_resource path="res://Level1/State-OtherClauses.gd" type="Script" id=10]
-[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=11]
+[ext_resource path="res://Base/Models/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Level1/States.gd" type="Script" id=6]
+[ext_resource path="res://Level1/Start.gd" type="Script" id=7]
+[ext_resource path="res://Level1/State-Victory.gd" type="Script" id=8]
+[ext_resource path="res://Level1/State-AddFiltering.gd" type="Script" id=9]
+[ext_resource path="res://Level1/State-Proficient.gd" type="Script" id=10]
+[ext_resource path="res://Level1/State-OtherClauses.gd" type="Script" id=11]
+[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=12]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -84,20 +85,36 @@ _sections_unfolded = [ "Albedo", "Emission", "Refraction", "Roughness", "Vertex 
 
 [sub_resource type="BoxShape" id=3]
 
-extents = Vector3( 1, 1, 1 )
+extents = Vector3( 15.28, 7.91369, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="BoxShape" id=4]
+
+extents = Vector3( 15.2251, 8.23876, 1 )
+
+[sub_resource type="BoxShape" id=5]
+
+extents = Vector3( 14.5648, 7.88898, 1 )
+
+[sub_resource type="BoxShape" id=6]
+
+extents = Vector3( 15.2444, 8.48434, 1.0083 )
+
+[sub_resource type="BoxShape" id=7]
+
+extents = Vector3( 15.2421, 1, 15.1031 )
+
+[sub_resource type="DynamicFont" id=8]
 
 size = 12
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 4 )
+font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="Theme" id=5]
+[sub_resource type="Theme" id=9]
 
 resource_local_to_scene = true
-default_font = SubResource( 4 )
+default_font = SubResource( 8 )
 _sections_unfolded = [ "Resource" ]
 
 [node name="Level1" instance=ExtResource( 1 )]
@@ -116,37 +133,13 @@ _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Ren
 [node name="Camera" parent="SceneVp/Spatial"]
 
 editor/display_folded = true
-transform = Transform( 0.724927, 0.433494, -0.535317, 0.047996, 0.743467, 0.667049, 0.687151, -0.509255, 0.518153, -13.4321, 10.0135, 13.4334 )
+transform = Transform( 0.724927, 0.205274, -0.657528, 0.047996, 0.937191, 0.345499, 0.687151, -0.28202, 0.669543, -13.4321, 4.07182, 13.4334 )
+fov = 70.0
 
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
 transform = Transform( 1, 0, 0, 0, 0.793003, 0.609217, 0, -0.609217, 0.793003, 1.48545, 2.33484, 3.43687 )
 light_cull_mask = -1
-
-[node name="Area" type="Area" parent="SceneVp/Spatial"]
-
-transform = Transform( 50.8015, 0, 0, 0, 13.5757, 0, 0, 0, 65.604, 0.0438729, 2.2004, 0.0600871 )
-input_ray_pickable = false
-input_capture_on_drag = false
-space_override = 0
-gravity_point = false
-gravity_distance_scale = 0.0
-gravity_vec = Vector3( 0, -1, 0 )
-gravity = 9.8
-linear_damp = 0.1
-angular_damp = 1.0
-priority = 0.0
-monitoring = true
-monitorable = true
-collision_layer = 1
-collision_mask = 1
-audio_bus_override = false
-audio_bus_name = "Master"
-reverb_bus_enable = false
-reverb_bus_name = "Master"
-reverb_bus_amount = 0.0
-reverb_bus_uniformity = 0.0
-_sections_unfolded = [ "Collision" ]
 
 [node name="Walls" type="StaticBody" parent="SceneVp/Spatial"]
 
@@ -178,71 +171,96 @@ _sections_unfolded = [ "material" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
-transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, 14.645 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.82667, 15.553 )
 shape = SubResource( 3 )
 disabled = false
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape3" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
-transform = Transform( 15.4997, 0, 0, 0, 6.1784, 0, 0, 0, 1, 0, 5.67825, -14.6112 )
-shape = SubResource( 3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0648203, 7.63258, -15.6289 )
+shape = SubResource( 4 )
 disabled = false
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
-transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, 14.6923, 5.67825, -0.950584 )
-shape = SubResource( 3 )
+transform = Transform( 0.00299509, 0, -0.999996, 0, 1, 0, 0.999996, 0, 0.00299509, 15.6198, 8.42618, -0.966211 )
+shape = SubResource( 5 )
 disabled = false
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape4" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
-transform = Transform( 0.261122, 0, -0.999858, 0, 6.1784, 0, 15.4975, 0, 0.0168469, -14.6807, 5.67825, -0.45567 )
-shape = SubResource( 3 )
+transform = Transform( -0.000756784, 0, -1, 0, 1, 0, 1, 0, -0.000756784, -15.6229, 7.4409, -0.39286 )
+shape = SubResource( 6 )
 disabled = false
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape5" type="CollisionShape" parent="SceneVp/Spatial/Walls"]
 
-transform = Transform( 0.28827, 0, -16.8669, 0, 0.936599, 0, 17.1087, 0, 0.284195, 0.00248429, -0.902782, -0.703071 )
-shape = SubResource( 3 )
+transform = Transform( 0.0168469, 0, -0.999858, 0, 1, 0, 0.999858, 0, 0.0168469, 0.0130252, -0.901801, -0.0774729 )
+shape = SubResource( 7 )
 disabled = false
+_sections_unfolded = [ "Transform" ]
 
 [node name="RatSpawn" type="Spatial" parent="SceneVp/Spatial"]
 
-[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 3 )]
+[node name="Ball" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40411, 0.941458, 0 )
+
+[node name="Ball2" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31539, 0.941458, 6.73119 )
+
+[node name="Ball3" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.37614, 0.941458, -7.84365 )
+
+[node name="Ball4" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72316, 0.941458, -7.84365 )
+
+[node name="Ball5" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72316, 0.941458, 3.81606 )
+
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 4 )]
 
 _sections_unfolded = [ "Material", "Mouse", "Pause", "Size Flags", "Visibility" ]
 
 [node name="UI" parent="."]
 
-theme = SubResource( 5 )
+theme = SubResource( 9 )
 
 [node name="States" parent="."]
 
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Start" parent="States"]
 
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="Victory" parent="States"]
 
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="AddFiltering" type="Node" parent="States"]
 
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Proficient" type="Node" parent="States"]
 
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="OtherClauses" type="Node" parent="States"]
 
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="SQLSeeder" parent="."]
 
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
