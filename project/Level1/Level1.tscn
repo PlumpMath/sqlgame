@@ -51,14 +51,14 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-metallic = 0.69
-metallic_specular = 0.5
+metallic = 0.6
+metallic_specular = 0.64
 metallic_texture_channel = 0
-roughness = 0.53
+roughness = 1.0
 roughness_texture_channel = 0
 emission_enabled = true
-emission = Color( 0.546875, 0.546875, 0.546875, 1 )
-emission_energy = 1.0
+emission = Color( 1, 1, 1, 1 )
+emission_energy = 0.17
 emission_operator = 0
 normal_enabled = false
 rim_enabled = false
@@ -80,7 +80,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Emission" ]
+_sections_unfolded = [ "Albedo", "Emission", "Refraction", "Roughness", "Vertex Color" ]
 
 [sub_resource type="BoxShape" id=3]
 
@@ -97,7 +97,6 @@ _sections_unfolded = [ "Font", "Settings" ]
 [sub_resource type="Theme" id=5]
 
 resource_local_to_scene = true
-resource_name = "GameUITheme"
 default_font = SubResource( 4 )
 _sections_unfolded = [ "Resource" ]
 
@@ -105,16 +104,19 @@ _sections_unfolded = [ "Resource" ]
 
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause", "Size Flags", "Visibility" ]
-max_rats = 10
+max_rats = 20
 
 [node name="SceneVp" parent="."]
 
+own_world = false
 msaa = 2
+shadow_atlas_size = 10
+_sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
 [node name="Camera" parent="SceneVp/Spatial"]
 
 editor/display_folded = true
-transform = Transform( 0.761476, 0.433494, -0.48191, -5.22405e-08, 0.743467, 0.668774, 0.648193, -0.509255, 0.566132, -13.4321, 10.0135, 13.4334 )
+transform = Transform( 0.724927, 0.433494, -0.535317, 0.047996, 0.743467, 0.667049, 0.687151, -0.509255, 0.518153, -13.4321, 10.0135, 13.4334 )
 
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 

@@ -22,7 +22,7 @@ func _seed():
         + "        first_name as nickname,"
         + "        colour as eye_colour,"
         + "        (Random() % 1000 + 3000) / 3000.0 as adrenaline,"
-        + "        (Random() % 1000 + 3000) / 3000.0 as size"
+        + "        (Random() % 1000 + 3000) / 5000.0 as size"
         + "    FROM ("
         + "        SELECT"
         + "            fn.first_name,"

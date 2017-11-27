@@ -11,12 +11,11 @@
 [ext_resource path="res://Base/Models/Textures/rat-head-Normalmap.png" type="Texture" id=9]
 [ext_resource path="res://Base/Models/Teeth.material" type="Material" id=10]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="BoxShape" id=26]
 
-radius = 1.0
-height = 1.0
+extents = Vector3( 0.3, 0.3, 1.2 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 
 length = 0.875
 loop = false
@@ -184,7 +183,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.0666667, 1, -1.73357e-09, 5.21541e-08, 9.68575e-08, -0.252914, 2.21025e-09, 5.55789e-09, 0.967489, 1, 1, 1, 0.133333, 1, 3.77546e-08, 7.45058e-08, 2.6077e-07, -0.195911, 7.9619e-09, 3.21115e-08, 0.980622, 1, 1, 1, 0.2, 1, 3.18206e-08, 1.49012e-08, 1.56462e-07, -0.0116275, -3.02712e-11, -8.15815e-10, 0.999932, 1, 1, 1, 0.266667, 1, -1.0488e-08, 6.33299e-08, 1.19209e-07, -0.173089, 5.06757e-09, 3.47182e-08, 0.984906, 1, 1, 1, 0.333333, 1, -8.73061e-08, -1.49012e-08, 1.8999e-07, -0.252914, 1.79051e-11, 2.31934e-09, 0.967489, 1, 1, 1, 0.875, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 
 length = 0.875
 loop = false
@@ -352,7 +351,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.0666667, 1, 2.13633e-08, 1.63913e-07, 2.04891e-07, -0.252914, 2.91792e-09, 3.86808e-09, 0.967489, 1, 1, 1, 0.133333, 1, -3.59632e-09, -9.68575e-08, 1.75089e-07, -0.195911, 7.07948e-09, 1.12307e-08, 0.980622, 1, 1, 1, 0.2, 1, -7.40931e-08, -1.3411e-07, -1.04308e-07, -0.0116275, 1.23046e-08, -3.71279e-09, 0.999932, 1, 1, 1, 0.266667, 1, 6.68117e-08, 4.47035e-08, 5.21541e-08, -0.173089, -4.8139e-09, 1.63877e-08, 0.984906, 1, 1, 1, 0.333333, 1, -1.56807e-08, -1.04308e-07, 1.63913e-07, -0.252914, -7.63927e-09, -1.66805e-09, 0.967489, 1, 1, 1, 0.875, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 
 length = 0.833333
 loop = false
@@ -520,7 +519,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.833333, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 
 length = 0.833333
 loop = false
@@ -688,7 +687,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.833333, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 
 length = 0.833333
 loop = false
@@ -856,7 +855,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.466667, 1, 1.73372e-10, -3.35276e-08, 5.58794e-08, -0.252914, -4.40652e-14, 2.93768e-14, 0.967489, 1, 1, 1, 0.533333, 1, -1.5806e-11, 0, 1.49012e-08, -0.129926, -2.86647e-14, 2.14985e-14, 0.991524, 1, 1, 1, 0.6, 1, -2.10143e-11, -9.31323e-08, 1.04308e-07, -0.0070972, 1.42112e-14, -1.42112e-14, 0.999975, 1, 1, 1, 0.666667, 1, -2.87415e-12, -4.84288e-08, 1.71363e-07, -0.0556198, -1.42329e-14, 7.11644e-15, 0.998452, 1, 1, 1, 0.733333, 1, 2.41229e-12, -8.56817e-08, 1.49012e-07, -0.0626773, 4.27166e-14, 7.11943e-15, 0.998034, 1, 1, 1, 0.8, 1, -8.88178e-14, -4.84288e-08, 1.3411e-07, -0.0141717, 5.68491e-14, 4.9743e-14, 0.9999, 1, 1, 1, 0.833333, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, 0, -2.84217e-14, -2.13163e-14, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 
 length = 0.833333
 loop = false
@@ -1024,7 +1023,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, 0, -2.84217e-14, -2.13163e-14, 1, 1, 1, 1, 0.0666667, 1, -4.22773e-13, -5.96046e-08, 1.56462e-07, -0.0404563, 2.8445e-14, 1.42225e-14, 0.999181, 1, 1, 1, 0.133333, 1, -1.73017e-12, 4.09782e-08, 1.49012e-07, -0.0697474, 0, 7.12277e-15, 0.997565, 1, 1, 1, 0.2, 1, 3.88312e-12, -9.31323e-08, 1.78814e-07, -0.0253216, 2.84308e-14, -4.26462e-14, 0.999679, 1, 1, 1, 0.266667, 1, -4.80895e-11, -2.23517e-08, 8.9407e-08, -0.039568, -1.4222e-14, 0, 0.999217, 1, 1, 1, 0.333333, 1, 1.11484e-10, -1.86265e-07, -8.19564e-08, -0.252914, -1.46884e-14, 0, 0.967489, 1, 1, 1, 0.833333, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 
 length = 1.125
 loop = false
@@ -1192,7 +1191,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, -0.252914, -4.40652e-14, -1.10163e-14, 0.967489, 1, 1, 1, 0.4, 1, -2.52507e-09, 1.60187e-07, 3.1665e-07, -0.252914, 3.10806e-11, -2.00342e-10, 0.967489, 1, 1, 1, 0.466667, 1, -1.0816e-09, 7.45058e-08, 2.34693e-07, -0.210182, -2.00551e-09, -3.44261e-09, 0.977662, 1, 1, 1, 0.533333, 1, -1.78454e-08, 8.56817e-08, 7.45058e-08, -0.0904083, -3.15761e-09, -4.49048e-09, 0.995905, 1, 1, 1, 0.6, 1, 2.52747e-08, -6.33299e-08, 2.34693e-07, -0.011719, -1.81742e-09, 4.20352e-09, 0.999931, 1, 1, 1, 0.666667, 1, -1.83114e-08, -1.86265e-07, -1.86265e-07, 0, -5.96732e-09, -1.1971e-09, 1, 1, 1, 1, 0.733333, 1, -7.62425e-09, 3.72529e-08, -7.45058e-09, 1.49012e-08, 2.05112e-09, -5.48415e-09, 1, 1, 1, 1, 0.8, 1, -1.91996e-09, -8.9407e-08, 6.70552e-08, -0.129581, -1.0153e-09, 6.71601e-09, 0.991569, 1, 1, 1, 0.866667, 1, 7.76592e-09, 7.82311e-08, 1.04308e-07, -0.252914, 3.82157e-09, -5.62604e-09, 0.967489, 1, 1, 1, 1.125, 1, 4.03621e-08, -9.31323e-08, 5.96046e-08, -0.252914, 8.84907e-09, 3.54721e-10, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 
 length = 0.416667
 loop = false
@@ -1360,7 +1359,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, -0.252914, -4.40652e-14, -1.10163e-14, 0.967489, 1, 1, 1, 0.416667, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, -0.252914, -4.40652e-14, -1.10163e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 
 length = 64.7083
 loop = true
@@ -1528,7 +1527,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1, 64.7083, 1, 7.85203e-10, 7.82311e-08, 1.49012e-07, -0.252914, -4.40652e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 
 length = 3.75
 loop = false
@@ -1696,7 +1695,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1, 3.75, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 
 length = 3.75
 loop = false
@@ -1864,7 +1863,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1, 3.75, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 
 length = 0.416667
 loop = true
@@ -2032,7 +2031,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 2.4869e-14, 0, 2.5332e-07, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.416667, 1, -1.13687e-13, -1.22935e-07, 1.30385e-07, -0.252914, -1.46884e-14, 3.30489e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 
 length = 0.0416667
 loop = true
@@ -2200,7 +2199,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1, 0.0416667, 1, 5.29603e-11, -7.45058e-09, 8.56817e-08, -0.252914, -1.46884e-14, 1.83605e-14, 0.967489, 1, 1, 1 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 
 length = 1.16667
 loop = true
@@ -2368,7 +2367,7 @@ tracks/26/loop_wrap = true
 tracks/26/imported = true
 tracks/26/keys = PoolRealArray( 0, 1, -1.03029e-13, -1.52737e-07, 9.68575e-08, -0.252914, 1.46884e-14, -3.6721e-15, 0.967489, 1, 1, 1, 1.16667, 1, -1.03029e-13, -1.52737e-07, 9.68575e-08, -0.252914, 1.46884e-14, -3.6721e-15, 0.967489, 1, 1, 1 )
 
-[sub_resource type="ArrayMesh" id=16]
+[sub_resource type="ArrayMesh" id=18]
 
 surfaces/0 = {
 "aabb": Rect3( -0.586677, -0.0189074, -2.85353, 1.17335, 1.41178, 4.47738 ),
@@ -2385,7 +2384,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=17]
+[sub_resource type="SpatialMaterial" id=19]
 
 render_priority = 0
 flags_transparent = false
@@ -2439,7 +2438,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Metallic", "NormalMap", "Parameters", "Roughness" ]
 
-[sub_resource type="ArrayMesh" id=18]
+[sub_resource type="ArrayMesh" id=20]
 
 surfaces/0 = {
 "aabb": Rect3( -0.171874, 0.716418, 1.64867, 0.343747, 0.125006, 0.0820793 ),
@@ -2456,7 +2455,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=19]
+[sub_resource type="SpatialMaterial" id=21]
 
 render_priority = 0
 flags_transparent = false
@@ -2510,7 +2509,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Emission" ]
 
-[sub_resource type="ArrayMesh" id=20]
+[sub_resource type="ArrayMesh" id=22]
 
 surfaces/0 = {
 "aabb": Rect3( -0.487577, 0.239353, 1.25863, 0.975154, 0.726411, 0.995317 ),
@@ -2527,7 +2526,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=21]
+[sub_resource type="SpatialMaterial" id=23]
 
 render_priority = 0
 flags_transparent = false
@@ -2581,7 +2580,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Emission", "NormalMap", "Roughness" ]
 
-[sub_resource type="ArrayMesh" id=22]
+[sub_resource type="ArrayMesh" id=24]
 
 surfaces/0 = {
 "aabb": Rect3( -0.109609, 0.337223, 1.74567, 0.219218, 0.36993, 0.37808 ),
@@ -2598,7 +2597,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=23]
+[sub_resource type="SpatialMaterial" id=25]
 
 render_priority = 0
 flags_transparent = false
@@ -2659,10 +2658,10 @@ collision/safe_margin = 0.001
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform", "Visibility", "collision" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionBox" type="CollisionShape" parent="."]
 
-transform = Transform( 0.28576, 0, 0, 0, 0.464939, 0, 0, 0, 0.629319, 0, 0.472235, 0.681639 )
-shape = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.598964, 0.725114 )
+shape = SubResource( 26 )
 disabled = false
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -2673,20 +2672,20 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Attack.000 = SubResource( 2 )
-anims/Attack.001 = SubResource( 3 )
-anims/Attack.002 = SubResource( 4 )
-anims/Attack.003 = SubResource( 5 )
-anims/Attack.Begin = SubResource( 6 )
-anims/Attack.End = SubResource( 7 )
-anims/Die = SubResource( 8 )
-anims/Hit = SubResource( 9 )
-anims/Idle.000 = SubResource( 10 )
-anims/Idle.001 = SubResource( 11 )
-anims/Idle.002 = SubResource( 12 )
-anims/Run = SubResource( 13 )
-anims/Stand = SubResource( 14 )
-anims/Walk = SubResource( 15 )
+anims/Attack.000 = SubResource( 4 )
+anims/Attack.001 = SubResource( 5 )
+anims/Attack.002 = SubResource( 6 )
+anims/Attack.003 = SubResource( 7 )
+anims/Attack.Begin = SubResource( 8 )
+anims/Attack.End = SubResource( 9 )
+anims/Die = SubResource( 10 )
+anims/Hit = SubResource( 11 )
+anims/Idle.000 = SubResource( 12 )
+anims/Idle.001 = SubResource( 13 )
+anims/Idle.002 = SubResource( 14 )
+anims/Run = SubResource( 15 )
+anims/Stand = SubResource( 16 )
+anims/Walk = SubResource( 17 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -2864,28 +2863,12 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 16 )
-skeleton = NodePath("..")
-material/0 = SubResource( 17 )
-_sections_unfolded = [ "material" ]
-
-[node name="Eyes" type="MeshInstance" parent="Model/Armature/Skeleton"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = true
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
 mesh = SubResource( 18 )
 skeleton = NodePath("..")
 material/0 = SubResource( 19 )
 _sections_unfolded = [ "material" ]
 
-[node name="Head" type="MeshInstance" parent="Model/Armature/Skeleton"]
+[node name="Eyes" type="MeshInstance" parent="Model/Armature/Skeleton"]
 
 layers = 1
 material_override = null
@@ -2901,7 +2884,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 21 )
 _sections_unfolded = [ "material" ]
 
-[node name="Teeth" type="MeshInstance" parent="Model/Armature/Skeleton"]
+[node name="Head" type="MeshInstance" parent="Model/Armature/Skeleton"]
 
 layers = 1
 material_override = null
@@ -2915,6 +2898,22 @@ lod_max_hysteresis = 0.0
 mesh = SubResource( 22 )
 skeleton = NodePath("..")
 material/0 = SubResource( 23 )
+_sections_unfolded = [ "material" ]
+
+[node name="Teeth" type="MeshInstance" parent="Model/Armature/Skeleton"]
+
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = true
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 24 )
+skeleton = NodePath("..")
+material/0 = SubResource( 25 )
 _sections_unfolded = [ "material" ]
 
 

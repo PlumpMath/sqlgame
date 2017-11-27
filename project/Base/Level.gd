@@ -108,6 +108,16 @@ func _set_message(message):
         return
     emit_signal("message_updated", message)
 
+func _flash_popup(message):
+    if state_history.size() > 0 and state_history.back() == "Failure":
+        # No popup allowed..
+        return
+    UI.popup.get_node("Label").set_text(message)
+    UI.popup.rect_size.x = 10 * message.length()
+    UI.popup.popup()
+    yield(get_tree().create_timer(4), "timeout")
+    UI.popup.hide()
+    
 func _table_show(name):
     sql_tools.describe_table(name)
 
@@ -126,7 +136,7 @@ func _add_table(table_name):
     item.add_button(0, load("res://Base/Images/add.png"))
     item.set_text(0, table_name)
     item.set_selectable (0, false)
-    
+
 func _objective_comment_left(text, icon_path):
     var comment_scene = load("res://Base/LeftComment.tscn")
     var comment_node = comment_scene.instance()

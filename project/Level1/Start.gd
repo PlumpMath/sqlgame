@@ -4,7 +4,7 @@ func _ready():
     pass
 
 func enter_state(from_state = null, message = null):
-    level._set_message("Freely experiment with the lab rats but don't hurt my black one!\n\nTo begin with, type [color=#1C9B1C]SELECT[/color]:\n [code]SELECT * FROM LabRats[/code]\n(or click [img]res://Base/Images/add.png[/img])\n\nEach query will display results as data below.")
+    level._set_message("[color=#445544][b]Primary Objective[/b]: Experiment with (kill) the lab rats but don't hurt the black one![/color]\n\nTo begin with, select all rats:\n\n[color=#1C9B1C]SELECT[/color] * FROM LabRats\n\nEach query will display results as data below.")
 
 func finish_statement(sql, clause, row_count, max_rows):
     if clause == "select":

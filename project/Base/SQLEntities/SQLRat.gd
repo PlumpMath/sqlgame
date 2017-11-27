@@ -17,20 +17,21 @@ func _ready():
 func _physics_process(delta):
     if alive:
         var t = get_transform()
-        var forward = get_global_transform().basis.xform(Vector3(0, 0, adrenaline * 2))
+        var forward = get_global_transform().basis.xform(Vector3(0, 0, adrenaline * 2 * size))
+        var target_forward = target_rot.xform(Vector3(0, 0, 1))
         var current_rot = Quat(t.basis)
         var look_at
-        if t.origin.x + size > 12 and forward.x > 0:
-            look_at = Vector3(randf() * 10 + 100, 0, randf() * 100 - 50)
+        if t.origin.x + size > 12 and target_forward.x > 0:
+            look_at = Vector3(randf() * 10 + 100, 0, randf() * 300 - 150)
             target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-        if t.origin.x - size < -12 and forward.x < 0:
-            look_at = Vector3(randf() * -10 - 100, 0, randf() * 100 - 50)
+        if t.origin.x - size < -12 and target_forward.x < 0:
+            look_at = Vector3(randf() * -10 - 100, 0, randf() * 300 - 150)
             target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-        if t.origin.z + size > 12 and forward.z > 0:
-            look_at = Vector3(randf() * 100 - 50, 0, randf() * 100 + 100)
+        if t.origin.z + size > 12 and target_forward.z > 0:
+            look_at = Vector3(randf() * 300 - 150, 0, randf() * 100 + 100)
             target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-        if t.origin.z - size < -12 and forward.z < 0:
-            look_at = Vector3(randf() * 100 - 50, 0, randf() * -100 - 100)
+        if t.origin.z - size < -12 and target_forward.z < 0:
+            look_at = Vector3(randf() * 300 - 150, 0, randf() * -100 - 100)
             target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
     
         var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
@@ -47,14 +48,20 @@ func _set_parameter(param, value):
         if value > 2:
             level.states._kill_rat(self, 0.5, "Oops. I don't think they're meant to get that size")
 
-        var shape = get_node("CollisionShape")
+        var col_box = get_node("CollisionBox")
+        col_box.shape.set_extents(Vector3(0.3 * size, 0.3 * size, 1.2 * size))
         var model = get_node("Model")
-        shape.scale.x = 0.4 * size
-        shape.scale.y = 0.5 * size
-        shape.scale.z = 0.6 * size
         model.scale.x = size
         model.scale.y = size
         model.scale.z = size
+        var size_category = int(size * 4)
+        set_collision_layer(0)
+        set_collision_layer_bit(size_category, 1)
+        set_collision_mask(0)
+        set_collision_mask_bit(size_category, 1)
+        set_collision_mask_bit(size_category + 1, 1)
+        if size_category != 0:
+            set_collision_mask_bit(size_category - 1, 1)
 
         #set_scale(Vector3(value, value, value))
     elif param == 'adrenaline':
@@ -100,10 +107,15 @@ func _set_parameter(param, value):
             "White" : [1,1,1],
             "Black" : [0,0,0]            
         }
-        var rgb = colour_rgbs[colour]
+        var rgb
+        if colour in colour_rgbs:
+            rgb = colour_rgbs[colour]
+        else:
+            rgb = [1,1,1]
         var body = get_node("Model/Armature/Skeleton/Eyes")
         var material = body.get_surface_material(0)
         #material.set_albedo(Color(rgb[0], rgb[1], rgb[2]))
+        material.set_albedo(Color(rgb[0], rgb[1], rgb[2]))
         material.set_emission(Color(rgb[0], rgb[1], rgb[2]))
         material.set_emission_energy(1)
         material.set_feature(material.FEATURE_EMISSION, true)
