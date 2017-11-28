@@ -11,7 +11,7 @@ func _seed():
     sql_tools.execute_raw("CREATE TABLE `LabRats` (" +
         "`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
         "`nickname` TEXT NOT NULL," +
-        "`eye_colour` TEXT NOT NULL," +
+        "`eye_color` TEXT NOT NULL," +
         "`adrenaline` NUMERIC NOT NULL," +
         "`size` NUMERIC NOT NULL);")
 
@@ -20,7 +20,7 @@ func _seed():
         + "    SELECT"
         + "        NULL as id,"
         + "        first_name as nickname,"
-        + "        colour as eye_colour,"
+        + "        colour as eye_color,"
         + "        (Random() % 1000 + 3000) / 3000.0 as adrenaline,"
         + "        (Random() % 1000 + 3000) / 5000.0 as size"
         + "    FROM ("
@@ -39,7 +39,7 @@ func _seed():
         + "    );"
     )
     
-    var headings = ['id', 'nickname', 'eye_colour', 'adrenaline', 'size']
+    var headings = ['id', 'nickname', 'eye_color', 'adrenaline', 'size']
     var rows = sql_tools.execute_select("SELECT * FROM LabRats",  false)
     for row in rows:
         level.states.process_row(row, headings, 'insert')

@@ -6,7 +6,7 @@ onready var target_rot = get_transform().basis
 
 var id = 1
 var nickname = ""
-var colour = ""
+var color = ""
 var adrenaline = 1
 var size = 1
 var alive = true
@@ -81,9 +81,9 @@ func _set_parameter(param, value):
     elif param == 'nickname':
         get_player().play("Run", -1, adrenaline * 0.5)
         nickname = value
-    elif param == 'eye_colour':
-        colour = value
-        var colour_rgbs = {
+    elif param == 'eye_color':
+        color = value
+        var color_rgbs = {
             "Red" : [0.901,0.098,0.294],
             "Green" : [0.235,0.705,0.294],
             "Yellow" : [1,0.882,0.098],
@@ -108,8 +108,8 @@ func _set_parameter(param, value):
             "Black" : [0,0,0]            
         }
         var rgb
-        if colour in colour_rgbs:
-            rgb = colour_rgbs[colour]
+        if color in color_rgbs:
+            rgb = color_rgbs[color]
         else:
             rgb = [1,1,1]
         var body = get_node("Model/Armature/Skeleton/Eyes")

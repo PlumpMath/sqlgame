@@ -39,7 +39,6 @@ Variant SqlModule::injectData(String sql, Array rows)
     }
 
     for (int row = 0; row < rows.size(); ++row) {
-        printf("NEXT ROW\n");
 
         if (rows[row].get_type() == Variant::ARRAY) {
             Array columns = rows[row];
@@ -53,7 +52,6 @@ Variant SqlModule::injectData(String sql, Array rows)
             if (row_id.get_type() == Variant::STRING) {
                 return row_id;
             }
-            printf("INSERTD %d\n", (int)row_id);
             columns[0] = row_id;
         }
     }
