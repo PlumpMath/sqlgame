@@ -40,7 +40,7 @@ func _input(ev):
                 print("Level Skip Start")
                 _start_level()
         if ev.get_scancode() == KEY_E and ev.get_control():
-            UI._on_ExecuteButton_pressed()
+            UI._execute_sql()
 
 func _run_intro():
     intro_started = true

@@ -44,7 +44,9 @@ func _on_ExecuteButton_pressed():
         level_node._set_state("Start")
         get_tree().reload_current_scene()
         return
+    _execute_sql()
 
+func _execute_sql():
     tab_container.set_current_tab(1)
     var sql = sql_editor.get_text()
     if (sql_tools.get_clause(sql) in ["delete", "select", "insert", "update"]):
