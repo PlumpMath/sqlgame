@@ -10,6 +10,7 @@ var color = ""
 var adrenaline = 1
 var size = 1
 var alive = true
+var impatience = 0
 
 func _ready():
     set_physics_process(true)
@@ -33,12 +34,21 @@ func _physics_process(delta):
         if t.origin.z - size < -12 and target_forward.z < 0:
             look_at = Vector3(randf() * 300 - 150, 0, randf() * -100 - 100)
             target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
-    
+
         var smooth_rot = current_rot.slerp(target_rot, delta * adrenaline)
         var origin = t.origin
         origin.y = 0
         set_transform(Transform(smooth_rot, origin))
-        move_and_collide(forward * delta)
+        var collision = move_and_collide(forward * delta)
+        if collision:
+            impatience += delta * 20
+
+        impatience += delta
+
+        if impatience * randf() * delta > 0.1:
+            impatience = 0
+            look_at = Vector3(randf() * 300 - 150, 0, randf() * 300 - 150)
+            target_rot = t.looking_at(look_at, Vector3(0,1,0)).basis
 
 func _set_parameter(param, value):
     if !alive:
@@ -105,7 +115,7 @@ func _set_parameter(param, value):
             "Navy" : [0,0,0.501],
             "Grey" : [0.501,0.501,0.501],
             "White" : [1,1,1],
-            "Black" : [0,0,0]            
+            "Black" : [0,0,0]
         }
         var rgb
         if color in color_rgbs:

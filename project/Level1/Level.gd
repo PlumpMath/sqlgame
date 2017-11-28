@@ -43,7 +43,7 @@ func _start_objective_intro():
         ['Director', 'You\'ll figure it out' , 1],
         ['Director', 'Just one more thing - don\'t kill the black rat' , 1],
         ['Director', 'I\'ve grown rather fond of it' , 1],
-        ['Director', 'Now go show those rats the power of SQL' , 4]
+        ['Director', 'Now go show those rats the power of SQL' , 2]
     ]
 
     print("Hide scene")

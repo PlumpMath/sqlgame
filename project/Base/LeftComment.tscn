@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Base/Images/agent1.png" type="Texture" id=1]
-[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -22,11 +21,10 @@ tracks/0/keys = {
 
 [sub_resource type="DynamicFont" id=2]
 
-size = 11
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
+size = 13
+use_mipmaps = true
+use_filter = true
+_sections_unfolded = [ "Settings" ]
 
 [node name="LeftComment" type="HBoxContainer"]
 
@@ -61,8 +59,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 60.0
-margin_bottom = 59.0
+margin_right = 90.0
+margin_bottom = 78.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -76,9 +74,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 60.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 60, 40 )
+margin_top = 6.0
+margin_right = 90.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 90, 60 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -95,9 +94,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 44.0
-margin_right = 60.0
-margin_bottom = 59.0
+margin_top = 70.0
+margin_right = 90.0
+margin_bottom = 71.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -108,7 +107,7 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Size Flags", "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "Size Flags", "custom_colors", "custom_fonts", "custom_styles" ]
 
 [node name="Spacer" type="MarginContainer" parent="."]
 
@@ -116,9 +115,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 64.0
-margin_right = 72.0
-margin_bottom = 59.0
+margin_left = 94.0
+margin_right = 102.0
+margin_bottom = 78.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -132,10 +131,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 76.0
-margin_top = 22.0
-margin_right = 199.0
-margin_bottom = 36.0
+margin_left = 106.0
+margin_top = 32.0
+margin_right = 229.0
+margin_bottom = 46.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -147,6 +146,6 @@ valign = 1
 percent_visible = 0.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
+_sections_unfolded = [ "custom_fonts", "custom_styles" ]
 
 

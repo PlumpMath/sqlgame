@@ -35,7 +35,7 @@ func _ready():
     # Let two frames pass to make sure the screen was captured
     yield(get_tree(), "idle_frame")
     yield(get_tree(), "idle_frame")
-    viewport_texture.texture = viewport.get_texture()  
+    viewport_texture.texture = viewport.get_texture()
     set_process(true)
 
 func _on_ExecuteButton_pressed():
@@ -55,7 +55,7 @@ func _execute_sql():
         _show_sql_error('Not a valid or allowed SQL statement')
 
 func _start_statement(sql, clause, max_rows):
-    pass
+    item_list.clear()
 
 func _show_sql_error(error):
     sql_errors.set_text("Error: " + error)
@@ -66,10 +66,6 @@ func _show_sql_error(error):
     sql_errors.get_parent().visible = false
 
 func _insert_headings(headings, clause):
-    # Initiate list
-    item_list.clear()
-    #print(item_list.fixed_column_width)
-
     var item_count = 0
     for heading in headings:
         if heading == "id" or heading.ends_with("_id"):
@@ -79,7 +75,7 @@ func _insert_headings(headings, clause):
 
     item_list.max_columns = item_count
     if item_count:
-        item_list.fixed_column_width = (item_list.rect_size.x - 20) / item_count - 8;
+        item_list.fixed_column_width = (item_list.rect_size.x - 44) / item_count - 4;
     item_list.get_parent().visible = true
 
 func _insert_row(row, headings, clause):

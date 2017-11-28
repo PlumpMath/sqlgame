@@ -33,6 +33,10 @@ window/stretch/shrink="1"
 
 singletons=[  ]
 
+[gui]
+
+theme/use_hidpi=true
+
 [physics]
 
 3d/physics_engine="Bullet"

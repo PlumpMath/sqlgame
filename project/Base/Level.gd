@@ -35,7 +35,7 @@ func scene_switcher_show():
 
 func _input(ev):
     if ev is InputEventKey:
-        if intro_started and !level_started: 
+        if intro_started and !level_started:
             if ev.get_scancode() == KEY_ESCAPE:
                 print("Level Skip Start")
                 _start_level()
@@ -103,21 +103,15 @@ func _is_state(state):
     return state_history.size() and state == state_history.back()
 
 func _set_message(message):
-    if state_history.size() > 0 and state_history.back() == "Failure":
-        # No message change allowed..
-        return
     emit_signal("message_updated", message)
 
 func _flash_popup(message):
-    if state_history.size() > 0 and state_history.back() == "Failure":
-        # No popup allowed..
-        return
     UI.popup.get_node("Label").set_text(message)
-    UI.popup.rect_size.x = 10 * message.length()
+    UI.popup.rect_size.x = 15 * message.length()
     UI.popup.popup()
-    yield(get_tree().create_timer(4), "timeout")
+    yield(get_tree().create_timer(8), "timeout")
     UI.popup.hide()
-    
+
 func _table_show(name):
     sql_tools.describe_table(name)
 
@@ -196,7 +190,7 @@ func _start_dialog(characters, dialog_array):
                 current_scroll += 2
                 UI.objectives.get_node("DialogScroll").set_v_scroll(current_scroll)
                 yield(get_tree().create_timer(0.0005), "timeout")
-    
+
             yield(get_tree().create_timer(animate_seconds + comment[2]), "timeout")
     emit_signal("end_dialog")
 
