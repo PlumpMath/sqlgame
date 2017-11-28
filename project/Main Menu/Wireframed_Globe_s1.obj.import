@@ -1,0 +1,12 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wireframed_Globe_s1.obj-48a583513eed8e99e677c70165a7667a.mesh"
+
+[gen]
+files=[ "res://.import/Wireframed_Globe_s1.obj-48a583513eed8e99e677c70165a7667a.mesh" ]
+
+[params]
+
+generate_tangents=true

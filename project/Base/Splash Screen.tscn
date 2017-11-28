@@ -79,7 +79,7 @@ size_flags_vertical = 3
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags" ]
 time_before_main_menu = 5.0
-next_scene = "res://Base/Main Menu.tscn"
+next_scene = "res://Main Menu/Main Menu.tscn"
 
 [node name="Background" type="ColorRect" parent="."]
 
@@ -114,14 +114,10 @@ _sections_unfolded = [ "Grow Direction", "Rect" ]
 
 [node name="Logo Background2" type="ColorRect" parent="."]
 
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -128.0
-margin_right = 512.0
-margin_bottom = 128.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -155,6 +151,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0

@@ -1,7 +1,7 @@
 extends Control
 
 export(float) var time_before_main_menu = 3
-export(NodePath) var next_scene = "res://Base/Main Menu.tscn"
+export(NodePath) var next_scene = "res://Main Menu/Main Menu.tscn"
 
 var _time_accum = 0
 var _anim_end = false
