@@ -13,7 +13,7 @@ func _ready():
 
 func _process(delta):
     _time_accum += delta
-    
+
     if _time_accum >= time_before_main_menu:
         goto_next_scene()
 
@@ -25,11 +25,11 @@ func _input(ev):
         var anim = get_node("Fade In")
         anim.seek(anim.get_current_animation_length(), true)
         _anim_end = true
-        
+
 func goto_next_scene():
     if next_scene:
         get_node("/root/SceneSwitcher").cut_to_scene(next_scene)
-        
+
 func on_anim_finished(name):
     if name == "Fade In":
         _anim_end = true

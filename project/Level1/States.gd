@@ -66,7 +66,7 @@ func _kill_rat(rat, delay = 0, message = ''):
         return
 
     if rat.id == level.primary_rat_id:
-        level._set_state("Failure", "You killed my favourite rat. You're dead!")
+        level._set_state("Failure")
         return
     elif message:
         level._flash_popup(message)

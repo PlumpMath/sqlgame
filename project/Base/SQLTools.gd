@@ -23,7 +23,6 @@ func _notification(what):
 func describe_table(table):
     var clause = "describe"
     var sql = "PRAGMA table_info([" + table + "])"
-    emit_signal("sql_start", sql, clause, 100)
 
     var headings = ["name", "type"]
 
@@ -31,6 +30,8 @@ func describe_table(table):
     if (prepare_result != null):
         emit_signal("sql_error", prepare_result)
         return
+
+    emit_signal("sql_start", sql, clause, 100)
 
     var count = 0
     var results
@@ -45,7 +46,7 @@ func describe_table(table):
             emit_signal("sql_headings_retrieved", headings, clause)
         emit_signal("sql_row_retrieved", [results[1], results[2]], headings, clause)
         count += 1
-    
+
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
@@ -72,10 +73,10 @@ func execute_raw_insert(sql):
 
 func seeder_select(sql):
     var clause = get_clause(sql)
-    
+
 
 # Translates the statement to an SELECT and 'signals' the results
-func execute_select(sql, use_signal = true, max_rows=1000):    
+func execute_select(sql, use_signal = true, max_rows=1000):
     # Where no signal is used
     sql = clean_sql(sql)
     var data = []
@@ -133,7 +134,7 @@ func execute_select(sql, use_signal = true, max_rows=1000):
         else:
             data.append(results)
         count += 1
-    
+
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         if use_signal:
@@ -188,7 +189,7 @@ func get_table_name(sql, clause):
     while remaining.substr(end, 1) != " ":
         end += 1
     return remaining.left(end)
-    
+
 func clean_sql(sql):
     sql = sql.replace("\n", " ")
     for i in range(20):

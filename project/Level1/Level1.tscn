@@ -1,22 +1,21 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level1/Level.gd" type="Script" id=2]
 [ext_resource path="res://Base/Models/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Level1/States.gd" type="Script" id=6]
-[ext_resource path="res://Level1/Start.gd" type="Script" id=7]
-[ext_resource path="res://Level1/State-Victory.gd" type="Script" id=8]
-[ext_resource path="res://Level1/State-AddFiltering.gd" type="Script" id=9]
-[ext_resource path="res://Level1/State-Proficient.gd" type="Script" id=10]
-[ext_resource path="res://Level1/State-OtherClauses.gd" type="Script" id=11]
-[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=12]
+[ext_resource path="res://Level1/States.gd" type="Script" id=5]
+[ext_resource path="res://Level1/Start.gd" type="Script" id=6]
+[ext_resource path="res://Level1/State-Victory.gd" type="Script" id=7]
+[ext_resource path="res://Level1/State-AddFiltering.gd" type="Script" id=8]
+[ext_resource path="res://Level1/State-Proficient.gd" type="Script" id=9]
+[ext_resource path="res://Level1/State-OtherClauses.gd" type="Script" id=10]
+[ext_resource path="res://Level1/SQLSeeder.gd" type="Script" id=11]
 
 [sub_resource type="ArrayMesh" id=1]
 
 surfaces/0 = {
-"aabb": Rect3( -6.58546, 1.99642, -6.58546, 13.1709, 7.34467, 13.1709 ),
+"aabb": AABB( -6.58546, 1.99642, -6.58546, 13.1709, 7.34467, 13.1709 ),
 "array_data": PoolByteArray( 149, 70, 252, 63, 149, 198, 0, 60, 0, 129, 0, 0, 149, 70, 252, 63, 149, 70, 0, 60, 0, 129, 0, 0, 149, 198, 252, 63, 149, 70, 0, 60, 0, 129, 0, 0, 149, 198, 252, 63, 149, 198, 0, 60, 0, 129, 0, 0, 67, 70, 144, 64, 67, 198, 0, 60, 0, 126, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 0, 126, 0, 0, 67, 198, 144, 64, 67, 70, 0, 60, 0, 126, 0, 0, 67, 70, 144, 64, 67, 70, 0, 60, 0, 126, 0, 0, 149, 198, 252, 63, 149, 198, 0, 60, 129, 0, 0, 0, 149, 198, 252, 63, 149, 70, 0, 60, 129, 0, 0, 0, 149, 198, 135, 72, 149, 70, 0, 60, 129, 0, 0, 0, 149, 198, 135, 72, 149, 198, 0, 60, 129, 0, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 0, 0, 126, 0, 67, 70, 144, 64, 67, 198, 0, 60, 0, 0, 126, 0, 67, 70, 171, 72, 67, 198, 0, 60, 0, 0, 126, 0, 67, 198, 171, 72, 67, 198, 0, 60, 0, 0, 126, 0, 149, 70, 252, 63, 149, 70, 0, 60, 127, 0, 0, 0, 149, 70, 252, 63, 149, 198, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 198, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 127, 0, 0, 0, 67, 198, 144, 64, 67, 70, 0, 60, 127, 0, 0, 0, 67, 198, 144, 64, 67, 198, 0, 60, 127, 0, 0, 0, 67, 198, 171, 72, 67, 198, 0, 60, 127, 0, 0, 0, 67, 198, 171, 72, 67, 70, 0, 60, 127, 0, 0, 0, 149, 70, 135, 72, 149, 198, 0, 60, 84, 94, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 84, 94, 0, 0, 67, 70, 171, 72, 67, 70, 0, 60, 84, 94, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 84, 94, 0, 0, 149, 70, 135, 72, 149, 70, 0, 60, 0, 94, 84, 0, 67, 70, 171, 72, 67, 70, 0, 60, 0, 94, 84, 0, 67, 198, 171, 72, 67, 70, 0, 60, 0, 94, 84, 0, 149, 198, 135, 72, 149, 70, 0, 60, 0, 94, 84, 0, 149, 198, 135, 72, 149, 70, 0, 60, 172, 94, 0, 0, 67, 198, 171, 72, 67, 70, 0, 60, 172, 94, 0, 0, 67, 198, 171, 72, 67, 198, 0, 60, 172, 94, 0, 0, 149, 198, 135, 72, 149, 198, 0, 60, 172, 94, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 0, 94, 172, 0, 149, 70, 135, 72, 149, 198, 0, 60, 0, 94, 172, 0, 149, 198, 135, 72, 149, 198, 0, 60, 0, 94, 172, 0, 67, 198, 171, 72, 67, 198, 0, 60, 0, 94, 172, 0, 149, 198, 252, 63, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 252, 63, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 135, 72, 149, 70, 0, 60, 0, 0, 127, 0, 149, 198, 135, 72, 149, 70, 0, 60, 0, 0, 127, 0, 149, 70, 252, 63, 149, 198, 0, 60, 0, 0, 129, 0, 149, 198, 252, 63, 149, 198, 0, 60, 0, 0, 129, 0, 149, 198, 135, 72, 149, 198, 0, 60, 0, 0, 129, 0, 149, 70, 135, 72, 149, 198, 0, 60, 0, 0, 129, 0, 67, 70, 144, 64, 67, 70, 0, 60, 0, 0, 129, 0, 67, 198, 144, 64, 67, 70, 0, 60, 0, 0, 129, 0, 67, 198, 171, 72, 67, 70, 0, 60, 0, 0, 129, 0, 67, 70, 171, 72, 67, 70, 0, 60, 0, 0, 129, 0, 67, 70, 144, 64, 67, 198, 0, 60, 130, 0, 0, 0, 67, 70, 144, 64, 67, 70, 0, 60, 130, 0, 0, 0, 67, 70, 171, 72, 67, 70, 0, 60, 130, 0, 0, 0, 67, 70, 171, 72, 67, 198, 0, 60, 130, 0, 0, 0 ),
 "array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 0, 0, 3, 0, 2, 0, 4, 0, 6, 0, 5, 0, 4, 0, 7, 0, 6, 0, 8, 0, 10, 0, 9, 0, 8, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 12, 0, 15, 0, 14, 0, 16, 0, 18, 0, 17, 0, 16, 0, 19, 0, 18, 0, 20, 0, 22, 0, 21, 0, 20, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 24, 0, 27, 0, 26, 0, 28, 0, 30, 0, 29, 0, 28, 0, 31, 0, 30, 0, 32, 0, 34, 0, 33, 0, 32, 0, 35, 0, 34, 0, 36, 0, 38, 0, 37, 0, 36, 0, 39, 0, 38, 0, 40, 0, 42, 0, 41, 0, 40, 0, 43, 0, 42, 0, 44, 0, 46, 0, 45, 0, 44, 0, 47, 0, 46, 0, 48, 0, 50, 0, 49, 0, 48, 0, 51, 0, 50, 0, 52, 0, 54, 0, 53, 0, 52, 0, 55, 0, 54, 0 ),
 "blend_shape_data": [  ],
@@ -27,7 +26,7 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 56
 }
-custom_aabb/custom_aabb = Rect3( 0, 0, 0, 0, 0, 0 )
+custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
 [sub_resource type="SpatialMaterial" id=2]
 
@@ -102,20 +101,6 @@ extents = Vector3( 15.2444, 8.48434, 1.0083 )
 [sub_resource type="BoxShape" id=7]
 
 extents = Vector3( 15.2421, 1, 15.1031 )
-
-[sub_resource type="DynamicFont" id=8]
-
-size = 12
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 5 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="Theme" id=9]
-
-resource_local_to_scene = true
-default_font = SubResource( 8 )
-_sections_unfolded = [ "Resource" ]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -230,37 +215,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72316, 0.941458, 3.81606 )
 
 _sections_unfolded = [ "Material", "Mouse", "Pause", "Size Flags", "Visibility" ]
 
-[node name="UI" parent="."]
-
-theme = SubResource( 9 )
-
 [node name="States" parent="."]
 
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="Start" parent="States"]
 
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Victory" parent="States"]
 
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="AddFiltering" type="Node" parent="States"]
 
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 
 [node name="Proficient" type="Node" parent="States"]
 
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="OtherClauses" type="Node" parent="States"]
 
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="SQLSeeder" parent="."]
 
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
