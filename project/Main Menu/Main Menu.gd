@@ -6,16 +6,9 @@ export(NodePath) var loading_scene = "res://Base/Loading Screen.tscn"
 func _ready():
     var viewport = get_node("Viewport")
     
-    yield(get_tree(), "idle_frame")
-    yield(get_tree(), "idle_frame")
-    
-    
-    var window_size = get_viewport().get_visible_rect().size
+    var window_size = OS.get_window_size()
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
-    
-    #print(get_viewport().size)
-    print(get_viewport().get_visible_rect().size)
     
     get_node("TextureRect").texture = viewport.get_texture()
 

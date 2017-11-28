@@ -1,0 +1,12 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/dna-cobreq-V5.obj-f3e8bc0157113b76cf0e37a46261d34c.mesh"
+
+[gen]
+files=[ "res://.import/dna-cobreq-V5.obj-f3e8bc0157113b76cf0e37a46261d34c.mesh" ]
+
+[params]
+
+generate_tangents=true
