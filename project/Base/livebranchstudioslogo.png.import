@@ -4,6 +4,10 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/livebranchstudioslogo.png-9307ba55db2059ce84cb3529ebd171a1.stex"
 
+[deps]
+
+source_md5="83d664bb3e6b4ee0cb71af6d11332991"
+
 [params]
 
 compress/mode=0

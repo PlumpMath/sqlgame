@@ -59,6 +59,8 @@ func _kill_rat(rat, delay = 0, message = ''):
     rat.get_node("Model/AnimationPlayer").stop_all()
     yield(get_tree().create_timer(0.01), "timeout")
     rat.get_node("Model/AnimationPlayer").play("Die.Bloody")
+    rat.get_node("BloodFloor").rotation_degrees = Vector3(-90, randf() * 360, 0)
+    rat.get_node("BloodFloor").visible = true
 
     if level._is_state("Failure"):
         return
