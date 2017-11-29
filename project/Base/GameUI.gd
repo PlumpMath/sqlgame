@@ -14,6 +14,7 @@ onready var objectives = get_node("VBoxMain/HBoxTop/TabContainer/Objectives")
 onready var dialog = objectives.get_node("DialogScroll/Dialog")
 onready var popup = get_node("VBoxMain/HBoxTop/TabContainer/Scene/PopupPanel")
 
+
 func _ready():
     # Handle signals
     sql_tools.connect("sql_start", self, "_start_statement")
@@ -51,6 +52,8 @@ func _execute_sql():
     var sql = sql_editor.get_text()
     if (sql_tools.get_clause(sql) in ["delete", "select", "insert", "update"]):
         sql_tools.execute_select(sql)
+        sql_editor._update_history()
+        sql_editor._create_new_history()
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
@@ -133,6 +136,7 @@ func _update_execute_button():
         execute_button.text = ""
 
 func _on_SQLEdit_gui_input( ev ):
+    sql_editor._update_history()
     if level_node._is_state("Failure"):
         return
     _update_execute_button()
@@ -149,11 +153,11 @@ func _on_Tree_button_pressed( item, column, id ):
     if id == 0:
         level_node._table_show(item.get_text(column))
     elif id == 1:
-        level_node._table_add(item.get_text(column))
+        level_node._table_select(item.get_text(column))
+        sql_editor._update_history()
         _update_execute_button()
     sql_editor.grab_focus()
-    sql_editor.cursor_set_column(1000, true)
-    sql_editor.cursor_set_line(1000, true)
+
 
 func _on_TabContainer_tab_changed( tab ):
     if tab == 0:

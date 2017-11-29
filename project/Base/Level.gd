@@ -34,13 +34,26 @@ func scene_switcher_show():
     get_node("UI").visible = true
 
 func _input(ev):
-    if ev is InputEventKey:
+    if ev is InputEventKey and ev.is_pressed() and !ev.is_echo():
         if intro_started and !level_started:
             if ev.get_scancode() == KEY_ESCAPE:
                 print("Level Skip Start")
                 _start_level()
-        if ev.get_scancode() == KEY_E and ev.get_control():
-            UI._execute_sql()
+        if UI.sql_editor.text != "":
+            if ev.get_scancode() == KEY_E and ev.get_control():
+                UI._execute_sql()
+            if ev.get_scancode() == KEY_ENTER and !ev.get_shift():
+                UI._execute_sql()
+
+        if ev.get_scancode() == KEY_UP:
+            UI.sql_editor._history_step_back()
+
+        if ev.get_scancode() == KEY_DOWN:
+            UI.sql_editor._history_step_forward()
+
+
+    elif ev is InputEventKey and ev.get_scancode() == KEY_ENTER and !ev.get_shift():
+        UI.sql_editor.text = ""
 
 func _run_intro():
     intro_started = true
@@ -115,7 +128,7 @@ func _flash_popup(message):
 func _table_show(name):
     sql_tools.describe_table(name)
 
-func _table_add(name):
+func _table_select(name):
     var sql = UI.sql_editor.get_text()
     if sql.ends_with(name):
         pass
