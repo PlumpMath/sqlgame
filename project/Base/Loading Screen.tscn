@@ -51,7 +51,7 @@ height = 1.0
 ascent = 0.0
 distance_field = false
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 
 resource_name = "Loading Complete Text Anim"
 length = 1.5
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
 length = 9.0
 loop = true
@@ -108,7 +108,7 @@ tracks/2/keys = {
 "values": [ Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 
 length = 8.0
 loop = true
@@ -136,9 +136,8 @@ tracks/1/keys = {
 "values": [ Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
-resource_name = "Particles"
 length = 8.0
 loop = true
 step = 0.1
@@ -260,7 +259,7 @@ _sections_unfolded = [ "Anchor", "BBCode", "Focus", "Grow Direction", "Hint", "M
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-"anims/Loading Complete Text Anim" = SubResource( 6 )
+"anims/Loading Complete Text Anim" = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -271,8 +270,8 @@ autoplay = "Loading Complete Text Anim"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Rotation = SubResource( 3 )
-"anims/Rotation (copy)" = SubResource( 4 )
+anims/Rotation = SubResource( 4 )
+"anims/Rotation (copy)" = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -283,7 +282,7 @@ autoplay = "Rotation"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Particles = SubResource( 5 )
+anims/Particles = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
