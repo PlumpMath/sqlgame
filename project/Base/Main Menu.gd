@@ -15,9 +15,6 @@ func _ready():
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
     
-    #print(get_viewport().size)
-    print(get_viewport().get_visible_rect().size)
-    
     get_node("TextureRect").texture = viewport.get_texture()
 
 func _exit_game():

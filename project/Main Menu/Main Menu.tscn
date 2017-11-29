@@ -754,7 +754,7 @@ transform = Transform( 2.75118, -1.19625, 0, 1.19625, 2.75118, 0, 0, 0, 3, 0, 0,
 script = ExtResource( 7 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="World"]
+[node name="Water" type="MeshInstance" parent="World"]
 
 transform = Transform( 0.653, 0, 0, 0, 0.653, 0, 0, 0, 0.653, 0, 0, 0 )
 layers = 1
@@ -771,7 +771,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 5 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="World" type="MeshInstance" parent="World"]
+[node name="Land" type="MeshInstance" parent="World"]
 
 layers = 1
 material_override = null
