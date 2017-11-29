@@ -18,6 +18,7 @@ extends Node
 
 signal scene_loaded
 signal scene_progress(progress)
+signal scene_switched(current_scene_path, destination_scene_path)
 
 var current_scene = null
 var loading_scene = null
@@ -46,6 +47,11 @@ func transition_to_scene(dest_scene_path, loading_scene_path):
     call_deferred("_deferred_transition_to_scene", dest_scene_path, loading_scene_path)
 
 func _deferred_cut_to_scene(dest_scene_path):
+    var current_scene_path = null
+    if current_scene:
+        current_scene_path = current_scene.get_filename()
+    var destination_scene_path = dest_scene_path
+    
     # Load destination scene
     var r = ResourceLoader.load(dest_scene_path)
 
@@ -59,6 +65,8 @@ func _deferred_cut_to_scene(dest_scene_path):
     get_tree().get_root().add_child(destination_scene)
     get_tree().set_current_scene(destination_scene)
     current_scene = destination_scene
+    
+    emit_signal("scene_switched", current_scene_path, destination_scene_path)
 
 func _deferred_transition_to_scene(scene_path, loading_scene_path):
     # Prepare interactive loader for next scene
@@ -95,6 +103,9 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
         self.connect("scene_progress", loading_scene, "on_loading_progress")
 
 func _callback_all_done():
+    var loading_scene_path = loading_scene.get_filename()
+    var destination_scene_path = destination_scene.get_filename()
+    
     # Remove loading scene
     call_deferred("_free_loading_scene")
 
@@ -104,6 +115,8 @@ func _callback_all_done():
 
     # Update current scene to be accurate
     current_scene = destination_scene
+    
+    emit_signal("scene_switched", loading_scene_path, destination_scene_path)
 
     # Stop processing
     set_process(false)

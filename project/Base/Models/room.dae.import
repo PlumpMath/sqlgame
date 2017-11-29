@@ -4,10 +4,6 @@ importer="scene"
 type="PackedScene"
 path="res://.import/room.dae-716ac6d888b0b5f336689c6bfcbdcf70.scn"
 
-[deps]
-
-source_md5="e4c6f708c1c1410c9318d4f5cc0347b3"
-
 [params]
 
 nodes/root_type="Spatial"
@@ -20,7 +16,6 @@ materials/keep_on_reimport=true
 meshes/compress=true
 meshes/ensure_tangents=true
 meshes/storage=0
-meshes/light_baking=0
 external_files/store_in_subdir=false
 animation/import=true
 animation/fps=15

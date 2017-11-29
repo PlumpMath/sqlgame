@@ -5,10 +5,6 @@ type="StreamTexture"
 path.s3tc="res://.import/rat-head-Normalmap.png-8a28b8cb8545f3a0b28b13c0c3b727b9.s3tc.stex"
 path.etc2="res://.import/rat-head-Normalmap.png-8a28b8cb8545f3a0b28b13c0c3b727b9.etc2.stex"
 
-[deps]
-
-source_md5="a3396c4cd39c9d4c8e0622e8eb742451"
-
 [params]
 
 compress/mode=2
