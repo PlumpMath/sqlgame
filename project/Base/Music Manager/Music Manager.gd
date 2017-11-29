@@ -69,13 +69,13 @@ func _process(delta):
 func _new_scene(old_scene_path, new_scene_path):
     if new_scene_path == "res://Level1/Level1.tscn":
         _change_music(level1_music)
-    elif new_scene_path == "res://Main Menu/Main Menu.tscn" and old_scene_path != "res://Base/Splash Screen.tscn":
+    elif new_scene_path == "res://Main Menu/Main Menu.tscn" and old_scene_path != "res://Base/Splash Screen.tscn" and old_scene_path != "res://Credits/Credits.tscn":
         _change_music(main_music)
 
 func _fadeIn(sound, delta, start_db = -80, dest_db = 0):
     sound.volume_db = start_db
     while sound.volume_db < dest_db:
-        sound.volume_db += 100 * delta
+        sound.volume_db += 1000 * delta
         print(sound.volume_db)
         if sound.volume_db > 0:
             sound.volume_db = 0

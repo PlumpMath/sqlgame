@@ -1,6 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Base/Loading Screen.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=7]
+
+offsets = PoolRealArray( 0, 0.781065, 1 )
+colors = PoolColorArray( 0.597656, 0.597656, 0.597656, 0.281765, 0.952663, 0.952663, 0.952663, 0.215451, 1, 1, 1, 0.232039 )
+
+[sub_resource type="GradientTexture" id=8]
+
+gradient = SubResource( 7 )
+width = 2048
 
 [sub_resource type="ParticlesMaterial" id=1]
 
@@ -32,7 +42,7 @@ angle = 60.0
 angle_random = 1.0
 scale = 5.0
 scale_random = 0.0
-color = Color( 0.0128174, 0.410156, 0, 1 )
+color_ramp = SubResource( 8 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -105,7 +115,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 3, 6, 9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -182,7 +192,7 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.207843, 0.211765, 0.207843, 1 )
+color = Color( 1, 1, 1, 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 
@@ -222,7 +232,7 @@ mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/mono_font = SubResource( 2 )
-custom_colors/default_color = Color( 0.242188, 1, 0, 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = false
 bbcode_text = "WAR IS PEACE"
 visible_characters = -1
@@ -246,7 +256,7 @@ mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/mono_font = SubResource( 2 )
-custom_colors/default_color = Color( 0.242188, 1, 0, 0.656781 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = false
 bbcode_text = "LOADING COMPLETE - PRESS ANY KEY TO CONTINUE"
 visible_characters = -1
