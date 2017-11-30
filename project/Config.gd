@@ -15,7 +15,7 @@ func _ready():
 
         set_resolution(screen_width, screen_height)
         set_fullscreen(screen_fullscreen)
-        
+
         var mute = _config.get_value("audio", "mute", false)
         var vol = _config.get_value("audio", "vol", 100)
 
@@ -24,18 +24,18 @@ func _ready():
     else:
         var new_config_file = File.new()
         new_config_file.open(_config_file_path, File.WRITE)
-        
+
         new_config_file.store_line("[display]")
         new_config_file.store_line("width=1024")
         new_config_file.store_line("height=768")
         new_config_file.store_line("fullscreen=false")
-        
+
         new_config_file.store_line("[audio]")
         new_config_file.store_line("mute=false")
         new_config_file.store_line("vol=100")
-        
+
         new_config_file.close()
-        
+
         err = _config.load(_config_file_path)
         if err != OK:
             print("Failed to load config")
@@ -63,7 +63,7 @@ func get_fullscreen():
 
 func set_mute(should_mute):
     AudioServer.set_bus_mute(0, should_mute)
-    
+
     if _config:
         _config.set_value("audio", "mute", should_mute)
         _config.save(_config_file_path)
@@ -76,16 +76,16 @@ func set_volume(vol):
     var vol_db = ((vol/100.0) - 1) * 40
 
     AudioServer.set_bus_volume_db(0, vol_db)
-    
+
     if _config:
         _config.set_value("audio", "vol", vol)
         _config.save(_config_file_path)
 
 func get_volume():
     var vol_db = AudioServer.get_bus_volume_db(0)
-    
+
     var vol = ((vol_db / 40.0) + 1) * 100.0
-    
+
     return vol
 
 func os_open_data_dir():

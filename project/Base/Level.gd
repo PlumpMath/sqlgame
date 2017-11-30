@@ -61,14 +61,14 @@ func _run_intro():
     if _tutorial_enabled:
         UI.get_node('TutorialAnimations').seek(0, true)
         UI.get_node('TutorialAnimations').stop(true)
-    
+
     intro_started = true
     _start_objective_intro()
     yield(self, "end_objective_intro")
     _start_dialog(characters, dialog)
     yield(self, "end_dialog")
     _start_level()
-    
+
     if _tutorial_enabled:
         UI.get_node('TutorialAnimations').play('QuickStartAndObjectives')
 
@@ -137,10 +137,10 @@ func _is_state(state):
 var first_message = true
 func _set_message(message):
     emit_signal("message_updated", message)
-    
+
     if _tutorial_enabled and not first_message:
         UI.get_node('TutorialAnimations').play('ObjectivesUpdated')
-    
+
     if first_message:
         first_message = false
 
@@ -194,7 +194,7 @@ func _preview_scene():
     # Without a delay the tab is not getting selected???
     yield(get_tree().create_timer(0.01), "timeout")
     UI.tab_container.set_current_tab(1)
-    
+
     if _tutorial_enabled:
         UI.get_node('TutorialAnimations').play('ObjectivesFlash')
 

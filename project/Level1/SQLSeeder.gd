@@ -6,7 +6,7 @@ func _ready():
 func _seed():
     ._seed()
     _set_max_rows(level.max_rats)
-    
+
     # Create Criminals table
     sql_tools.execute_raw("CREATE TABLE `LabRats` (" +
         "`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
@@ -38,9 +38,9 @@ func _seed():
         + "        LIMIT " + str(level.max_rats)
         + "    );"
     )
-    
+
     var headings = ['id', 'nickname', 'eye_color', 'adrenaline', 'size']
     var rows = sql_tools.execute_select("SELECT * FROM LabRats",  false)
     for row in rows:
-        level.states.process_row(row, headings, 'insert')
+        level.states.process_row(row, 'LabRats', headings, 'insert')
     level.emit_signal("seeder_finished")

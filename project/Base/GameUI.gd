@@ -146,6 +146,7 @@ func _on_Out_meta_clicked( meta ):
         tab_container.set_current_tab(1)
 
 func _on_Tree_button_pressed( item, column, id ):
+    print(item.get_text(column))
     if id == 0:
         level_node._table_show(item.get_text(column))
     elif id == 1:
@@ -162,7 +163,7 @@ func _on_TabContainer_tab_changed( tab ):
     if tab == 0:
         if !level_node.intro_started:
             level_node._run_intro()
-    elif tab == 2:  
+    elif tab == 2:
         if main_menu_scene:
             get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
 

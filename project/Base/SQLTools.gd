@@ -31,7 +31,7 @@ func describe_table(table):
         emit_signal("sql_error", prepare_result)
         return
 
-    emit_signal("sql_start", sql, clause, 100)
+    emit_signal("sql_start", sql, table, clause, 100)
 
     var count = 0
     var results
@@ -43,14 +43,14 @@ func describe_table(table):
         if typeof(results) != TYPE_ARRAY || results.size() == 0:
             break
         if (count == 0):
-            emit_signal("sql_headings_retrieved", headings, clause)
-        emit_signal("sql_row_retrieved", [results[1], results[2]], headings, clause)
+            emit_signal("sql_headings_retrieved", table, headings, clause)
+        emit_signal("sql_row_retrieved", [results[1], results[2]], table, headings, clause)
         count += 1
 
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
-    emit_signal("sql_complete", sql, clause, 100, count)
+    emit_signal("sql_complete", sql, table, clause, 100, count)
 
 func inject_data(sql, rows):
     return sql_client.inject_data(sql, rows)
