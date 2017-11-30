@@ -5,11 +5,11 @@ export(NodePath) var loading_scene = "res://Base/Loading Screen.tscn"
 
 func _ready():
     var viewport = get_node("Viewport")
-    
+
     var window_size = OS.get_window_size()
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
-    
+
     get_node("TextureRect").texture = viewport.get_texture()
 
 func _exit_game():

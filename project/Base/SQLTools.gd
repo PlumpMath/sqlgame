@@ -31,7 +31,7 @@ func describe_table(table):
         emit_signal("sql_error", prepare_result)
         return
 
-    emit_signal("sql_start", sql, clause, 100)
+    emit_signal("sql_start", sql, table, clause, 100)
 
     var count = 0
     var results
@@ -43,14 +43,14 @@ func describe_table(table):
         if typeof(results) != TYPE_ARRAY || results.size() == 0:
             break
         if (count == 0):
-            emit_signal("sql_headings_retrieved", headings, clause)
-        emit_signal("sql_row_retrieved", [results[1], results[2]], headings, clause)
+            emit_signal("sql_headings_retrieved", table, headings, clause)
+        emit_signal("sql_row_retrieved", [results[1], results[2]], table, headings, clause)
         count += 1
 
     var finalize_result = sql_client.finalize_statement()
     if (finalize_result != null):
         emit_signal("sql_error", finalize_result)
-    emit_signal("sql_complete", sql, clause, 100, count)
+    emit_signal("sql_complete", sql, table, clause, 100, count)
 
 func inject_data(sql, rows):
     return sql_client.inject_data(sql, rows)
@@ -83,6 +83,8 @@ func execute_select(sql, use_signal = true, max_rows=1000):
 
     var clause = get_clause(sql)
 
+    var table = get_table_name(sql, clause)
+
     # Translate SQL to a select statement
     var new_sql
     if clause == "delete":
@@ -96,13 +98,12 @@ func execute_select(sql, use_signal = true, max_rows=1000):
             if use_signal:
                 emit_signal("sql_error", result)
             return result
-        var table = get_table_name(sql, clause)
         new_sql = "SELECT * FROM " + table + " WHERE id = " + str(result)
     else:
         new_sql = sql
 
     if use_signal:
-        emit_signal("sql_start", sql, clause, max_rows)
+        emit_signal("sql_start", sql, table, clause, max_rows)
 
     var prepare_result = sql_client.prepare_statement(new_sql)
     if (prepare_result != null):
@@ -128,9 +129,9 @@ func execute_select(sql, use_signal = true, max_rows=1000):
         if (count == 0):
             headings = sql_client.get_column_names()
             if use_signal:
-                emit_signal("sql_headings_retrieved", headings, clause)
+                emit_signal("sql_headings_retrieved", table, headings, clause)
         if use_signal:
-            emit_signal("sql_row_retrieved", results, headings, clause)
+            emit_signal("sql_row_retrieved", results, table, headings, clause)
         else:
             data.append(results)
         count += 1
@@ -145,7 +146,7 @@ func execute_select(sql, use_signal = true, max_rows=1000):
         execute_raw(sql)
 
     if use_signal:
-        emit_signal("sql_complete", sql, clause, count, max_rows)
+        emit_signal("sql_complete", sql, table, clause, count, max_rows)
     else:
         return data
 
@@ -186,7 +187,7 @@ func get_table_name(sql, clause):
     var start = sql.findn(lead) + lead.length()
     var remaining = sql.right(start).strip_edges(" ")
     var end = 0
-    while remaining.substr(end, 1) != " ":
+    while remaining.substr(end, 1) != " " and end < remaining.length():
         end += 1
     return remaining.left(end)
 

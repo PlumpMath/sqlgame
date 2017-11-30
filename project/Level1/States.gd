@@ -5,7 +5,7 @@ func _ready():
 
 var rat_id_indices = {}
 
-func process_row(row, headings, clause):
+func process_row(row, table, headings, clause):
     if level._is_state("Failure"):
         return
 

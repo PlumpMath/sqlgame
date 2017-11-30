@@ -14,6 +14,7 @@ onready var objectives = get_node("VBoxMain/HBoxTop/TabContainer/Objectives")
 onready var dialog = objectives.get_node("DialogScroll/Dialog")
 onready var popup = get_node("VBoxMain/HBoxTop/TabContainer/Scene/PopupPanel")
 
+
 func _ready():
     # Handle signals
     sql_tools.connect("sql_start", self, "_start_statement")
@@ -51,10 +52,12 @@ func _execute_sql():
     var sql = sql_editor.get_text()
     if (sql_tools.get_clause(sql) in ["delete", "select", "insert", "update"]):
         sql_tools.execute_select(sql)
+        sql_editor._update_history()
+        sql_editor._create_new_history()
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
-func _start_statement(sql, clause, max_rows):
+func _start_statement(sql, table, clause, max_rows):
     item_list.clear()
 
 func _show_sql_error(error):
@@ -65,7 +68,7 @@ func _show_sql_error(error):
     sql_info.get_parent().visible = true
     sql_errors.get_parent().visible = false
 
-func _insert_headings(headings, clause):
+func _insert_headings(table, headings, clause):
     var item_count = 0
     for heading in headings:
         if heading == "id" or heading.ends_with("_id"):
@@ -78,7 +81,7 @@ func _insert_headings(headings, clause):
         item_list.fixed_column_width = (item_list.rect_size.x - 44) / item_count - 4;
     item_list.get_parent().visible = true
 
-func _insert_row(row, headings, clause):
+func _insert_row(row, table, headings, clause):
     var index = 0
     if headings[0] == "name" and row[0] == "id":
         return
@@ -93,7 +96,7 @@ func _insert_row(row, headings, clause):
             item_list.add_item("")
         index += 1
 
-func _finish_statement(sql, clause, row_count, max_rows):
+func _finish_statement(sql, table, clause, row_count, max_rows):
     if row_count == max_rows:
         item_list.add_item("**Limited to")
         item_list.add_item(str(max_rows) + " rows")
@@ -133,6 +136,7 @@ func _update_execute_button():
         execute_button.text = ""
 
 func _on_SQLEdit_gui_input( ev ):
+    sql_editor._update_history()
     if level_node._is_state("Failure"):
         return
     _update_execute_button()
@@ -142,14 +146,15 @@ func _on_Out_meta_clicked( meta ):
         tab_container.set_current_tab(1)
 
 func _on_Tree_button_pressed( item, column, id ):
+    print(item.get_text(column))
     if id == 0:
         level_node._table_show(item.get_text(column))
     elif id == 1:
-        level_node._table_add(item.get_text(column))
+        level_node._table_select(item.get_text(column))
+        sql_editor._update_history()
         _update_execute_button()
     sql_editor.grab_focus()
-    sql_editor.cursor_set_column(1000, true)
-    sql_editor.cursor_set_line(1000, true)
+
 
 export(NodePath) var main_menu_scene = "res://Main Menu/Main Menu.tscn"
 export(NodePath) var loading_scene = "res://Base/Loading Screen.tscn"
@@ -158,7 +163,7 @@ func _on_TabContainer_tab_changed( tab ):
     if tab == 0:
         if !level_node.intro_started:
             level_node._run_intro()
-    elif tab == 2:  
+    elif tab == 2:
         if main_menu_scene:
             get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
 

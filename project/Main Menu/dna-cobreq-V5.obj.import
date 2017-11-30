@@ -4,8 +4,11 @@ importer="wavefront_obj"
 type="Mesh"
 path="res://.import/dna-cobreq-V5.obj-f3e8bc0157113b76cf0e37a46261d34c.mesh"
 
-[gen]
+[deps]
+
 files=[ "res://.import/dna-cobreq-V5.obj-f3e8bc0157113b76cf0e37a46261d34c.mesh" ]
+
+source_md5="f3ab26ddd010003cb471baf621364783"
 
 [params]
 

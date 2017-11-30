@@ -4,6 +4,10 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/194796__jim-ph__vintage-keyboard-2.wav-8461ad10181931f31516200d06172062.sample"
 
+[deps]
+
+source_md5="1c7a4c2e8935bd6a99a43fa4200ce592"
+
 [params]
 
 force/8_bit=false

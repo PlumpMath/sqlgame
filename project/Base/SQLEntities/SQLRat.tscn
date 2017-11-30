@@ -1196,7 +1196,6 @@ tracks/26/keys = PoolRealArray( 0, 1, -1.3145e-13, -5.21541e-08, -1.49012e-08, -
 
 [sub_resource type="Animation" id=9]
 
-resource_name = "Die.Bloody"
 length = 3.0
 loop = false
 step = 0.1
@@ -2876,7 +2875,7 @@ flag_disable_z = false
 spread = 0.2
 flatness = 1.0
 gravity = Vector3( 0, 0, -6.8 )
-initial_velocity = 6.0
+initial_velocity = 6.38
 initial_velocity_random = 0.9
 angular_velocity = 0.0
 angular_velocity_random = 0.0

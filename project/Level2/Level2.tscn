@@ -1,0 +1,3040 @@
+[gd_scene load_steps=64 format=2]
+
+[ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Level2/Level.gd" type="Script" id=2]
+[ext_resource path="res://Base/SQLEntities/Airliner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Base/SQLEntities/Airliner.gd" type="Script" id=4]
+[ext_resource path="res://Base/Images/cloud.png" type="Texture" id=5]
+[ext_resource path="res://Base/SQLEntities/Passenger.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Base/Images/blood-pool.png" type="Texture" id=7]
+[ext_resource path="res://Level2/Particles.gd" type="Script" id=8]
+[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Level2/States.gd" type="Script" id=11]
+[ext_resource path="res://Level2/Start.gd" type="Script" id=12]
+[ext_resource path="res://Level2/State-Victory.gd" type="Script" id=13]
+[ext_resource path="res://Level2/State-Failure.gd" type="Script" id=14]
+[ext_resource path="res://Level2/SQLSeeder.gd" type="Script" id=15]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.0946746, 0.899408, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.176784, 1, 1, 1, 0.397804, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="Curve" id=3]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 0.704102 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+
+width = 2048
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 0.62
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = false
+spread = 0.02
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.13
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Gravity", "Initial Velocity", "Linear Accel", "Scale", "Spread", "Trail" ]
+
+[sub_resource type="SpatialMaterial" id=6]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 3
+params_grow = false
+params_use_alpha_scissor = false
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = 0
+albedo_color = Color( 0.234375, 0.234375, 0.234375, 1 )
+albedo_texture = ExtResource( 5 )
+metallic = 0.0
+metallic_specular = 0.0
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Metallic", "Parameters", "Vertex Color" ]
+
+[sub_resource type="QuadMesh" id=7]
+
+material = SubResource( 6 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="QuadMesh" id=8]
+
+size = Vector2( 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=10]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=11]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=12]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=13]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=14]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=15]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=16]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=17]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=18]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=19]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=20]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="QuadMesh" id=21]
+
+size = Vector2( 0.3, 1 )
+
+[sub_resource type="SpatialMaterial" id=22]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=23]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=24]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=25]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=26]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=27]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=28]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=29]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=30]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=31]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=32]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=33]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="SpatialMaterial" id=34]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=35]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=36]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=37]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.3, 1, 1 )
+uv1_offset = Vector3( 0.3, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "UV1", "UV2" ]
+
+[sub_resource type="SpatialMaterial" id=38]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=39]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=40]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 0.5, 0.6, 1 )
+uv1_offset = Vector3( 0.5, 0.2, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 2, 2, 2 )
+uv2_offset = Vector3( 0.5, 0.5, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=41]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+albedo_texture = ExtResource( 7 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Flags" ]
+
+[sub_resource type="Gradient" id=42]
+
+offsets = PoolRealArray( 0, 0.0828402, 0.869823, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.170735, 1, 1, 1, 0.0828627, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=43]
+
+gradient = SubResource( 42 )
+width = 2048
+
+[sub_resource type="ParticlesMaterial" id=44]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 20, 20 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = false
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 26.37
+initial_velocity_random = 0.33
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 3.47
+scale_random = 0.0
+color_ramp = SubResource( 43 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Initial Velocity", "Scale", "Spread", "Trail" ]
+
+[sub_resource type="SpatialMaterial" id=45]
+
+render_priority = 0
+flags_transparent = true
+flags_unshaded = false
+flags_vertex_lighting = true
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = false
+params_diffuse_mode = 1
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 3
+params_grow = false
+params_use_alpha_scissor = false
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = 0
+albedo_color = Color( 0.796875, 0.796875, 0.796875, 1 )
+albedo_texture = ExtResource( 5 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "Distance Fade", "Flags", "Parameters", "Proximity Fade", "Vertex Color" ]
+
+[sub_resource type="QuadMesh" id=46]
+
+material = SubResource( 45 )
+size = Vector2( 6, 6 )
+
+[sub_resource type="DynamicFont" id=47]
+
+size = 12
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 10 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Theme" id=48]
+
+resource_local_to_scene = true
+default_font = SubResource( 47 )
+_sections_unfolded = [ "Resource" ]
+
+[node name="Level2" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+_sections_unfolded = [ "Pause", "Size Flags", "Visibility" ]
+max_seats = 88
+max_scientists = 10
+max_passports = 10000
+
+[node name="SceneVp" parent="."]
+
+own_world = false
+msaa = 2
+shadow_atlas_size = 10
+_sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
+
+[node name="Camera" parent="SceneVp/Spatial"]
+
+transform = Transform( 0.999715, -0.0108226, 0.0212813, -0.00652295, 0.733638, 0.679509, -0.022967, -0.679454, 0.733359, 0.276445, 7.92585, 0.220712 )
+fov = 70.0
+
+[node name="DirectionalLight" parent="SceneVp/Spatial"]
+
+transform = Transform( 0.914489, -0.246496, 0.320857, 0, 0.793003, 0.609217, -0.40461, -0.557122, 0.725193, 3.8492, 2.33484, -6.30051 )
+light_cull_mask = -1
+
+[node name="Airliner" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
+
+transform = Transform( 0.00113247, 0, -1.79686, 0, 1.79686, 0, 1.79686, 0, 0.00113247, 1.10018, 0, -8.84246 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="RotTween" type="Tween" parent="SceneVp/Spatial/Airliner"]
+
+playback_process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
+
+[node name="PosTween" type="Tween" parent="SceneVp/Spatial/Airliner"]
+
+playback_process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
+
+[node name="Particles2" type="Particles" parent="SceneVp/Spatial/Airliner"]
+
+transform = Transform( -0.0976185, 0, -0.0019795, 0, 0.0976388, 0, 0.0019795, 0, -0.0976185, -1.4249, -0.617569, 0.0162671 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+emitting = true
+amount = 100
+lifetime = 1.3
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 5 )
+draw_passes = 1
+draw_pass_1 = SubResource( 7 )
+_sections_unfolded = [ "Draw Passes", "Drawing", "Process Material", "Time" ]
+
+[node name="Particles3" type="Particles" parent="SceneVp/Spatial/Airliner"]
+
+transform = Transform( -0.0976185, 0, -0.0019795, 0, 0.0976388, 0, 0.0019795, 0, -0.0976185, 1.52626, -0.617569, -0.0435762 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+emitting = true
+amount = 100
+lifetime = 1.3
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 5 )
+draw_passes = 1
+draw_pass_1 = SubResource( 7 )
+_sections_unfolded = [ "Draw Passes", "Drawing", "Process Material", "Time" ]
+
+[node name="Passengers" type="Spatial" parent="SceneVp/Spatial/Airliner"]
+
+[node name="Seat85" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.310814, -0.407423, -2.4058 )
+
+[node name="Seat37" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.33265, -0.407423, 0.819762 )
+
+[node name="Seat61" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.315778, -0.407423, -0.808595 )
+
+[node name="Seat13" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.337615, -0.407423, 2.41697 )
+
+[node name="Seat73" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.324687, -0.407423, -1.60937 )
+
+[node name="Seat25" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.346523, -0.407423, 1.6162 )
+
+[node name="Seat49" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.329651, -0.407423, -0.012158 )
+
+[node name="Seat1" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.351488, -0.407423, 3.21341 )
+
+[node name="Seat81" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.317453, -0.407423, -2.13302 )
+
+[node name="Seat33" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.339289, -0.407423, 1.09255 )
+
+[node name="Seat57" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.322418, -0.407423, -0.535811 )
+
+[node name="Seat9" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.344254, -0.407423, 2.68975 )
+
+[node name="Seat69" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.331326, -0.407423, -1.33658 )
+
+[node name="Seat21" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.353162, -0.407423, 1.88898 )
+
+[node name="Seat45" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.336291, -0.407423, 0.260625 )
+
+[node name="Seat77" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.3205, -0.407423, -1.87241 )
+
+[node name="Seat29" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.342337, -0.407423, 1.35315 )
+
+[node name="Seat53" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.325464, -0.407423, -0.275203 )
+
+[node name="Seat5" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.347301, -0.407423, 2.95036 )
+
+[node name="Seat65" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.334373, -0.407423, -1.07597 )
+
+[node name="Seat17" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.35621, -0.407423, 2.14959 )
+
+[node name="Seat41" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.339341, -0.407423, 0.52575 )
+
+[node name="Seat86" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.173209, -0.407423, -2.4058 )
+
+[node name="Seat38" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.195045, -0.407423, 0.819762 )
+
+[node name="Seat62" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.178174, -0.407423, -0.808594 )
+
+[node name="Seat14" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.20001, -0.407423, 2.41697 )
+
+[node name="Seat74" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.187082, -0.407423, -1.60936 )
+
+[node name="Seat26" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.208918, -0.407423, 1.6162 )
+
+[node name="Seat50" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.192047, -0.407423, -0.0121576 )
+
+[node name="Seat2" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.213883, -0.407423, 3.21341 )
+
+[node name="Seat82" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.179848, -0.407423, -2.13302 )
+
+[node name="Seat34" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.201684, -0.407423, 1.09255 )
+
+[node name="Seat58" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.184813, -0.407423, -0.53581 )
+
+[node name="Seat10" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.206649, -0.407423, 2.68975 )
+
+[node name="Seat70" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.193721, -0.407423, -1.33658 )
+
+[node name="Seat22" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.215558, -0.407423, 1.88898 )
+
+[node name="Seat46" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.198686, -0.407423, 0.260625 )
+
+[node name="Seat78" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.182895, -0.407423, -1.87241 )
+
+[node name="Seat30" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.204731, -0.407423, 1.35315 )
+
+[node name="Seat54" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.18786, -0.407423, -0.275203 )
+
+[node name="Seat6" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.209695, -0.407423, 2.95036 )
+
+[node name="Seat66" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.196769, -0.407423, -1.07597 )
+
+[node name="Seat18" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.218605, -0.407423, 2.14959 )
+
+[node name="Seat42" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, -0.201734, -0.407423, 0.521233 )
+
+[node name="Seat88" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.328524, -0.407423, -2.4058 )
+
+[node name="Seat40" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.306688, -0.407423, 0.819762 )
+
+[node name="Seat64" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.323559, -0.407423, -0.808594 )
+
+[node name="Seat16" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.301723, -0.407423, 2.41697 )
+
+[node name="Seat76" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.314651, -0.407423, -1.60936 )
+
+[node name="Seat28" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.292814, -0.407423, 1.6162 )
+
+[node name="Seat52" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.309686, -0.407423, -0.0121573 )
+
+[node name="Seat4" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.287848, -0.407423, 3.21341 )
+
+[node name="Seat84" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.321886, -0.407423, -2.13302 )
+
+[node name="Seat36" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.300048, -0.407423, 1.09255 )
+
+[node name="Seat60" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.31692, -0.407423, -0.53581 )
+
+[node name="Seat12" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.295083, -0.407423, 2.68975 )
+
+[node name="Seat72" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.308012, -0.407423, -1.33658 )
+
+[node name="Seat24" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.286175, -0.407423, 1.88898 )
+
+[node name="Seat48" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.303046, -0.407423, 0.260626 )
+
+[node name="Seat80" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.318838, -0.407423, -1.87241 )
+
+[node name="Seat32" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.297002, -0.407423, 1.35315 )
+
+[node name="Seat56" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.313872, -0.407423, -0.275202 )
+
+[node name="Seat8" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.292037, -0.407423, 2.95036 )
+
+[node name="Seat68" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.304965, -0.407423, -1.07597 )
+
+[node name="Seat20" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.283128, -0.407423, 2.14959 )
+
+[node name="Seat44" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.299999, -0.407423, 0.521234 )
+
+[node name="Seat87" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.191826, -0.407423, -2.4058 )
+
+[node name="Seat39" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.169989, -0.407423, 0.819762 )
+
+[node name="Seat63" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.18686, -0.407423, -0.808595 )
+
+[node name="Seat15" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.165023, -0.407423, 2.41697 )
+
+[node name="Seat75" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.177952, -0.407423, -1.60936 )
+
+[node name="Seat27" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.156116, -0.407423, 1.6162 )
+
+[node name="Seat51" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.172986, -0.407423, -0.0121574 )
+
+[node name="Seat3" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.15115, -0.407423, 3.21341 )
+
+[node name="Seat83" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.185186, -0.407423, -2.13302 )
+
+[node name="Seat35" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.163349, -0.407423, 1.09255 )
+
+[node name="Seat59" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.180221, -0.407423, -0.53581 )
+
+[node name="Seat11" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.158384, -0.407423, 2.68975 )
+
+[node name="Seat71" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.171313, -0.407423, -1.33658 )
+
+[node name="Seat23" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.149477, -0.407423, 1.88898 )
+
+[node name="Seat47" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.166348, -0.407423, 0.260626 )
+
+[node name="Seat79" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.182139, -0.407423, -1.87241 )
+
+[node name="Seat31" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.160302, -0.407423, 1.35316 )
+
+[node name="Seat55" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.177173, -0.407423, -0.275202 )
+
+[node name="Seat7" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.155335, -0.407423, 2.95036 )
+
+[node name="Seat67" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.168265, -0.407423, -1.07597 )
+
+[node name="Seat19" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.146428, -0.407423, 2.14959 )
+
+[node name="Seat43" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
+
+transform = Transform( 0.0412931, 0, -2.79579e-09, 0, 0.0412931, 0, 2.79579e-09, 0, 0.0412931, 0.163299, -0.407423, 0.521234 )
+
+[node name="BloodPaintLower" type="Spatial" parent="SceneVp/Spatial/Airliner"]
+
+editor/display_folded = true
+visible = false
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Blood29" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( 0.0024095, -0.802078, -0.0845444, -0.0148725, -0.105551, 0.642527, -0.717671, -0.000505509, -0.0166652, 1.07409, 0.464662, -4.28081 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 9 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood30" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( 0.0024095, -0.802078, -0.0845445, -0.0148725, -0.105551, 0.642527, -0.717671, -0.000505509, -0.0166652, 0.945377, 0.464662, -4.12317 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 10 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood31" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( 0.0024095, -0.802078, -0.0845445, -0.0148725, -0.105551, 0.642527, -0.717671, -0.000505509, -0.0166652, 0.663154, 0.464662, -3.92168 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 11 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood32" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( 0.0024096, -0.802077, -0.0845533, 0.000652337, -0.105527, 0.642736, -0.717824, -0.00278831, -0.00276512, 1.46207, 0.542478, -4.466 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 12 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood4" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799655, 0, -0.709397, 0, -0.0160164, 0.132006, 0.712402, -3.4058 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 13 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood5" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799655, 0, -0.709397, 0, -0.0160164, 0.136751, 0.841436, -3.56032 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 14 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood19" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.253127, -0.436451, 0.0808482, 0.121236, 0.0307613, 0.411242, -0.378825, 0.301477, 0.0750834, 0.446439, 0.440768, -3.60335 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 15 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood14" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.27242, -0.433188, 0.015121, 0.0794376, -0.038949, 0.418872, -0.376506, 0.305214, 0.0749144, 0.627183, 0.427004, -3.73099 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 16 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood15" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.294641, -0.414734, -0.00722635, 0.0625929, -0.0658635, 0.418967, -0.362696, 0.325549, 0.0755573, 0.9257, 0.452539, -3.97285 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 17 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood17" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.289077, -0.419459, 0.0124022, 0.101318, -0.0697138, 0.412069, -0.358398, 0.31862, 0.106488, 1.4233, 0.541685, -4.36499 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 18 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood18" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.301115, -0.408853, 0.000681242, 0.0715677, -0.0658634, 0.41753, -0.355651, 0.332905, 0.0834427, 1.70998, 0.575247, -4.54621 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 19 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood16" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintLower"]
+
+transform = Transform( -0.294471, -0.41422, 0.0197777, 0.102006, -0.0614133, 0.412778, -0.353782, 0.327069, 0.102554, 1.20423, 0.511549, -4.2063 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 20 )
+_sections_unfolded = [ "material" ]
+
+[node name="BloodPaintMid" type="Spatial" parent="SceneVp/Spatial/Airliner"]
+
+editor/display_folded = true
+transform = Transform( 1, 0, 5.82077e-11, 0, 1, 0, -5.82077e-11, 0, 1, 0, 0, 0 )
+visible = false
+
+[node name="Blood28" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.413331, 0.00753358, 0.202968, 0.154669, -0.379083, 0.264292, 0.165877, 0.372241, 0.265043, 0.0657368, 1.06412, -3.18502 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 22 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood23" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0660667, 1.75097, -3.71473 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 23 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood22" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0659795, 1.565, -3.57616 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 24 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood21" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0658913, 1.36915, -3.43604 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 25 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood20" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0658126, 1.19987, -3.31231 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 26 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood8" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.00960859, 0.000191305, 0.425653, -0.269275, 0.436106, -0.00623289, -0.386883, -0.303539, -0.00868676, 0.112116, 1.56593, -3.84459 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 27 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood7" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.00960859, 0.000191305, 0.425653, -0.269275, 0.436106, -0.00623289, -0.386883, -0.303539, -0.00868676, 0.105333, 1.32742, -3.67316 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 28 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood6" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.00960859, 0.000191305, 0.425653, -0.269275, 0.436106, -0.00623289, -0.386883, -0.303539, -0.00868676, 0.13206, 1.05483, -3.48799 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 29 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood13" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799655, 0, -0.709397, 0, -0.0160164, 0.103448, 1.60711, -4.0551 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 30 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood3" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799656, 0, -0.709397, 0, -0.0160164, 0.132424, 1.46575, -4.07012 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 31 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood2" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799656, 0, -0.709397, 0, -0.0160164, 0.13235, 1.28084, -3.9537 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 32 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintMid"]
+
+transform = Transform( -0.0206831, 0, 0.921354, 0, 1.15012, 0, -1.02031, 0, -0.023036, 0.132272, 1.01374, -3.83042 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 33 )
+_sections_unfolded = [ "material" ]
+
+[node name="BloodPaintUpper" type="Spatial" parent="SceneVp/Spatial/Airliner"]
+
+editor/display_folded = true
+transform = Transform( 1, 0, 5.82077e-11, 0, 1, 0, -5.82077e-11, 0, 1, 0, 0, 0 )
+visible = false
+
+[node name="Blood27" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0664215, 2.51945, -4.27112 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 34 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood26" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0663352, 2.32094, -4.13618 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 35 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood25" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0662408, 2.1427, -3.98822 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 36 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood24" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.413344, 0.00757166, 0.202946, 0.128286, -0.430151, 0.222028, 0.187, 0.311829, 0.301348, 0.0661545, 1.94241, -3.85381 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 21 )
+skeleton = NodePath("..")
+material/0 = SubResource( 37 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood11" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.00961194, 0.000196618, 0.425653, -0.276754, 0.430115, -0.006406, -0.381569, -0.31197, -0.00856375, 0.102822, 2.33339, -4.40867 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 38 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood10" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.00961194, 0.000196618, 0.425653, -0.276754, 0.430115, -0.006406, -0.381569, -0.31197, -0.00856375, 0.119383, 2.14653, -4.26764 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 39 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood9" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.00960859, 0.000191305, 0.425653, -0.269275, 0.436106, -0.00623289, -0.386883, -0.303539, -0.00868676, 0.138198, 1.87959, -4.06618 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 40 )
+_sections_unfolded = [ "material" ]
+
+[node name="Blood12" type="MeshInstance" parent="SceneVp/Spatial/Airliner/BloodPaintUpper"]
+
+transform = Transform( -0.0143805, 0, 0.640597, 0, 0.799655, 0, -0.709397, 0, -0.0160164, 0.0963869, 1.87778, -4.27966 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 8 )
+skeleton = NodePath("..")
+material/0 = SubResource( 41 )
+_sections_unfolded = [ "material" ]
+
+[node name="Particles" type="Particles" parent="SceneVp/Spatial"]
+
+transform = Transform( -0.0454199, 0, 0.998968, 0, 1, 0, -0.998968, 0, -0.0454199, -46.4146, -8.58172, -11.9101 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+emitting = true
+amount = 400
+lifetime = 5.0
+one_shot = false
+preprocess = 3.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_aabb = AABB( -39.9292, -40, 0, 79.8585, 80, 80 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 44 )
+draw_passes = 1
+draw_pass_1 = SubResource( 46 )
+script = ExtResource( 8 )
+_sections_unfolded = [ "Draw Passes", "Drawing", "Geometry", "Process Material", "Time", "Transform" ]
+
+[node name="Tween" type="Tween" parent="SceneVp/Spatial/Particles"]
+
+playback_process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
+
+[node name="DeadPassengers" type="Spatial" parent="SceneVp/Spatial"]
+
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 9 )]
+
+_sections_unfolded = [ "Material", "Mouse", "Pause", "Size Flags", "Visibility" ]
+
+[node name="UI" parent="."]
+
+theme = SubResource( 48 )
+
+[node name="States" parent="."]
+
+script = ExtResource( 11 )
+
+[node name="Start" parent="States"]
+
+script = ExtResource( 12 )
+
+[node name="Victory" parent="States"]
+
+script = ExtResource( 13 )
+
+[node name="Failure" parent="States"]
+
+script = ExtResource( 14 )
+
+[node name="SQLSeeder" parent="."]
+
+script = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+

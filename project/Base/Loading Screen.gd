@@ -33,7 +33,7 @@ func _input(ev):
 
 func on_loading_finished():
     _scene_switcher_finished = true
-    
+
 func _reset():
     _time_accum = 0
     _scene_switcher_finished = false

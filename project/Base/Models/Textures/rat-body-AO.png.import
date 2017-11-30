@@ -5,6 +5,10 @@ type="StreamTexture"
 path.s3tc="res://.import/rat-body-AO.png-b34a2f24c753f2cfd6e0d384fe4c8d28.s3tc.stex"
 path.etc2="res://.import/rat-body-AO.png-b34a2f24c753f2cfd6e0d384fe4c8d28.etc2.stex"
 
+[deps]
+
+source_md5="a5b08927ea795ebd023528e89f37eebf"
+
 [params]
 
 compress/mode=2

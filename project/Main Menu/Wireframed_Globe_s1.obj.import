@@ -4,8 +4,11 @@ importer="wavefront_obj"
 type="Mesh"
 path="res://.import/Wireframed_Globe_s1.obj-48a583513eed8e99e677c70165a7667a.mesh"
 
-[gen]
+[deps]
+
 files=[ "res://.import/Wireframed_Globe_s1.obj-48a583513eed8e99e677c70165a7667a.mesh" ]
+
+source_md5="961f0cba55f5553cca5fc837eb0bc665"
 
 [params]
 
