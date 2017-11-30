@@ -6,7 +6,7 @@ onready var sql_tools = get_parent().get_node("SQLTools")
 func _seed():
     # Seed parameters
     sql_tools.execute_raw("ATTACH 'SeedData.db' as SeedDb")
-    
+
     level.connect("seeder_finished", self, "_seeder_finished")
 
 func _seeder_finished():

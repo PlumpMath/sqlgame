@@ -8,12 +8,14 @@ onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 func _ready():
     # Set tables
     _add_table("LabRats")
+    UI.objectives.get_node("Intro").set_bbcode("[b]Level 1: Lab Rats[/b]\n\n[i]There's many ways to skin a rat[/i]")
     _preview_scene()
     var rat_node = rat_spawner.get_child(states.rat_id_indices[primary_rat_id])
     var body = rat_node.get_node("Model/Armature/Skeleton/Body")
     var body_mat = body.get_surface_material(0).duplicate()
     body_mat.albedo_color = Color(0, 0, 0)
     body.set_surface_material(0, body_mat)
+    sql_seeder._seed()
 
 func _start_objective_intro():
     characters = {

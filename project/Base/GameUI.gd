@@ -57,7 +57,7 @@ func _execute_sql():
     else:
         _show_sql_error('Not a valid or allowed SQL statement')
 
-func _start_statement(sql, clause, max_rows):
+func _start_statement(sql, table, clause, max_rows):
     item_list.clear()
 
 func _show_sql_error(error):
@@ -68,7 +68,7 @@ func _show_sql_error(error):
     sql_info.get_parent().visible = true
     sql_errors.get_parent().visible = false
 
-func _insert_headings(headings, clause):
+func _insert_headings(table, headings, clause):
     var item_count = 0
     for heading in headings:
         if heading == "id" or heading.ends_with("_id"):
@@ -81,7 +81,7 @@ func _insert_headings(headings, clause):
         item_list.fixed_column_width = (item_list.rect_size.x - 44) / item_count - 4;
     item_list.get_parent().visible = true
 
-func _insert_row(row, headings, clause):
+func _insert_row(row, table, headings, clause):
     var index = 0
     if headings[0] == "name" and row[0] == "id":
         return
@@ -96,7 +96,7 @@ func _insert_row(row, headings, clause):
             item_list.add_item("")
         index += 1
 
-func _finish_statement(sql, clause, row_count, max_rows):
+func _finish_statement(sql, table, clause, row_count, max_rows):
     if row_count == max_rows:
         item_list.add_item("**Limited to")
         item_list.add_item(str(max_rows) + " rows")

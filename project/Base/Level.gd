@@ -22,7 +22,7 @@ onready var dialog = []
 func _ready():
     set_process(true)
     set_process_input(true)
-    sql_seeder._seed()
+    sql_tools.connect("sql_start", self, "_start_statement")
     sql_tools.connect("sql_row_retrieved", self, "_check_row")
     sql_tools.connect("sql_headings_retrieved", self, "_check_headings")
     sql_tools.connect("sql_complete", self, "_finish_statement")
@@ -67,32 +67,42 @@ func _start_objective_intro():
     emit_signal("end_objective_intro")
 
 
-func _check_headings(headings, clause):
+
+func _start_statement(sql, table, clause, max_rows):
+    # Get current State
+    var state_name = state_history.back()
+    var state = states.get_node(state_name)
+    if state.has_method("start_statement"):
+        state.start_statement(sql, table, clause, max_rows)
+    if states.has_method("start_statement"):
+        states.start_statement(sql, table, clause, max_rows)
+
+func _check_headings(table, headings, clause):
     # Get current State
     var state_name = state_history.back()
     var state = states.get_node(state_name)
     if state.has_method("process_headings"):
-        state.process_headings(headings, clause)
+        state.process_headings(table, headings, clause)
     if states.has_method("process_headings"):
-        states.process_headings(headings, clause)
+        states.process_headings(table, headings, clause)
 
-func _check_row(row, headings, clause):
+func _check_row(row, table, headings, clause):
     # Get current State
     var state_name = state_history.back()
     var state = states.get_node(state_name)
     if state.has_method("process_row"):
-        state.process_row(row, headings, clause)
+        state.process_row(row, table, headings, clause)
     if states.has_method("process_row"):
-        states.process_row(row, headings, clause)
+        states.process_row(row, table, headings, clause)
 
-func _finish_statement(sql, clause, row_count, max_rows):
+func _finish_statement(sql, table, clause, row_count, max_rows):
     # Get current State
     var state_name = state_history.back()
     var state = states.get_node(state_name)
     if state.has_method("finish_statement"):
-        state.finish_statement(sql, clause, row_count, max_rows)
+        state.finish_statement(sql, table, clause, row_count, max_rows)
     if states.has_method("finish_statement"):
-        states.finish_statement(sql, clause, row_count, max_rows)
+        states.finish_statement(sql, table, clause, row_count, max_rows)
 
 func _set_state(new_state, message = null):
     if state_history.size() > 0 and state_history.back() == "Failure" and new_state != "Start":
@@ -138,7 +148,12 @@ func _table_select(name):
         UI.sql_editor.insert_text_at_cursor(name)
 
 func _add_table(table_name):
-    var item = UI.table_tree.create_item()
+    var root = UI.table_tree.get_root()
+    if !root:
+        root = UI.table_tree.create_item()
+        root.set_text(0, "Tables")
+        root.set_selectable (0, false)
+    var item = UI.table_tree.create_item(root)
     item.add_button(0, load("res://Base/Images/view.png"))
     item.add_button(0, load("res://Base/Images/add.png"))
     item.set_text(0, table_name)
