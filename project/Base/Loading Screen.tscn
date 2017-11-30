@@ -3,7 +3,7 @@
 [ext_resource path="res://Base/Loading Screen.gd" type="Script" id=1]
 [ext_resource path="res://Base/Fonts/Monoid-Retina.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=1]
 
 size = 16
 use_mipmaps = false
@@ -11,7 +11,7 @@ use_filter = true
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=2]
 
 size = 16
 use_mipmaps = false
@@ -19,7 +19,7 @@ use_filter = true
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=3]
 
 resource_name = "AnimationLoading"
 length = 3.0
@@ -48,7 +48,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=4]
 
 resource_name = "AnimationFade"
 length = 12.0
@@ -119,7 +119,7 @@ rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "WAR IS PEACE"
 align = 1
@@ -159,7 +159,7 @@ rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "LOADING COMPLETE - PRESS ANY KEY TO CONTINUE"
 align = 2
@@ -217,7 +217,7 @@ _sections_unfolded = [ "Rect" ]
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/AnimationLoading = SubResource( 17 )
+anims/AnimationLoading = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -229,7 +229,7 @@ _sections_unfolded = [ "playback" ]
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/AnimationFade = SubResource( 16 )
+anims/AnimationFade = SubResource( 4 )
 playback/active = true
 playback/speed = 1.3
 blend_times = [  ]

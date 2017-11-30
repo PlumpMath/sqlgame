@@ -36,12 +36,17 @@ var main_music = null
 var level1_music = null
 var current_music = null
 
+var _connect = true
 func _change_music(music):
     if current_music != null:
         current_music.stop()
     
     current_music = music
-    current_music.connect('finished', self, '_loop')
+    
+    if _connect:
+        current_music.connect('finished', self, '_loop')
+        _connect = false
+    
     current_music.play()
 
 func _loop():

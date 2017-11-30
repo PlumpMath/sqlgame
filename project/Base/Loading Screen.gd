@@ -25,6 +25,7 @@ func _process(delta):
     if _ready_to_switch() and _signal_sent == false and _user_wants_to_continue:
         emit_signal("finished")
         _signal_sent = true
+        _reset()
 
 func _input(ev):
     if ev is InputEventKey and ev.pressed == false and _ready_to_switch():
@@ -32,3 +33,9 @@ func _input(ev):
 
 func on_loading_finished():
     _scene_switcher_finished = true
+    
+func _reset():
+    _time_accum = 0
+    _scene_switcher_finished = false
+    _signal_sent = false
+    _user_wants_to_continue = false

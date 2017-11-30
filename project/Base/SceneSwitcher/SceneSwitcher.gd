@@ -121,6 +121,13 @@ func _callback_all_done():
     # Stop processing
     set_process(false)
 
+    #_thread = null
+    _thread_started = false
+
+    loader_non_blocking = null
+    _stop_polling = false
+    _should_transition = false
+
 func _add_destination_scene_to_tree():
     # Spin up a new thread to add the next scene to the root scene
     _thread = Thread.new()

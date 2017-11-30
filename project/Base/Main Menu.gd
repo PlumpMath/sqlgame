@@ -11,7 +11,6 @@ func _ready():
     yield(get_tree(), "idle_frame")
     yield(get_tree(), "idle_frame")
     
-    
     var window_size = get_viewport().get_visible_rect().size
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
