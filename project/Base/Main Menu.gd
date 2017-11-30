@@ -3,6 +3,7 @@ extends Control
 export(NodePath) var next_scene = "res://Level1/Level1.tscn"
 export(NodePath) var loading_scene = "res://Base/Loading Screen.tscn"
 export(NodePath) var credits_scene = "res://Credits/Credits.tscn"
+export(NodePath) var config_scene = "res://Config/Config Screen.tscn"
 
 func _ready():
     var viewport = get_node("Viewport")
@@ -33,3 +34,7 @@ func _on_Start_Game_button_up():
 func _on_Credits_button_up():
     if credits_scene:
         get_node("/root/SceneSwitcher").cut_to_scene(credits_scene)
+
+func _on_Options_button_up():
+    if config_scene:
+        get_node("/root/SceneSwitcher").cut_to_scene(config_scene)

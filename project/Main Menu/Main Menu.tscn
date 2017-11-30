@@ -410,6 +410,7 @@ _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags" ]
 next_scene = "res://Level1/Level1.tscn"
 loading_scene = "res://Base/Loading Screen.tscn"
 credits_scene = "res://Credits/Credits.tscn"
+config_scene = "res://Config/Config Screen.tscn"
 
 [node name="Viewport" type="Viewport" parent="."]
 
@@ -669,7 +670,6 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-disabled = true
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -812,6 +812,8 @@ script = ExtResource( 6 )
 _sections_unfolded = [ "Geometry", "LOD", "Transform", "material" ]
 
 [connection signal="button_up" from="Buttons/Start Game" to="." method="_on_Start_Game_button_up"]
+
+[connection signal="button_up" from="Buttons/Options" to="." method="_on_Options_button_up"]
 
 [connection signal="button_up" from="Buttons/Credits" to="." method="_on_Credits_button_up"]
 

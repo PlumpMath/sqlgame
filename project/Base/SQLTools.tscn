@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Base/SQLTools.gd" type="Script" id=1]
 
-
 [node name="SQLTools" type="Node"]
 
 script = ExtResource( 1 )
