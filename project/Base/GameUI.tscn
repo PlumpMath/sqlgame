@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Base/Themes/Default.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Base/GameUI.gd" type="Script" id=2]
@@ -275,6 +275,81 @@ tracks/5/keys = {
 "values": [ true, true, false, false ]
 }
 
+[sub_resource type="Animation" id=17]
+
+resource_name = "ObjectivesFlash"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxMain/HBoxTop/TabContainer:custom_colors/font_color_bg")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+
+resource_name = "ObjectivesUpdated"
+length = 1.0
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText/Tutorial Highlight:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.345098 ), Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.345098 ), Color( 1, 0.84375, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+
+length = 9.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxMain/HBoxTop/TabContainer/Objectives/Out/Tutorial Highlight:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1.4, 2.1, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.348078 ), Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.348078 ), Color( 1, 0.84375, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText/Tutorial Highlight:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/keys = {
+"times": PoolRealArray( 2.8, 3.5, 4.2, 4.9, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.298353 ), Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.298353 ), Color( 1, 0.84375, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxMain/HBoxBottom/SQLEdit/Tutorial Highlight:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/keys = {
+"times": PoolRealArray( 5.6, 6.2, 6.9, 7.6, 8.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.348078 ), Color( 1, 0.84375, 0, 0 ), Color( 1, 0.84375, 0, 0.348078 ), Color( 1, 0.84375, 0, 0 ) ]
+}
+
 [node name="UI" type="PanelContainer"]
 
 self_modulate = Color( 0, 0, 0, 1 )
@@ -290,6 +365,8 @@ size_flags_vertical = 3
 theme = SubResource( 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Hint", "Margin", "Material", "Rect", "Size Flags", "Theme", "Visibility" ]
+main_menu_scene = "res://Main Menu/Main Menu.tscn"
+loading_scene = "res://Base/Loading Screen.tscn"
 
 [node name="VBoxMain" type="VBoxContainer" parent="."]
 
@@ -339,12 +416,14 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_colors/font_color_bg = Color( 1, 1, 1, 1 )
 tab_align = 0
 tabs_visible = true
-_sections_unfolded = [ "Margin", "Rect", "Visibility", "custom_constants" ]
+_sections_unfolded = [ "Anchor", "Focus", "Margin", "Mouse", "Rect", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_icons", "custom_styles" ]
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -359,7 +438,7 @@ mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Margin", "Theme" ]
+_sections_unfolded = [ "Margin", "Theme", "Visibility" ]
 
 [node name="Intro" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
@@ -380,7 +459,9 @@ custom_fonts/italics_font = ExtResource( 5 )
 custom_fonts/bold_font = ExtResource( 4 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = ""
+bbcode_text = "[b]Level 1: Lab Rats[/b]
+
+[i]There's many ways to skin a rat[/i]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
@@ -463,7 +544,6 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Out" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -489,10 +569,25 @@ bbcode_text = "Quickstart:
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
-_sections_unfolded = [ "Anchor", "BBCode", "Margin", "Rect", "Size Flags", "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "Anchor", "BBCode", "Focus", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="Tutorial Highlight" type="ColorRect" parent="VBoxMain/HBoxTop/TabContainer/Objectives/Out"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 0.84375, 0, 0 )
+_sections_unfolded = [ "Mouse" ]
 
 [node name="Scene" type="TextureRect" parent="VBoxMain/HBoxTop/TabContainer"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -555,6 +650,23 @@ lines_skipped = 0
 max_lines_visible = 1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "Visibility" ]
 
+[node name="Exit" type="Control" parent="VBoxMain/HBoxTop/TabContainer"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 48.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
 [node name="DataColumn" type="VBoxContainer" parent="VBoxMain/HBoxTop"]
 
 anchor_left = 0.0
@@ -601,6 +713,7 @@ margin_top = 4.0
 margin_right = -5.0
 margin_bottom = -8.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
@@ -615,6 +728,24 @@ visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
 _sections_unfolded = [ "Anchor", "BBCode", "Caret", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_icons", "custom_styles" ]
+
+[node name="Tutorial Highlight" type="ColorRect" parent="VBoxMain/HBoxTop/DataColumn/ScrollInfo/InfoText"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -4.0
+margin_right = -5.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 0.84375, 0, 0 )
+_sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Mouse", "Size Flags" ]
 
 [node name="Errors" type="Panel" parent="VBoxMain/HBoxTop/DataColumn"]
 
@@ -646,6 +777,7 @@ margin_top = 4.0
 margin_right = -5.0
 margin_bottom = -8.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
@@ -771,6 +903,20 @@ caret_blink_speed = 0.65
 script = ExtResource( 10 )
 _sections_unfolded = [ "Anchor", "Caret", "Focus", "Grow Direction", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Visibility", "custom_colors", "custom_constants", "custom_fonts" ]
 
+[node name="Tutorial Highlight" type="ColorRect" parent="VBoxMain/HBoxBottom/SQLEdit"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 0.84375, 0, 0 )
+_sections_unfolded = [ "Mouse" ]
+
 [node name="ExecuteButton" type="Button" parent="VBoxMain/HBoxBottom"]
 
 anchor_left = 0.0
@@ -808,6 +954,20 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "RevealComments"
+_sections_unfolded = [ "Playback Options", "playback" ]
+
+[node name="TutorialAnimations" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/ObjectivesFlash = SubResource( 17 )
+anims/ObjectivesUpdated = SubResource( 18 )
+anims/QuickStartAndObjectives = SubResource( 19 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
 _sections_unfolded = [ "Playback Options", "playback" ]
 
 [connection signal="resized" from="." to="." method="_on_UI_resized"]

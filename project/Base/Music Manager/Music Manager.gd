@@ -27,7 +27,6 @@ func _delay_execute(sound, delta, delay):
 func _delay(sound, delta, delay):
     var time_accum = 0
     while time_accum < delay:
-        print(time_accum)
         time_accum += delta
         yield()
     sound.volume_db = -80
@@ -37,12 +36,17 @@ var main_music = null
 var level1_music = null
 var current_music = null
 
+var _connect = true
 func _change_music(music):
     if current_music != null:
         current_music.stop()
     
     current_music = music
-    current_music.connect('finished', self, '_loop')
+    
+    if _connect:
+        current_music.connect('finished', self, '_loop')
+        _connect = false
+    
     current_music.play()
 
 func _loop():
@@ -69,14 +73,13 @@ func _process(delta):
 func _new_scene(old_scene_path, new_scene_path):
     if new_scene_path == "res://Level1/Level1.tscn":
         _change_music(level1_music)
-    elif new_scene_path == "res://Main Menu/Main Menu.tscn" and old_scene_path != "res://Base/Splash Screen.tscn":
+    elif new_scene_path == "res://Main Menu/Main Menu.tscn" and old_scene_path != "res://Base/Splash Screen.tscn" and old_scene_path != "res://Credits/Credits.tscn" and old_scene_path != "res://Config/Config Screen.tscn":
         _change_music(main_music)
 
 func _fadeIn(sound, delta, start_db = -80, dest_db = 0):
     sound.volume_db = start_db
     while sound.volume_db < dest_db:
-        sound.volume_db += 100 * delta
-        print(sound.volume_db)
+        sound.volume_db += 1000 * delta
         if sound.volume_db > 0:
             sound.volume_db = 0
         

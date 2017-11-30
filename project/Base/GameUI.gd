@@ -140,10 +140,6 @@ func _on_SQLEdit_gui_input( ev ):
     if level_node._is_state("Failure"):
         return
     _update_execute_button()
-    #if ev is InputEventKey and ev.get_scancode() == KEY_ENTER:
-    #    if !ev.get_control():
-    #        print ("Execute pressed")
-    #        _on_ExecuteButton_pressed()
 
 func _on_Out_meta_clicked( meta ):
     if meta == 'view_scene':
@@ -159,10 +155,16 @@ func _on_Tree_button_pressed( item, column, id ):
     sql_editor.grab_focus()
 
 
+export(NodePath) var main_menu_scene = "res://Main Menu/Main Menu.tscn"
+export(NodePath) var loading_scene = "res://Base/Loading Screen.tscn"
+
 func _on_TabContainer_tab_changed( tab ):
     if tab == 0:
         if !level_node.intro_started:
             level_node._run_intro()
+    elif tab == 2:  
+        if main_menu_scene:
+            get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
 
 func _on_UI_resized():
     var viewport = get_parent().get_node("SceneVp")

@@ -19,6 +19,8 @@ onready var state_history = Array()
 onready var characters = {}
 onready var dialog = []
 
+var _tutorial_enabled = true
+
 func _ready():
     set_process(true)
     set_process_input(true)
@@ -56,12 +58,19 @@ func _input(ev):
         UI.sql_editor.text = ""
 
 func _run_intro():
+    if _tutorial_enabled:
+        UI.get_node('TutorialAnimations').seek(0, true)
+        UI.get_node('TutorialAnimations').stop(true)
+    
     intro_started = true
     _start_objective_intro()
     yield(self, "end_objective_intro")
     _start_dialog(characters, dialog)
     yield(self, "end_dialog")
     _start_level()
+    
+    if _tutorial_enabled:
+        UI.get_node('TutorialAnimations').play('QuickStartAndObjectives')
 
 func _start_objective_intro():
     emit_signal("end_objective_intro")
@@ -125,8 +134,15 @@ func _get_state():
 func _is_state(state):
     return state_history.size() and state == state_history.back()
 
+var first_message = true
 func _set_message(message):
     emit_signal("message_updated", message)
+    
+    if _tutorial_enabled and not first_message:
+        UI.get_node('TutorialAnimations').play('ObjectivesUpdated')
+    
+    if first_message:
+        first_message = false
 
 func _flash_popup(message):
     UI.popup.get_node("Label").set_text(message)
@@ -178,6 +194,9 @@ func _preview_scene():
     # Without a delay the tab is not getting selected???
     yield(get_tree().create_timer(0.01), "timeout")
     UI.tab_container.set_current_tab(1)
+    
+    if _tutorial_enabled:
+        UI.get_node('TutorialAnimations').play('ObjectivesFlash')
 
 func _start_dialog(characters, dialog_array):
     var last_character = ''

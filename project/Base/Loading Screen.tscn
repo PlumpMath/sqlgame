@@ -1,156 +1,80 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Base/Loading Screen.gd" type="Script" id=1]
+[ext_resource path="res://Base/Fonts/Monoid-Retina.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="DynamicFont" id=1]
 
-render_priority = 0
-trail_divisor = 1
-emission_shape = 2
-emission_box_extents = Vector3( 1, 1, 1 )
-flag_align_y = false
-flag_rotate_y = false
-flag_disable_z = true
-spread = 180.0
-flatness = 0.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 0.0
-angular_velocity = 100.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
-radial_accel = 0.0
-radial_accel_random = 0.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
-damping = 0.0
-damping_random = 0.0
-angle = 60.0
-angle_random = 1.0
-scale = 5.0
-scale_random = 0.0
-color = Color( 0.0128174, 0.410156, 0, 1 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Angle", "Angular Velocity", "Color", "Emission Shape", "Flags", "Initial Velocity", "Radial Accel", "Spread", "Tangential Accel", "Trail" ]
+size = 16
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[sub_resource type="BitmapFont" id=2]
+[sub_resource type="DynamicFont" id=2]
 
-textures = [  ]
-chars = PoolIntArray(  )
-kernings = PoolIntArray(  )
-height = 1.0
-ascent = 0.0
-distance_field = false
+size = 16
+use_mipmaps = false
+use_filter = true
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [sub_resource type="Animation" id=3]
 
-resource_name = "Loading Complete Text Anim"
-length = 1.5
-loop = true
+resource_name = "AnimationLoading"
+length = 3.0
+loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Loading Complete Text:modulate")
+tracks/0/path = NodePath("Control/Loading Complete/Control/Underline:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
+"update": 0,
+"values": [ Vector2( 0, 2 ), Vector2( 0, 2 ), Vector2( 480, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
 
-length = 9.0
+resource_name = "AnimationFade"
+length = 12.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Particles2D:position")
+tracks/0/path = NodePath("Loading:custom_colors/font_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3, 4.5, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 4.89328, 309.005 ), Vector2( 511.949, 594.454 ), Vector2( 1017.78, 320.054 ), Vector2( 511.949, 10.0506 ), Vector2( 6.12109, 309.005 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Loading Text:bbcode_text")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ "WAR IS PEACE", "FREEDOM IS SLAVERY" ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Loading Text:custom_colors/default_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/keys = {
 "times": PoolRealArray( 0, 3, 6, 9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-
-length = 8.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Loading Text:bbcode_text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ "WAR IS PEACE", "FREEDOM IS SLAVERY" ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Loading Text:custom_colors/default_color")
+tracks/1/path = NodePath("Loading:text")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2, 4, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ), Color( 0.242188, 1, 0, 0 ), Color( 0.242188, 1, 0, 1 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-
-length = 8.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Particles2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 4, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 300 ), Vector2( 512, 600 ), Vector2( 1024, 300 ), Vector2( 512, 0 ) ]
+"times": PoolRealArray( 0, 3, 9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "WAR IS PEACE", "FREEDOM IS SLAVERY", "WAR IS PEACE" ]
 }
 
 [node name="Loading Screen" type="Control"]
@@ -182,110 +106,134 @@ rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.207843, 0.211765, 0.207843, 1 )
+color = Color( 1, 1, 1, 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Loading" type="Label" parent="."]
 
-position = Vector2( 4.89328, 309.005 )
-emitting = true
-amount = 32
-lifetime = 1.0
-one_shot = false
-preprocess = 1.0
-speed_scale = 1.0
-explosiveness = 0.0
-randomness = 1.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = false
-draw_order = 0
-process_material = SubResource( 1 )
-texture = null
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WAR IS PEACE"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Loading Text" type="RichTextLabel" parent="."]
+[node name="Control" type="Control" parent="."]
+
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -120.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Focus", "Rect", "Visibility" ]
+
+[node name="Loading Complete" type="Label" parent="Control"]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -50.0
-margin_top = -27.0
-margin_right = 99.0
-margin_bottom = 44.0
+margin_left = -242.0
+margin_top = -10.5
+margin_right = 242.0
+margin_bottom = 10.5
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
+rect_clip_content = false
+mouse_filter = 2
 size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/mono_font = SubResource( 2 )
-custom_colors/default_color = Color( 0.242188, 1, 0, 1 )
-bbcode_enabled = false
-bbcode_text = "WAR IS PEACE"
-visible_characters = -1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "LOADING COMPLETE - PRESS ANY KEY TO CONTINUE"
+align = 2
+valign = 2
 percent_visible = 1.0
-override_selected_font_color = false
-_sections_unfolded = [ "Anchor", "BBCode", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Grow Direction", "Rect", "Visibility", "custom_colors", "custom_fonts" ]
 
-[node name="Loading Complete Text" type="RichTextLabel" parent="."]
+[node name="Control" type="Control" parent="Control/Loading Complete"]
 
-visible = false
-anchor_left = 0.5
+anchor_left = 0.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.0
 anchor_bottom = 0.5
-margin_left = -168.0
-margin_top = 11.0
-margin_right = 167.0
-margin_bottom = 82.0
+margin_top = -20.0
+margin_right = 40.0
+margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/mono_font = SubResource( 2 )
-custom_colors/default_color = Color( 0.242188, 1, 0, 0.656781 )
-bbcode_enabled = false
-bbcode_text = "LOADING COMPLETE - PRESS ANY KEY TO CONTINUE"
-visible_characters = -1
-percent_visible = 1.0
-override_selected_font_color = false
-_sections_unfolded = [ "Anchor", "BBCode", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Loading Complete Text Anim" type="AnimationPlayer" parent="."]
+[node name="Underline" type="ColorRect" parent="Control/Loading Complete/Control"]
 
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
-"anims/Loading Complete Text Anim" = SubResource( 3 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "Loading Complete Text Anim"
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_top = -2.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
-[node name="TextAnim" type="AnimationPlayer" parent="."]
+[node name="Control" type="Control" parent="Control"]
 
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
-anims/Rotation = SubResource( 4 )
-"anims/Rotation (copy)" = SubResource( 5 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "Rotation"
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
 
-[node name="Particles" type="AnimationPlayer" parent="."]
+[node name="AnimationLoading" type="AnimationPlayer" parent="."]
 
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/Particles = SubResource( 6 )
+anims/AnimationLoading = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
-autoplay = "Particles"
+autoplay = ""
+_sections_unfolded = [ "playback" ]
+
+[node name="AnimationFade" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/AnimationFade = SubResource( 4 )
+playback/active = true
+playback/speed = 1.3
+blend_times = [  ]
+autoplay = "AnimationFade"
+_sections_unfolded = [ "Playback Options", "playback" ]
 
 
