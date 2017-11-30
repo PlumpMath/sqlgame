@@ -8,10 +8,8 @@ func _ready():
 func _on_Volume_Slider_value_changed( value ):
     get_node("/root/Config").set_volume(value)
 
-
 func _on_CheckButton_toggled( pressed ):
     get_node("/root/Config").set_mute(pressed)
-
 
 func _on_Fullscreen_toggled( pressed ):
     get_node("/root/Config").set_fullscreen(pressed)
@@ -24,3 +22,7 @@ func _on_Submit_button_up():
 func _on_Button_button_up():
     if main_menu_scene:
         get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
+
+
+func _on_Open_pressed():
+    get_node("/root/Config").os_open_data_dir()

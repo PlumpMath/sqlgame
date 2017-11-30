@@ -87,3 +87,6 @@ func get_volume():
     var vol = ((vol_db / 40.0) + 1) * 100.0
     
     return vol
+
+func os_open_data_dir():
+    OS.shell_open(str("file://", OS.get_data_dir()))

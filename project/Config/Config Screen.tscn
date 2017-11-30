@@ -126,7 +126,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 110.0
+margin_right = 136.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -147,8 +147,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 114.0
-margin_right = 334.0
+margin_left = 140.0
+margin_right = 364.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -175,7 +175,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 34.0
-margin_right = 110.0
+margin_right = 136.0
 margin_bottom = 55.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -196,9 +196,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 114.0
+margin_left = 140.0
 margin_top = 25.0
-margin_right = 334.0
+margin_right = 364.0
 margin_bottom = 65.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -220,7 +220,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 78.0
-margin_right = 110.0
+margin_right = 136.0
 margin_bottom = 99.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -241,9 +241,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 114.0
+margin_left = 140.0
 margin_top = 69.0
-margin_right = 334.0
+margin_right = 364.0
 margin_bottom = 109.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -265,7 +265,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 113.0
-margin_right = 110.0
+margin_right = 136.0
 margin_bottom = 134.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -286,9 +286,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 114.0
+margin_left = 140.0
 margin_top = 113.0
-margin_right = 334.0
+margin_right = 364.0
 margin_bottom = 134.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -303,7 +303,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 108.0
+margin_right = 110.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -332,8 +332,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 112.0
-margin_right = 220.0
+margin_left = 114.0
+margin_right = 224.0
 margin_bottom = 21.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -363,13 +363,14 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 138.0
-margin_right = 110.0
-margin_bottom = 157.0
+margin_right = 136.0
+margin_bottom = 160.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Size Flags", "Visibility" ]
 
 [node name="Submit" type="Button" parent="Settings/GridContainer"]
 
@@ -377,10 +378,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 114.0
+margin_left = 140.0
 margin_top = 138.0
-margin_right = 334.0
-margin_bottom = 157.0
+margin_right = 364.0
+margin_bottom = 160.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -394,6 +395,62 @@ group = null
 text = "Apply"
 flat = false
 _sections_unfolded = [ "custom_fonts" ]
+
+[node name="Filler2" type="Control" parent="Settings/GridContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 164.0
+margin_right = 136.0
+margin_bottom = 167.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Size Flags", "Visibility" ]
+
+[node name="Filler3" type="Control" parent="Settings/GridContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 140.0
+margin_top = 164.0
+margin_right = 364.0
+margin_bottom = 167.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Size Flags", "Visibility" ]
+
+[node name="Open" type="Button" parent="Settings/GridContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 171.0
+margin_right = 136.0
+margin_bottom = 193.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Open Config Dir"
+flat = false
+_sections_unfolded = [ "Theme", "custom_fonts" ]
 
 [node name="Control" type="Control" parent="."]
 
@@ -440,6 +497,8 @@ _sections_unfolded = [ "Theme", "custom_fonts" ]
 [connection signal="toggled" from="Settings/GridContainer/Fullscreen" to="." method="_on_Fullscreen_toggled"]
 
 [connection signal="button_up" from="Settings/GridContainer/Submit" to="." method="_on_Submit_button_up"]
+
+[connection signal="pressed" from="Settings/GridContainer/Open" to="." method="_on_Open_pressed"]
 
 [connection signal="button_up" from="Control/Back" to="." method="_on_Button_button_up"]
 
