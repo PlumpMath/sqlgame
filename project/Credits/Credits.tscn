@@ -101,7 +101,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 742.0
-margin_bottom = 693.0
+margin_bottom = 933.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -114,6 +114,14 @@ David Kemsley and Samuel Evans-Powell
 
 SOUND FX: 
 keyboard sounds - jim-ph (https://freesound.org/people/jim-ph/)
+
+Rat explosion sound:  IMP + Gore 1 - Jarred Gibb (https://freesound.org/people/JarredGibb/sounds/217287/)
+Licensed under Creative Commons: Public Domain Dedication
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Rat death sound: RatDeath - Psychentist (https://freesound.org/people/psychentist/sounds/168567/)
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
 
 MODELS:
 DNA Strand - superalysson	

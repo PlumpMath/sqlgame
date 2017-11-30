@@ -15,7 +15,7 @@ stream = ExtResource( 2 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
-bus = "Master"
+bus = "Music"
 
 [node name="Level1" type="AudioStreamPlayer" parent="."]
 
@@ -23,6 +23,6 @@ stream = ExtResource( 3 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
-bus = "Master"
+bus = "Music"
 
 

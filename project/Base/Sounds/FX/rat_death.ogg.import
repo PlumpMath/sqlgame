@@ -1,0 +1,10 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rat_death.ogg-7ae426048081e3d199e04d2e5f0f18a8.oggstr"
+
+[params]
+
+loop=false
+loop_offset=0

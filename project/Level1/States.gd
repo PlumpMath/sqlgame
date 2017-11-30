@@ -61,12 +61,16 @@ func _kill_rat(rat, delay = 0, message = ''):
     rat.get_node("Model/AnimationPlayer").play("Die.Bloody")
     rat.get_node("BloodFloor").rotation_degrees = Vector3(-90, randf() * 360, 0)
     rat.get_node("BloodFloor").visible = true
+    
+    yield(get_tree().create_timer(randf()*0.25), "timeout")
+    rat.get_node("DieAudio").play()
 
     if level._is_state("Failure"):
         return
 
     if rat.id == level.primary_rat_id:
         level._set_state("Failure")
+        level.get_node('FailAudio').play()
         return
     elif message:
         level._flash_popup(message)
