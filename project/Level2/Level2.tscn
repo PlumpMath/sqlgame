@@ -2004,7 +2004,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
+visibility_aabb = Rect3( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
 process_material = SubResource( 5 )
@@ -2034,7 +2034,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
+visibility_aabb = Rect3( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
 process_material = SubResource( 5 )
@@ -2980,7 +2980,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = AABB( -39.9292, -40, 0, 79.8585, 80, 80 )
+visibility_aabb = Rect3( -39.9292, -40, 0, 79.8585, 80, 80 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 44 )
@@ -3018,6 +3018,7 @@ script = ExtResource( 12 )
 [node name="Victory" parent="States"]
 
 script = ExtResource( 13 )
+next_scene = "res://Credits/Credits.tscn"
 
 [node name="Failure" parent="States"]
 
