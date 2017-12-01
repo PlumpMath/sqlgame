@@ -14,13 +14,13 @@ func _ready():
 
 func _randomize_position():
     var target_pos = original_pos + Vector3(randf() * 0.5, randf() * 2 + 2, -2)
-    pos_tween.interpolate_property(self, "translation:z", translation.z, target_pos.z, 10.0, Tween.TRANS_QUAD, Tween.EASE_IN)
-    pos_tween.interpolate_property(self, "translation:y", translation.y, target_pos.y, 10.0, Tween.TRANS_QUAD, Tween.EASE_OUT)
+    pos_tween.interpolate_property(self, "translation:z", translation.z, target_pos.z, 2.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
+    pos_tween.interpolate_property(self, "translation:y", translation.y, target_pos.y, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
     pos_tween.start()
 
 func _randomize_rotation():
-    var target_rot = original_rot + Vector3((randf() - 0.5) * 4.4, (randf() - 0.5) * 4.4, (randf() - 4.4) * 0.4)
-    rot_tween.interpolate_property(self, "rotation", rotation, target_rot, 10.0, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+    var target_rot = original_rot + Vector3((randf() - 0.5) * 2.4, (randf() - 0.5) * 2.4, (randf() - 0.5) * 2.4)
+    rot_tween.interpolate_property(self, "rotation", rotation, target_rot, 2.0, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
     rot_tween.start()
 
 func _eject():

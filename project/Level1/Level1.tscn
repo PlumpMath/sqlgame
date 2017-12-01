@@ -107,7 +107,7 @@ extents = Vector3( 15.2421, 1, 15.1031 )
 
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause", "Size Flags", "Visibility" ]
-max_rats = 10
+max_rats = 30
 
 [node name="SceneVp" parent="."]
 
