@@ -1945,6 +1945,7 @@ max_passports = 10000
 
 [node name="SceneVp" parent="."]
 
+editor/display_folded = true
 own_world = false
 msaa = 2
 shadow_atlas_size = 10
@@ -1958,6 +1959,7 @@ fov = 70.0
 [node name="DirectionalLight" parent="SceneVp/Spatial"]
 
 transform = Transform( 0.914489, -0.246496, 0.320857, 0, 0.793003, 0.609217, -0.40461, -0.557122, 0.725193, 3.8492, 2.33484, -6.30051 )
+light_indirect_energy = 1.0
 light_cull_mask = -1
 
 [node name="Airliner" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
@@ -2004,7 +2006,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = Rect3( -4, -4, -4, 8, 8, 8 )
+visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
 process_material = SubResource( 5 )
@@ -2034,7 +2036,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = Rect3( -4, -4, -4, 8, 8, 8 )
+visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
 process_material = SubResource( 5 )
@@ -2980,7 +2982,7 @@ explosiveness = 0.0
 randomness = 0.0
 fixed_fps = 0
 fract_delta = true
-visibility_aabb = Rect3( -39.9292, -40, 0, 79.8585, 80, 80 )
+visibility_aabb = AABB( -39.9292, -40, 0, 79.8585, 80, 80 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 44 )

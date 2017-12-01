@@ -82,8 +82,11 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     # Instantiate loading scene
     loading_scene = r.instance()
 
-    # Free current scene (deferred call therefore safe)
-    current_scene.free()
+    var wr = weakref(current_scene);
+    if (wr.get_ref()):
+        # Free current scene (deferred call therefore safe)
+        if current_scene != null:
+            current_scene.free()
 
     # Add loading scene to scene tree
     get_tree().get_root().add_child(loading_scene)

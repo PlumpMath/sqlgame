@@ -7,6 +7,7 @@ func _ready():
 
 func enter_state(from_state, message):
     .enter_state(from_state, message)
-    level._set_message("Well done. Now lets move on to the next phase - the human genome...")
+    level._set_message("Well done.")
     
+    yield(get_tree().create_timer(3), "timeout")
     get_node("/root/SceneSwitcher").cut_to_scene(next_scene)

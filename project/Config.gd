@@ -89,4 +89,4 @@ func get_volume():
     return vol
 
 func os_open_data_dir():
-    OS.shell_open(str("file://", OS.get_data_dir()))
+    OS.shell_open(str("file://", OS.get_user_data_dir()))
