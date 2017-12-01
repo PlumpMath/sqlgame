@@ -51,7 +51,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 
 resource_name = "AnimationFade"
-length = 12.0
+length = 18.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
@@ -60,10 +60,10 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3, 6, 9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3, 6, 9, 12, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Loading:text")
@@ -71,10 +71,10 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3, 9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 3, 9, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "WAR IS PEACE", "FREEDOM IS SLAVERY", "WAR IS PEACE" ]
+"values": [ "SQL IS PEACE", "SQL IS STRENGTH", "FREEDOM IS SQL", "SQL IS PEACE" ]
 }
 
 [node name="Loading Screen" type="Control"]
@@ -121,7 +121,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "WAR IS PEACE"
+text = "SQL IS PEACE"
 align = 1
 valign = 1
 percent_visible = 1.0
