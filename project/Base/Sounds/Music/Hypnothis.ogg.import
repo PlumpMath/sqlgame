@@ -4,10 +4,6 @@ importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
 path="res://.import/Hypnothis.ogg-618e991ffb54159195749b9b31546c6e.oggstr"
 
-[deps]
-
-source_md5="8c90ac0e9d17ed38a32b14dec3e9dc9a"
-
 [params]
 
 loop=true

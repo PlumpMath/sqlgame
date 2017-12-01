@@ -423,7 +423,6 @@ _sections_unfolded = [ "Anchor", "Focus", "Margin", "Mouse", "Rect", "Theme", "V
 
 [node name="Objectives" type="VBoxContainer" parent="VBoxMain/HBoxTop/TabContainer"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -461,7 +460,7 @@ custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[b]Level 1: Lab Rats[/b]
 
-[i]There's many ways to skin a rat[/i]"
+[i]There are many ways to skin a rat[/i]"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false
@@ -483,15 +482,38 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
+[node name="ExitDialog" type="ConfirmationDialog" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -299.0
+margin_top = -45.0
+margin_right = 299.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 200, 70 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+popup_exclusive = true
+window_title = "Exit"
+resizable = false
+dialog_text = "Would you like to quit?"
+dialog_hide_on_ok = true
+_sections_unfolded = [ "Dialog", "Popup", "Rect" ]
+
 [node name="DialogScroll" type="ScrollContainer" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 92.0
+margin_top = 186.0
 margin_right = 598.0
-margin_bottom = 336.0
+margin_bottom = 360.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
@@ -508,7 +530,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 500.0
-margin_bottom = 244.0
+margin_bottom = 174.0
 rect_min_size = Vector2( 500, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -532,9 +554,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 340.0
+margin_top = 364.0
 margin_right = 598.0
-margin_bottom = 344.0
+margin_bottom = 368.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -548,7 +570,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 348.0
+margin_top = 372.0
 margin_right = 598.0
 margin_bottom = 430.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -649,23 +671,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = 1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "Visibility" ]
-
-[node name="Exit" type="Control" parent="VBoxMain/HBoxTop/TabContainer"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 48.0
-margin_right = -4.0
-margin_bottom = -4.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
 [node name="DataColumn" type="VBoxContainer" parent="VBoxMain/HBoxTop"]
 
@@ -895,7 +900,6 @@ override_selected_font_color = false
 context_menu_enabled = true
 smooth_scrolling = false
 v_scroll_speed = 80.0
-hiding_enabled = 0
 caret_block_mode = true
 caret_blink = true
 caret_blink_speed = 0.65
@@ -972,6 +976,8 @@ _sections_unfolded = [ "Playback Options", "playback" ]
 [connection signal="resized" from="." to="." method="_on_UI_resized"]
 
 [connection signal="tab_changed" from="VBoxMain/HBoxTop/TabContainer" to="." method="_on_TabContainer_tab_changed"]
+
+[connection signal="confirmed" from="VBoxMain/HBoxTop/TabContainer/Objectives/ExitDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 
 [connection signal="meta_clicked" from="VBoxMain/HBoxTop/TabContainer/Objectives/Out" to="." method="_on_Out_meta_clicked"]
 

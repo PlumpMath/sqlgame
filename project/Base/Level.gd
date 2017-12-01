@@ -53,6 +53,9 @@ func _input(ev):
         if ev.get_scancode() == KEY_DOWN:
             UI.sql_editor._history_step_forward()
 
+        if level_started:
+            if ev.get_scancode() == KEY_ESCAPE:
+                get_node("UI").get_node("VBoxMain/HBoxTop/TabContainer/Objectives/ExitDialog").popup()
 
     elif ev is InputEventKey and ev.get_scancode() == KEY_ENTER and !ev.get_shift():
         UI.sql_editor.text = ""
@@ -245,10 +248,11 @@ func _start_level():
     UI.objectives.get_node('Out').visible = true
     if !level_started:
         anim.play("EndCutscene")
-        level_started = true
     yield(anim, "animation_finished")
     UI.sql_editor.grab_focus()
     _set_state("Start")
+    if !level_started:
+        level_started = true
 
 func _show_objectives():
     if !objectives_shown:

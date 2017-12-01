@@ -163,9 +163,6 @@ func _on_TabContainer_tab_changed( tab ):
     if tab == 0:
         if !level_node.intro_started:
             level_node._run_intro()
-    elif tab == 2:
-        if main_menu_scene:
-            get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
 
 func _on_UI_resized():
     var viewport = get_parent().get_node("SceneVp")
@@ -178,3 +175,7 @@ func _on_UI_resized():
         crt.rect_size.y = viewport.size.y
         crt.material.set_shader_param("screen_width", viewport.size.x)
         crt.material.set_shader_param("screen_height", viewport.size.y)
+
+func _on_ConfirmationDialog_confirmed():
+    if main_menu_scene:
+        get_node("/root/SceneSwitcher").cut_to_scene(main_menu_scene)
