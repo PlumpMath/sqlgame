@@ -23,8 +23,6 @@ signal scene_switched(current_scene_path, destination_scene_path)
 var current_scene = null
 var loading_scene = null
 var destination_scene = null
-var last_check = 0 # milliseconds
-var time_max = 100 # milliseconds
 
 var _thread = null
 var _mutex = null
@@ -34,6 +32,8 @@ var loader_non_blocking = null
 var _stop_polling = false
 
 var _should_transition = false
+
+var started_processing
 
 func _ready():
     _mutex = Mutex.new()
@@ -78,6 +78,8 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     if loader_non_blocking == null:
         show_error()
         return
+
+    _stop_polling = false
     set_process(true)
 
     # Load loading scene
@@ -153,9 +155,6 @@ func _thread_func(u):
 func _process(delta):
 
     if _stop_polling == false:
-        # Load a little of the resource
-        last_check = OS.get_ticks_msec()
-
         var err = loader_non_blocking.poll()
 
         if err == ERR_FILE_EOF: # Loading finished
