@@ -9,22 +9,21 @@ func _seed():
 
     sql_tools.execute_raw("CREATE TABLE `PlaneParts` (" +
         "`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-        "`part_name` TEXT NOT NULL," +
-        "`strength` NUMERIC NOT NULL);")
+        "`part_name` TEXT NOT NULL);")
 
     sql_tools.execute_raw("INSERT INTO `PlaneParts` VALUES "
-        + "    (1, 'Left Engine', 1),"
-        + "    (2, 'Right Engine', 1),"
-        + "    (3, 'Left Wing', 1),"
-        + "    (4, 'Right Wing', 1),"
-        + "    (5, 'Left Flaps', 1),"
-        + "    (6, 'Right Flaps', 1),"
-        + "    (7, 'Vertical Stabilizer', 1),"
-        + "    (8, 'Horizontal Stabilizer', 1),"
-        + "    (9, 'Cockpit', 1)")
+        + "    (1, 'Left Engine'),"
+        + "    (2, 'Right Engine'),"
+        + "    (3, 'Left Wing'),"
+        + "    (4, 'Right Wing'),"
+        + "    (5, 'Left Flaps'),"
+        + "    (6, 'Right Flaps'),"
+        + "    (7, 'Rudder'),"
+        + "    (8, 'Elevators'),"
+        + "    (9, 'Cockpit')")
 
     for i in range(level.max_seats):
-        sql_tools.execute_raw("INSERT INTO `PlaneParts` VALUES (" + str(i + 10) + ", 'Seat" + str(i + 1) + "', 1)")
+        sql_tools.execute_raw("INSERT INTO `PlaneParts` VALUES (" + str(i + 10) + ", 'Seat" + str(i + 1) + "')")
 
     sql_tools.execute_raw("CREATE TABLE `Passports` (" +
         "`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
