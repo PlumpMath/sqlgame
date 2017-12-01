@@ -8,6 +8,6 @@ func _ready():
 func enter_state(from_state, message):
     .enter_state(from_state, message)
     level._set_message("Well done.")
-    
-    yield(get_tree().create_timer(3), "timeout")
+
+    yield(get_tree().create_timer(7), "timeout")
     get_node("/root/SceneSwitcher").cut_to_scene(next_scene)

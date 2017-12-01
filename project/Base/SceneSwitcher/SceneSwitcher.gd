@@ -62,7 +62,7 @@ func _deferred_cut_to_scene(dest_scene_path):
     destination_scene = r.instance()
 
     # Free current scene (deferred call therefore safe)
-    current_scene.free()
+    current_scene.queue_free()
 
     # Add destination scene to scene tree
     get_tree().get_root().add_child(destination_scene)
@@ -85,7 +85,7 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     # Instantiate loading scene
     loading_scene = r.instance()
 
-    current_scene.free()
+    current_scene.queue_free()
 
     # Add loading scene to scene tree
     get_tree().get_root().add_child(loading_scene)
@@ -198,4 +198,4 @@ func _on_loading_progress():
 
 func _free_loading_scene():
     if loading_scene != null:
-        loading_scene.free()
+        loading_scene.queue_free()

@@ -1,12 +1,14 @@
 extends "res://Base/Level.gd"
 
 export var max_rats = 30
-onready var primary_rat_id = (randi() % max_rats) + 1
+var primary_rat_id
 
 onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 
 func _ready():
     # Set tables
+    randomize()
+    primary_rat_id = (randi() % max_rats) + 1
     _add_table("LabRats")
     UI.objectives.get_node("Intro").set_bbcode("[b]Level 1: Lab Rats[/b]\n\n[i]There are many ways to skin a rat[/i]")
     _preview_scene()

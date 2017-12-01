@@ -10,11 +10,12 @@ onready var airliner = get_node('SceneVp/Spatial/Airliner')
 
 func _ready():
     # Set tables
+    randomize()
     _add_table("PlaneParts")
     _add_table("Tickets")
     _add_table("Passports")
     UI.objectives.get_node("Intro").set_bbcode("[b]Level 2: Loose Ends[/b]\n\n[i]The science of fireworks[/i]")
-    UI.objectives.get_node("Out").set_bbcode("No hand holding this time Agent, you're on your own. Go make those passengers fly!")
+    UI.objectives.get_node("Out").set_bbcode("No hand holding this time Agent, you're on your own")
 
     for i in range(max_scientists):
         var id
