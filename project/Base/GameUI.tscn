@@ -484,6 +484,7 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="ExitDialog" type="ConfirmationDialog" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -511,9 +512,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 186.0
+margin_top = 92.0
 margin_right = 598.0
-margin_bottom = 360.0
+margin_bottom = 422.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 1
@@ -530,7 +531,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 500.0
-margin_bottom = 174.0
+margin_bottom = 330.0
 rect_min_size = Vector2( 500, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -554,9 +555,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 364.0
+margin_top = 426.0
 margin_right = 598.0
-margin_bottom = 368.0
+margin_bottom = 430.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -566,11 +567,12 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Out" type="RichTextLabel" parent="VBoxMain/HBoxTop/TabContainer/Objectives"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 372.0
+margin_top = 348.0
 margin_right = 598.0
 margin_bottom = 430.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -900,6 +902,7 @@ override_selected_font_color = false
 context_menu_enabled = true
 smooth_scrolling = false
 v_scroll_speed = 80.0
+hiding_enabled = 0
 caret_block_mode = true
 caret_blink = true
 caret_blink_speed = 0.65
