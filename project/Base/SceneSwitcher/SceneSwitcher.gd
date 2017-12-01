@@ -35,21 +35,24 @@ var _stop_polling = false
 var _should_transition = false
 
 func _ready():
-    var root = get_tree().get_root()
-    current_scene = root.get_child(root.get_child_count() - 1)
     _mutex = Mutex.new()
     set_process(false)
 
 func cut_to_scene(dest_scene_path):
+    var root = get_tree().get_root()
+    current_scene = root.get_child(root.get_child_count() - 1)
     call_deferred("_deferred_cut_to_scene", dest_scene_path)
 
 func transition_to_scene(dest_scene_path, loading_scene_path):
+    var root = get_tree().get_root()
+    current_scene = root.get_child(root.get_child_count() - 1)
     call_deferred("_deferred_transition_to_scene", dest_scene_path, loading_scene_path)
 
 func _deferred_cut_to_scene(dest_scene_path):
     var current_scene_path = null
-    if current_scene:
-        current_scene_path = current_scene.get_filename()
+
+    current_scene_path = current_scene.get_filename()
+
     var destination_scene_path = dest_scene_path
 
     # Load destination scene
@@ -82,11 +85,7 @@ func _deferred_transition_to_scene(scene_path, loading_scene_path):
     # Instantiate loading scene
     loading_scene = r.instance()
 
-    var wr = weakref(current_scene);
-    if (wr.get_ref()):
-        # Free current scene (deferred call therefore safe)
-        if current_scene != null:
-            current_scene.free()
+    current_scene.free()
 
     # Add loading scene to scene tree
     get_tree().get_root().add_child(loading_scene)
@@ -117,7 +116,7 @@ func _callback_all_done():
         destination_scene.scene_switcher_show()
 
     # Update current scene to be accurate
-    current_scene = destination_scene
+    # current_scene = destination_scene
 
     emit_signal("scene_switched", loading_scene_path, destination_scene_path)
 

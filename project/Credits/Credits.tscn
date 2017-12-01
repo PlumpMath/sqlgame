@@ -101,7 +101,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 742.0
-margin_bottom = 1173.0
+margin_bottom = 1572.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -111,6 +111,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "DEVELOPERS:
 David Kemsley and Samuel Evans-Powell
+http://livebranchstudios.com.au/
 
 SOUND FX: 
 keyboard sounds - jim-ph (https://freesound.org/people/jim-ph/)
@@ -140,6 +141,18 @@ Wireframed Globe / Earth - leon_cheung
 Licensed under Creative Commons: Public Domain Dedication
 https://creativecommons.org/publicdomain/zero/1.0/
 
+Rat - CDmir cdmir.weebly.com
+Licensed under Creative Commons: Public Domain Dedication
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Airliner - Nick Royer, http://hjmediastudios.com
+Licensed under Creative Commons: By Attribution 3.0 License
+http://creativecommons.org/licenses/by/3.0/
+
+Wooden Mannequin - Sebastian Lague
+Licensed under Creative Commons: Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+
 MUSIC:
 Hypnothis - Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 3.0 License
@@ -153,7 +166,8 @@ MISC:
 CRT SHADER - Henrique Lacreta Alves
 Licensed under MIT Licence:
 https://raw.githubusercontent.com/
-henriquelalves/SimpleGodotCRTShader/master/LICENSE"
+henriquelalves/SimpleGodotCRTShader/master/LICENSE
+"
 align = 1
 autowrap = true
 percent_visible = 1.0

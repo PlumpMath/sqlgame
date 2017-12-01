@@ -4,7 +4,7 @@ func _ready():
     pass
 
 func enter_state(from_state = null, message = null):
-    level._set_message("[color=#445544][b]Primary Objective[/b]: Create a group of viruses to deploy the SQL Genome[/color]\n\nTo begin with, select all rats:\n\n[color=#1C9B1C]SELECT[/color] * FROM LabRats\n\nEach query will display results as data below.")
+    level._set_message("[color=#999999][b]Primary Objective[/b]: Remove the 10 scientists from the plane.[/color]\n\n88 seats and 10 scientists - how will you ever find that GROUP, HAVING so little to go off?")
 
 func finish_statement(sql, table, clause, row_count, max_rows):
     if clause == "select":

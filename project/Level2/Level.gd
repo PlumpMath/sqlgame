@@ -2,7 +2,7 @@ extends "res://Base/Level.gd"
 
 export var max_seats = 88
 export var max_scientists = 10
-export var max_passports = 100001
+export var max_passports = 10001
 var primary_passport_ids = []
 var primary_plane_part_names = []
 
@@ -37,7 +37,7 @@ func _start_objective_intro():
         ['Director', 'Not yet. We need to deploy a virus to install the DNA wrapper', 1],
         ['Director', 'But before we do that, we need to clean up', 1],
         ['Agent154', 'Well, true, I have rat blood on my hands', 1],
-        ['Director', 'No, clean up some loose ends. To many people know about this project', 1],
+        ['Director', 'No, clean up some loose ends. Too many people know about this project', 1],
         ['Director', 'There are 10 scientists who created the SQL genome wrapper', 1],
         ['Director', 'They escaped on a plane before I could erase them', 1],
         ['Agent154', 'Do we know which plane they\'re on?', 1],

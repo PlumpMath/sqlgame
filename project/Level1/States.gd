@@ -50,6 +50,9 @@ func process_row(row, table, headings, clause):
         var rat_node = spawn.get_child(rat_id_indices[id])
         for i in range(1, row.size()):
             if rat_node.alive:
+                print ("setting")
+                print (headings[i])
+                print (row[i])
                 rat_node._set_parameter(headings[i], row[i])
 
 func _kill_rat(rat, delay = 0, message = ''):

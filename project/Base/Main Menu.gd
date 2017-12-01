@@ -7,14 +7,14 @@ export(NodePath) var config_scene = "res://Config/Config Screen.tscn"
 
 func _ready():
     var viewport = get_node("Viewport")
-    
+
     yield(get_tree(), "idle_frame")
     yield(get_tree(), "idle_frame")
-    
+
     var window_size = get_viewport().get_visible_rect().size
     viewport.size.x = window_size.x
     viewport.size.y = window_size.y
-    
+
     get_node("TextureRect").texture = viewport.get_texture()
 
 func _exit_game():
