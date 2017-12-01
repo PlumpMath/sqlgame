@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Base/Models/Mannequin.dae" type="PackedScene" id=1]
 [ext_resource path="res://Base/SQLEntities/Passenger.gd" type="Script" id=2]
 [ext_resource path="res://Base/Models/Wood.material" type="Material" id=3]
 [ext_resource path="res://Base/Images/blood.png" type="Texture" id=4]
+[ext_resource path="res://Base/Sounds/FX/eject.ogg" type="AudioStream" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 
@@ -226,5 +227,13 @@ process_material = SubResource( 6 )
 draw_passes = 1
 draw_pass_1 = SubResource( 8 )
 _sections_unfolded = [ "Draw Passes", "Drawing", "Geometry", "Process Material", "Time", "Transform", "Visibility" ]
+
+[node name="EjectAudio" type="AudioStreamPlayer" parent="."]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 

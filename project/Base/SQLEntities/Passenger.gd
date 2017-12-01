@@ -38,6 +38,7 @@ func _eject():
     get_node("Cube").visible = false
     get_node("Cube.001").visible = false
     get_node("Stickman").visible = false
+    get_node("EjectAudio").play()
 
     var distance_to_end = translation.distance_to(Vector3(0, translation.y, -3))
     yield(get_tree().create_timer(sqrt(distance_to_end) / 2), "timeout")

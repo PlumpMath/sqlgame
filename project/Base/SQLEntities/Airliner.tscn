@@ -13,7 +13,7 @@
 [ext_resource path="res://Base/Models/GreenLight.material" type="Material" id=11]
 [ext_resource path="res://Base/Models/Tire.material" type="Material" id=12]
 
-[sub_resource type="ArrayMesh" id=13]
+[sub_resource type="ArrayMesh" id=1]
 
 resource_name = "Plane.001"
 surfaces/0 = {
@@ -31,17 +31,17 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="Gradient" id=40]
+[sub_resource type="Gradient" id=2]
 
 offsets = PoolRealArray( 0, 0.420664, 0.675277, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=41]
+[sub_resource type="GradientTexture" id=3]
 
-gradient = SubResource( 40 )
+gradient = SubResource( 2 )
 width = 2048
 
-[sub_resource type="ParticlesMaterial" id=44]
+[sub_resource type="ParticlesMaterial" id=4]
 
 render_priority = 0
 trail_divisor = 1
@@ -70,7 +70,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 1.0
 scale_random = 0.0
-color_ramp = SubResource( 41 )
+color_ramp = SubResource( 3 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -80,7 +80,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Gravity", "Initial Velocity", "Scale", "Spread" ]
 
-[sub_resource type="SpatialMaterial" id=45]
+[sub_resource type="SpatialMaterial" id=5]
 
 render_priority = 0
 flags_transparent = true
@@ -135,12 +135,12 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Flags", "Parameters", "Vertex Color" ]
 
-[sub_resource type="QuadMesh" id=46]
+[sub_resource type="QuadMesh" id=6]
 
-material = SubResource( 45 )
+material = SubResource( 5 )
 size = Vector2( 2, 2 )
 
-[sub_resource type="ArrayMesh" id=21]
+[sub_resource type="ArrayMesh" id=7]
 
 resource_name = "Plane.004"
 surfaces/0 = {
@@ -158,7 +158,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=8]
 
 render_priority = 0
 flags_transparent = false
@@ -209,7 +209,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Parameters", "Roughness" ]
 
-[sub_resource type="ArrayMesh" id=12]
+[sub_resource type="ArrayMesh" id=9]
 
 resource_name = "Plane"
 surfaces/0 = {
@@ -305,7 +305,7 @@ surfaces/6 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=23]
+[sub_resource type="ArrayMesh" id=10]
 
 resource_name = "Rudder"
 surfaces/0 = {
@@ -323,7 +323,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=24]
+[sub_resource type="ArrayMesh" id=11]
 
 surfaces/0 = {
 "aabb": AABB( -1.56031, -0.206391, -0.683418, 3.11347, 0.402616, 1.24612 ),
@@ -353,7 +353,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=25]
+[sub_resource type="ArrayMesh" id=12]
 
 surfaces/0 = {
 "aabb": AABB( -0.393088, -0.142164, -0.47559, 0.841831, 0.253114, 0.555818 ),
@@ -383,7 +383,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=26]
+[sub_resource type="ArrayMesh" id=13]
 
 surfaces/0 = {
 "aabb": AABB( -1.55316, -0.205019, -0.683418, 3.11347, 0.401244, 1.24613 ),
@@ -413,7 +413,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=27]
+[sub_resource type="ArrayMesh" id=14]
 
 surfaces/0 = {
 "aabb": AABB( -0.448743, -0.142164, -0.47559, 0.841831, 0.253114, 0.555818 ),
@@ -443,7 +443,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=28]
+[sub_resource type="ArrayMesh" id=15]
 
 surfaces/0 = {
 "aabb": AABB( -0.851872, -0.19298, -0.470914, 1.70112, 0.342315, 0.841541 ),
@@ -460,7 +460,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=29]
+[sub_resource type="ArrayMesh" id=16]
 
 surfaces/0 = {
 "aabb": AABB( -0.84618, -0.185443, -0.462585, 1.69402, 0.332233, 0.826351 ),
@@ -477,7 +477,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=30]
+[sub_resource type="ArrayMesh" id=17]
 
 surfaces/0 = {
 "aabb": AABB( -5.11845, 0.0709491, -1.33079, 0.0257359, 0.0257257, 0.050342 ),
@@ -494,7 +494,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=31]
+[sub_resource type="ArrayMesh" id=18]
 
 surfaces/0 = {
 "aabb": AABB( 5.09273, 0.0709491, -1.33079, 0.0257258, 0.0257257, 0.050342 ),
@@ -511,7 +511,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=32]
+[sub_resource type="ArrayMesh" id=19]
 
 surfaces/0 = {
 "aabb": AABB( -0.0699732, -0.296841, -0.0264606, 0.139956, 0.323504, 0.0529212 ),
@@ -528,7 +528,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=33]
+[sub_resource type="ArrayMesh" id=20]
 
 surfaces/0 = {
 "aabb": AABB( 0.0729731, -0.396527, -0.187159, 0.107241, 0.449652, 0.386214 ),
@@ -558,7 +558,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=34]
+[sub_resource type="ArrayMesh" id=21]
 
 surfaces/0 = {
 "aabb": AABB( -0.180214, -0.396527, -0.187159, 0.107241, 0.449652, 0.386214 ),
@@ -588,7 +588,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=35]
+[sub_resource type="ArrayMesh" id=22]
 
 surfaces/0 = {
 "aabb": AABB( -0.0950546, -0.0192901, -0.25201, 0.102271, 0.0279342, 0.50402 ),
@@ -605,7 +605,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=36]
+[sub_resource type="ArrayMesh" id=23]
 
 surfaces/0 = {
 "aabb": AABB( -0.00721598, -0.0192902, -0.25201, 0.102281, 0.0279344, 0.50402 ),
@@ -622,7 +622,7 @@ surfaces/0 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=37]
+[sub_resource type="ArrayMesh" id=24]
 
 surfaces/0 = {
 "aabb": AABB( -0.1327, -0.0948145, -0.094815, 0.265401, 0.18963, 0.18963 ),
@@ -652,7 +652,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=38]
+[sub_resource type="ArrayMesh" id=25]
 
 surfaces/0 = {
 "aabb": AABB( -0.1327, -0.0948145, -0.094815, 0.265401, 0.18963, 0.18963 ),
@@ -682,7 +682,7 @@ surfaces/1 = {
 }
 custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[sub_resource type="ArrayMesh" id=39]
+[sub_resource type="ArrayMesh" id=26]
 
 surfaces/0 = {
 "aabb": AABB( -0.0744189, -0.0531727, -0.0531726, 0.148838, 0.106345, 0.106345 ),
@@ -752,7 +752,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 13 )
+mesh = SubResource( 1 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -782,9 +782,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time" ]
 
 [node name="Right Engine" type="RigidBody" parent="Parts"]
@@ -822,7 +822,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 21 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -852,9 +852,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Body" type="RigidBody" parent="Parts"]
@@ -884,7 +884,7 @@ angular_damp = -1.0
 [node name="Plane" type="MeshInstance" parent="Parts/Body"]
 
 layers = 1
-material_override = SubResource( 22 )
+material_override = SubResource( 8 )
 cast_shadow = 1
 extra_cull_margin = 0.0
 use_in_baked_light = true
@@ -892,7 +892,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 12 )
+mesh = SubResource( 9 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -928,9 +928,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Rudder" type="RigidBody" parent="Parts"]
@@ -969,7 +969,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 23 )
+mesh = SubResource( 10 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -999,9 +999,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Left Flaps" type="RigidBody" parent="Parts"]
@@ -1040,7 +1040,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 24 )
+mesh = SubResource( 11 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1057,7 +1057,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 25 )
+mesh = SubResource( 12 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1087,9 +1087,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Right Flaps" type="RigidBody" parent="Parts"]
@@ -1128,7 +1128,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 26 )
+mesh = SubResource( 13 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1145,7 +1145,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 27 )
+mesh = SubResource( 14 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1175,9 +1175,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Elevators" type="RigidBody" parent="Parts"]
@@ -1216,7 +1216,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 28 )
+mesh = SubResource( 15 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -1233,7 +1233,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 29 )
+mesh = SubResource( 16 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
@@ -1263,9 +1263,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 [node name="Lights" type="RigidBody" parent="Parts"]
@@ -1304,7 +1304,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 30 )
+mesh = SubResource( 17 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1320,7 +1320,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 31 )
+mesh = SubResource( 18 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1359,7 +1359,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 32 )
+mesh = SubResource( 19 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1375,7 +1375,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 33 )
+mesh = SubResource( 20 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1392,7 +1392,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 34 )
+mesh = SubResource( 21 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1409,7 +1409,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 35 )
+mesh = SubResource( 22 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1425,7 +1425,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 36 )
+mesh = SubResource( 23 )
 skeleton = NodePath("..")
 material/0 = null
 
@@ -1441,7 +1441,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 37 )
+mesh = SubResource( 24 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1458,7 +1458,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 38 )
+mesh = SubResource( 25 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1475,7 +1475,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 39 )
+mesh = SubResource( 26 )
 skeleton = NodePath("..")
 material/0 = null
 material/1 = null
@@ -1505,9 +1505,9 @@ fract_delta = true
 visibility_aabb = AABB( -4, -4, -4, 8, 8, 8 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 44 )
+process_material = SubResource( 4 )
 draw_passes = 1
-draw_pass_1 = SubResource( 46 )
+draw_pass_1 = SubResource( 6 )
 _sections_unfolded = [ "Draw Passes", "Process Material", "Time", "Transform" ]
 
 

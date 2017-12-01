@@ -41,6 +41,7 @@ func _randomize_rotation():
     rot_tween.start()
 
 func _eject_part(name):
+    get_node('ExplosionAudio').play()
     var seat = get_node("Passengers/" + name)
     if seat:
         seat._eject()

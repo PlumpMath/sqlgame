@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Base/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level2/Level.gd" type="Script" id=2]
@@ -7,14 +7,15 @@
 [ext_resource path="res://Base/Images/cloud.png" type="Texture" id=5]
 [ext_resource path="res://Base/SQLEntities/Passenger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Base/Images/blood-pool.png" type="Texture" id=7]
-[ext_resource path="res://Level2/Particles.gd" type="Script" id=8]
-[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://Level2/States.gd" type="Script" id=11]
-[ext_resource path="res://Level2/Start.gd" type="Script" id=12]
-[ext_resource path="res://Level2/State-Victory.gd" type="Script" id=13]
-[ext_resource path="res://Level2/State-Failure.gd" type="Script" id=14]
-[ext_resource path="res://Level2/SQLSeeder.gd" type="Script" id=15]
+[ext_resource path="res://Base/Sounds/FX/347311__newagesoup__fun-explosion02.wav" type="AudioStream" id=8]
+[ext_resource path="res://Level2/Particles.gd" type="Script" id=9]
+[ext_resource path="res://CRT Shader/CRT.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Base/Fonts/Monoid-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Level2/States.gd" type="Script" id=12]
+[ext_resource path="res://Level2/Start.gd" type="Script" id=13]
+[ext_resource path="res://Level2/State-Victory.gd" type="Script" id=14]
+[ext_resource path="res://Level2/State-Failure.gd" type="Script" id=15]
+[ext_resource path="res://Level2/SQLSeeder.gd" type="Script" id=16]
 
 [sub_resource type="Gradient" id=1]
 
@@ -1926,7 +1927,7 @@ size = Vector2( 6, 6 )
 size = 12
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 10 )
+font_data = ExtResource( 11 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="Theme" id=48]
@@ -1945,7 +1946,6 @@ max_passports = 10000
 
 [node name="SceneVp" parent="."]
 
-editor/display_folded = true
 own_world = false
 msaa = 2
 shadow_atlas_size = 10
@@ -2045,6 +2045,8 @@ draw_pass_1 = SubResource( 7 )
 _sections_unfolded = [ "Draw Passes", "Drawing", "Process Material", "Time" ]
 
 [node name="Passengers" type="Spatial" parent="SceneVp/Spatial/Airliner"]
+
+editor/display_folded = true
 
 [node name="Seat85" parent="SceneVp/Spatial/Airliner/Passengers" instance=ExtResource( 6 )]
 
@@ -2960,6 +2962,14 @@ skeleton = NodePath("..")
 material/0 = SubResource( 41 )
 _sections_unfolded = [ "material" ]
 
+[node name="ExplosionAudio" type="AudioStreamPlayer" parent="SceneVp/Spatial/Airliner"]
+
+stream = ExtResource( 8 )
+volume_db = -8.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
 [node name="Particles" type="Particles" parent="SceneVp/Spatial"]
 
 transform = Transform( -0.0454199, 0, 0.998968, 0, 1, 0, -0.998968, 0, -0.0454199, -46.4146, -8.58172, -11.9101 )
@@ -2988,7 +2998,7 @@ draw_order = 0
 process_material = SubResource( 44 )
 draw_passes = 1
 draw_pass_1 = SubResource( 46 )
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Draw Passes", "Drawing", "Geometry", "Process Material", "Time", "Transform" ]
 
 [node name="Tween" type="Tween" parent="SceneVp/Spatial/Particles"]
@@ -3001,7 +3011,7 @@ _sections_unfolded = [ "playback" ]
 
 [node name="DeadPassengers" type="Spatial" parent="SceneVp/Spatial"]
 
-[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 9 )]
+[node name="CRT Effect" parent="SceneVp" instance=ExtResource( 10 )]
 
 _sections_unfolded = [ "Material", "Mouse", "Pause", "Size Flags", "Visibility" ]
 
@@ -3011,24 +3021,24 @@ theme = SubResource( 48 )
 
 [node name="States" parent="."]
 
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="Start" parent="States"]
 
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="Victory" parent="States"]
 
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 next_scene = "res://Credits/Credits.tscn"
 
 [node name="Failure" parent="States"]
 
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 
 [node name="SQLSeeder" parent="."]
 
-script = ExtResource( 15 )
+script = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
