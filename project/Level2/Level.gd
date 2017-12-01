@@ -40,7 +40,7 @@ func _start_objective_intro():
         ['Director', 'No, clean up some loose ends. To many people know about this project', 1],
         ['Director', 'There are 10 scientists who created the SQL genome wrapper', 1],
         ['Director', 'They escaped on a plane, before I could erase them', 1],
-        ['Agent154', 'Do we know what plane or where they headed', 1],
+        ['Agent154', 'Do we know what plane or where they headed?', 1],
         ['Director', 'Even better, they boarded plane that we manufactured', 1],
         ['Director', 'Various parts of the plane have been installed with an SQL wrapper', 1],
         ['Agent154', 'Excellent, so we can simply bring down the plane...', 1],
