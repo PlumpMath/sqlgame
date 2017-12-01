@@ -8,7 +8,7 @@ onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
 func _ready():
     # Set tables
     _add_table("LabRats")
-    UI.objectives.get_node("Intro").set_bbcode("[b]Level 1: Lab Rats[/b]\n\n[i]There's many ways to skin a rat[/i]")
+    UI.objectives.get_node("Intro").set_bbcode("[b]Level 1: Lab Rats[/b]\n\n[i]There are many ways to skin a rat[/i]")
     _preview_scene()
     sql_seeder._seed()
     var rat_node = rat_spawner.get_child(states.rat_id_indices[primary_rat_id])
@@ -38,7 +38,8 @@ func _start_objective_intro():
         ['Director', 'As did I...', 1],
         ['Director', 'Which is precisely why I started the SQLGenome project', 1],
         ['Agent154', 'Okay...', 1],
-        ['Director', 'It\'s basically a wrapper between SQL and Human DNA' , 1],
+        #['Director', 'It\'s basically a wrapper between SQL and Human DNA' , 1],
+        ['Director', 'It may give us the power to modify our very DNA with SQL' , 1],
         ['Agent154', 'Is that... safe?' , 1],
         ['Director', 'Not sure. Hence the Rats. We need you to learn SQL, and fast', 1],
         ['Agent154', 'How should I train?' , 1],
