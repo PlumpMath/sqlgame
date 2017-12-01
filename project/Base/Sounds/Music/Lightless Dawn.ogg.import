@@ -4,6 +4,10 @@ importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
 path="res://.import/Lightless Dawn.ogg-ad03d715c146fd0797d1f29fa0bb9481.oggstr"
 
+[deps]
+
+source_md5="bdc830c25a3639f3ae0d1e247051d5bd"
+
 [params]
 
 loop=true

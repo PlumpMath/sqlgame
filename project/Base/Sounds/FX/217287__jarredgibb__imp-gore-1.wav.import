@@ -4,6 +4,10 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/217287__jarredgibb__imp-gore-1.wav-9fcf18184b592764f9a5225910542aff.sample"
 
+[deps]
+
+source_md5="884e59cab4892836c2a89201fe7f94af"
+
 [params]
 
 force/8_bit=false
