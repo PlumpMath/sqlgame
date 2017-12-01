@@ -170,7 +170,14 @@ func _history_step_forward():
         cursor_set_column(1000, true)
         cursor_set_line(1000, true)
 
-#func _process(delta):
-#    # Called every frame. Delta is time since last frame.
-#    # Update game logic here.
-#    pass
+func _inject_history(statement):
+    sql_history.push_back(statement)
+    sql_modified_history = sql_history.duplicate()
+
+    # Insert a new history extry (for new current)
+    sql_modified_history.push_back("")
+    sql_history_index = sql_modified_history.size() - 1
+
+    # Update the GUI
+    text = sql_modified_history.back()
+    grab_focus()

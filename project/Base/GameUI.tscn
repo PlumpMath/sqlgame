@@ -594,8 +594,8 @@ bbcode_enabled = true
 bbcode_text = "Quickstart:
 - Objective updates will appear in the top right corner
 - Hitting [img]res://Base/Images/view.png[/img] will show the table structure
-- Hitting [img]res://Base/Images/add.png[/img] will create a basic SELECT statement
-- Hitting 'SELECT' will run the query"
+- Hitting the UP arrow key will show previous satement
+- Hitting 'SELECT / UPDATE / DELETE' button will run the query"
 visible_characters = -1
 percent_visible = 1.0
 override_selected_font_color = false

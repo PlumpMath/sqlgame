@@ -23,6 +23,7 @@ signal scene_switched(current_scene_path, destination_scene_path)
 var current_scene = null
 var loading_scene = null
 var destination_scene = null
+var last_check = 0 # milliseconds
 var time_max = 100 # milliseconds
 
 var _thread = null
@@ -152,24 +153,20 @@ func _thread_func(u):
 func _process(delta):
 
     if _stop_polling == false:
-        # For time_max msec a frame
-        var t = OS.get_ticks_msec()
-        while OS.get_ticks_msec() < t + time_max:
-            # Load a little of the resource
-            var err = loader_non_blocking.poll()
+        # Load a little of the resource
+        last_check = OS.get_ticks_msec()
 
-            if err == ERR_FILE_EOF: # Loading finished
-                _on_loading_finished()
-                _stop_polling = true
-                break
-            elif err == OK:
-                _on_loading_progress()
-                break
-            else:
-                show_error()
-                loader_non_blocking = null
-                _stop_polling = true
-                break
+        var err = loader_non_blocking.poll()
+
+        if err == ERR_FILE_EOF: # Loading finished
+            _on_loading_finished()
+            _stop_polling = true
+        elif err == OK:
+            _on_loading_progress()
+        else:
+            show_error()
+            loader_non_blocking = null
+            _stop_polling = true
 
     if _thread_started:
         # Try to lock mutex (this will succeed when thread has finished)
@@ -188,6 +185,7 @@ func _process(delta):
 func _on_loading_finished():
     # Instance destination scene
     destination_scene = loader_non_blocking.get_resource().instance()
+    print("Loading finished")
 
     _add_destination_scene_to_tree()
 
@@ -198,4 +196,4 @@ func _on_loading_progress():
 
 func _free_loading_scene():
     if loading_scene != null:
-        loading_scene.queue_free()
+        loading_scene.free()

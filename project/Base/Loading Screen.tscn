@@ -51,7 +51,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 
 resource_name = "AnimationFade"
-length = 18.0
+length = 24.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
@@ -60,10 +60,10 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3, 6, 9, 12, 15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3, 6, 9, 12, 15, 18, 21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Loading:text")
@@ -71,10 +71,10 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3, 9, 15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3, 9, 15, 21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ "SQL IS PEACE", "SQL IS STRENGTH", "FREEDOM IS SQL", "SQL IS PEACE" ]
+"values": [ "SQL IS PEACE", "SQL IS STRENGTH", "FREEDOM IS SQL", "SQL IS COURAGE", "SQL IS PEACE" ]
 }
 
 [node name="Loading Screen" type="Control"]

@@ -14,6 +14,11 @@ func _ready():
     _add_table("PlaneParts")
     _add_table("Tickets")
     _add_table("Passports")
+    UI.sql_editor._inject_history('DELETE FROM PlaneParts WHERE ...')
+    UI.sql_editor._inject_history('SELECT * FROM Passports')
+    UI.sql_editor._inject_history('SELECT * FROM Tickets')
+    UI.sql_editor._inject_history('SELECT * FROM PlaneParts')
+
     UI.objectives.get_node("Intro").set_bbcode("[b]Level 2: Loose Ends[/b]\n\n[i]The science of fireworks[/i]")
     UI.objectives.get_node("Out").set_bbcode("No hand holding this time Agent, you're on your own")
 

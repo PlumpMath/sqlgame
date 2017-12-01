@@ -10,6 +10,9 @@ func _ready():
     randomize()
     primary_rat_id = (randi() % max_rats) + 1
     _add_table("LabRats")
+    UI.sql_editor._inject_history('DELETE FROM LabRats WHERE ...')
+    UI.sql_editor._inject_history('UPDATE LabRats SET a = b WHERE ...')
+    UI.sql_editor._inject_history('SELECT * FROM LabRats')
     UI.objectives.get_node("Intro").set_bbcode("[b]Level 1: Lab Rats[/b]\n\n[i]There are many ways to skin a rat[/i]")
     _preview_scene()
     sql_seeder._seed()
