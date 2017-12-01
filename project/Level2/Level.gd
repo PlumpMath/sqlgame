@@ -44,7 +44,7 @@ func _start_objective_intro():
         ['Director', 'Even better, they boarded plane that we manufactured', 1],
         ['Director', 'Various parts of the plane have been installed with an SQL wrapper', 1],
         ['Agent154', 'Excellent, so we can simply bring down the plane...', 1],
-        ['Director', 'Not so fast, we need to be inconspicuous.', 1],
+        ['Director', 'Not so fast, we need to be inconspicuous', 1],
         ['Director', 'Taking down the whole plane will raise too many questions', 1],
         ['Agent154', 'Do we know where they\'re seated in the plane?', 1],
         ['Director', 'No, we know very little' , 1],
