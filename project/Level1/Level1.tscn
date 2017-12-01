@@ -107,7 +107,7 @@ extents = Vector3( 15.2421, 1, 15.1031 )
 
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause", "Size Flags", "Visibility" ]
-max_rats = 20
+max_rats = 2
 
 [node name="SceneVp" parent="."]
 
@@ -192,6 +192,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="RatSpawn" type="Spatial" parent="SceneVp/Spatial"]
 
+_sections_unfolded = [ "Visibility" ]
+
 [node name="Ball" parent="SceneVp/Spatial" instance=ExtResource( 3 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40411, 0.941458, 0 )
@@ -227,6 +229,8 @@ script = ExtResource( 6 )
 [node name="Victory" parent="States"]
 
 script = ExtResource( 7 )
+loading_scene = "res://Base/Loading Screen.tscn"
+next_scene = "res://Level2/Level2.tscn"
 
 [node name="AddFiltering" type="Node" parent="States"]
 

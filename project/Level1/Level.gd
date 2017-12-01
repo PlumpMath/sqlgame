@@ -1,6 +1,6 @@
 extends "res://Base/Level.gd"
 
-export var max_rats = 20
+export var max_rats = 2
 onready var primary_rat_id = (randi() % max_rats) + 1
 
 onready var rat_spawner = get_node("SceneVp/Spatial/RatSpawn")
